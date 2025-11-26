@@ -1,0 +1,34 @@
+import React from 'react'
+import SecurityHeader from '../../Component/Usercomponent/SecurityHeader';
+
+export default function ViewParking({ result, loading }) {
+    console.log(result);
+    return (
+        <div className='flex items-start'>
+          
+            <SecurityHeader />
+
+            {loading ? (
+                <img className='m-[auto]' src='/Assets/loading.gif' alt='Loading...' />
+            ) : (
+                <div className='w-full lg:mt-[0px] font-bold font-2xl md:mt-[0px] sm:mt-[70px] max-[639px]:mt-[70px]'>
+                    <p className='w-full text-center text-2xl'>Allocate Parking</p>
+
+                    <div className='flex gap-4 p-5 flex-wrap font-semibold lg:flex md:flex md:flex-row md:justify-center sm:flex sm:flex-row sm:justify-center max-[639px]:flex max-[639px]:justify-center sm:w-[100%]'>
+                        {result.length === 0 ? (
+                            <p>No Parking allocate</p>
+                        ) : (
+                            result.map((data, index) => (
+                                <div key={index} className='p-5 rounded bg-gray-50 shadow w-[300px]'>
+                                    <p className='mt-1 p-1 w-[250px]'>Parking Number: {data.parking_no}</p>
+                                    <p className='mt-1 p-1 w-[250px]'>Vehical Type: {data.vehical_type}</p>
+                                    <p className='mt-1 p-1 w-[250px]'>Parking Location: {data.parking_location}</p>
+                                </div>
+                            ))
+                        )}
+                    </div>
+                </div>
+            )}
+        </div>
+    )
+}
