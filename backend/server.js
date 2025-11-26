@@ -25,6 +25,8 @@ app.use("/auth",ParkingAllocationRoutes);
 app.use("/auth",StaffRoutes);
 app.use("/security",VisitorRoutes);
 app.use("/residence",residenceRoutes);
-app.listen(5000 , ()=>{
-    console.log("server is running on port 5000");
-})
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
