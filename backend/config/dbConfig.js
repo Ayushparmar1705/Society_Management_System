@@ -2,13 +2,13 @@
 const mysql = require("mysql2");
 // create the connection to database
 
-
+dotenv.config();
 const db = mysql.createConnection({
-    MYSQLHOST: mysql.railway.internal,
-    MYSQLDATABASE: railway,
-    MYSQLPASSWORD: tPpctPBwUrtpIMiKxtKJOxifAIfBMiXC,
-    MYSQLPORT: 3306,
-    MYSQLUSER: root,
+    MYSQLHOST: process.env.MYSQLHOST,
+    MYSQLDATABASE: process.env.MYSQLDATABASE,
+    MYSQLPASSWORD: process.env.MYSQLPASSWORD,
+    MYSQLPORT: process.env.MYSQLPORT,
+    MYSQLUSER: process.env.MYSQLUSER,
 })
 
 db.connect((err) => {
