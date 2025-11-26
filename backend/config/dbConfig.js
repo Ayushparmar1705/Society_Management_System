@@ -3,18 +3,19 @@ const mysql = require("mysql2");
 // create the connection to database
 
 
-const db =  mysql.createConnection({
-    host : "localhost",
-    user : "root",
-    password : "Ayush#2004",
-    database : "society",
+const db = mysql.createConnection({
+    MYSQLHOST: mysql.railway.internal,
+    MYSQLDATABASE: railway,
+    MYSQLPASSWORD: tPpctPBwUrtpIMiKxtKJOxifAIfBMiXC,
+    MYSQLPORT: 3306,
+    MYSQLUSER: root,
 })
 
-db.connect((err)=>{
-    if(err){
+db.connect((err) => {
+    if (err) {
         throw err;
     }
-    else{
+    else {
         console.log("database connected...");
     }
 })
