@@ -31,6 +31,7 @@ const blockController = {
     getSocietyName: async (req, res) => {
         try {
             const result = await blockModel.getFlatsName();
+            console.log("result of the society name = ",result);
             return res.status(200).send({ code: 200, message: result });
         } catch (err) {
             return res.status(500).send({ code: 500, message: err });
