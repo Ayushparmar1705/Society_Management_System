@@ -1,7 +1,7 @@
 // for local host
-const BASE_URL = "http://localhost:5000";
-// for network
-// const BASE_URL = "http://192.168.1.12:5000";
+// const BASE_URL = "http://localhost:5000";
+// for live url
+const BASE_URL = "https://society-management-backend-vpvs.onrender.com";
 const MainAdminApiEndPoints = {
     "add_society" : `${BASE_URL}/mainadmin/addsociety`,
     "get_society" : (page , limit) => `${BASE_URL}/mainadmin/getsociety/${page}/${limit}`,

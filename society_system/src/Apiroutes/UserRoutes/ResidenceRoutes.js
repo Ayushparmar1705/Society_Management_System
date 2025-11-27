@@ -1,6 +1,8 @@
-const BASE_URL = "http://localhost:5000";
-// for network
-// const BASE_URL = "http://192.168.1.12:5000";
+// for local
+// const BASE_URL = "http://localhost:5000"
+
+// for live
+const BASE_URL = "https://society-management-backend-vpvs.onrender.com";
 const ResidenceEndPoints = {
     "Manageresidence" : (flat_id)=>`${BASE_URL}/residence/view_visitor/${flat_id}`,
     "approve": (vid) => `${BASE_URL}/residence/approve/${vid}`,

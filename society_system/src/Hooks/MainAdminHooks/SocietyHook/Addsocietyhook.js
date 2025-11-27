@@ -20,7 +20,7 @@ export default function Addsocietyhook() {
         console.log(formData);
     }
     const handleOnSubmit = async()=>{
-        console.log(formData);
+       
         if(formData.name === "" || !isNaN(formData.name))
         {
             toast.error("Invalid society name");
@@ -53,6 +53,7 @@ export default function Addsocietyhook() {
         else
         {
             const result = await ManageSociety.addSociety(formData);
+            console.log(result);
             if(result.code === 200)
             {
                 toast.success("Society added succesfully");

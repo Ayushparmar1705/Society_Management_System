@@ -1,5 +1,8 @@
+// for local
+// const BASE_URL = "http://localhost:5000"
 
-const BASE_URL = "http://localhost:5000"
+// for live
+const BASE_URL = "https://society-management-backend-vpvs.onrender.com";
 const ApiEndpoint = {
 
     MemberManagement: (society_name) => `${BASE_URL}/auth/member/${society_name}`,
