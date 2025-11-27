@@ -15,23 +15,13 @@ let pool = mysql.createPool({
 
 const db = pool.promise();
 
-// Automatically recreate pool if connection lost
-db.on("error", (err) => {
-  if (err.code === "PROTOCOL_CONNECTION_LOST") {
-    console.error("Database connection lost. Reconnecting...");
-    pool = mysql.createPool({
-      host: process.env.MYSQLHOST,
-      user: process.env.MYSQLUSER,
-      password: process.env.MYSQLPASSWORD,
-      database: process.env.MYSQLDATABASE,
-      port: process.env.MYSQLPORT || 3306,
-      waitForConnections: true,
-      connectionLimit: 10,
-      queueLimit: 0
-    });
-  } else {
-    throw err;
+// Ping database every 30s to prevent idle disconnect
+setInterval(async () => {
+  try {
+    await db.query("SELECT 1");
+  } catch (err) {
+    console.error("Ping error:", err);
   }
-});
+}, 30000);
 
 module.exports = db;
