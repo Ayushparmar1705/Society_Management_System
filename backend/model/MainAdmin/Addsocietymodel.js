@@ -2,6 +2,8 @@ const { query } = require("../../config/dbConfig");
 
 const societyModel = {
   addSociety: async (data) => {
+
+    console.log("society modal data = ",data);
     const sql = `
       INSERT INTO Addsociety 
       (society_name, state, email, phone, address, total_flats, total_blocks, created_at, updated_at)

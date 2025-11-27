@@ -5,7 +5,7 @@ const societyController = {
     Addsociety: async (req, res) => {
         try {
             const data = req.body;
-            console.log("society data:", data);
+           
 
             // Check if society name is unique
             const existing = await societyModel.uniqueName(data.society_name);
