@@ -15,7 +15,7 @@ export default function Managesocietyhook() {
         setLoading(true);
         // get the society details from the api
         try {
-            const getSociety = async () => {
+            
                 const result = await ManageSociety.societyDetails(page , 5);
                 // set the result into the society list
                 
@@ -27,9 +27,6 @@ export default function Managesocietyhook() {
                 else{
                     setTotalPage(1);
                 }
-            }
-
-            getSociety();
         }
         catch (error) {
 
