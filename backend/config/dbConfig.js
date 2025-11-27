@@ -27,36 +27,20 @@ const mysql = require("mysql2");
 const dotenv = require("dotenv");
 dotenv.config();
 
-let conn;
-
-// Helper to create the pool
-function createPool() {
-  return process.env.MYSQL_PUBLIC_URL
-    ? mysql.createPool(process.env.MYSQL_PUBLIC_URL)
-    : mysql.createPool({
-        host: process.env.MYSQLHOST,
-        user: process.env.MYSQLUSER,
-        password: process.env.MYSQLPASSWORD,
-        database: process.env.MYSQLDATABASE,
-        port: process.env.MYSQLPORT || 3306,
-        waitForConnections: true,
-        connectionLimit: 10,
-        queueLimit: 0,
-      });
-}
-
-// Initialize the pool
-conn = createPool();
-
-// Handle disconnects automatically
-conn.on("error", function (err) {
-  console.error("Database error:", err);
-  if (err.code === "PROTOCOL_CONNECTION_LOST") {
-    console.log("Reconnecting to the database...");
-    conn = createPool(); // Recreate the pool on disconnect
-  } else {
-    throw err;
-  }
+// Create a pool
+const pool = mysql.createPool({
+  host: process.env.MYSQLHOST,
+  user: process.env.MYSQLUSER,
+  password: process.env.MYSQLPASSWORD,
+  database: process.env.MYSQLDATABASE,
+  port: process.env.MYSQLPORT || 3306,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
-module.exports = conn;
+// Promisify for async/await
+const db = pool.promise();
+
+// Export the pool
+module.exports = db;

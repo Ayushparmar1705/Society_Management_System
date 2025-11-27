@@ -1,122 +1,115 @@
-const { societyModel } = require("../../model/MainAdmin/Addsocietymodel");
+const societyModel = require("../../model/MainAdmin/Addsocietymodel");
+
 const societyController = {
-    // create the object to add new society in db
-    Addsociety: (req, res) => {
-        // request by the client
-        const data = req.body;
-        console.log(data);
-        // check unique society name
-        societyModel.uniqueName(data.name, (err, result) => {
-            if (err) {
-                return res.status(500).send({ code: 500, message: err });
-            }
-            if (result.length > 0) {
-                return res.status(409).send({ code: 409, message: "Society name already exists" });
-            }
-            // add the new society if not exists in db
-            else {
-                societyModel.addSociety(data, (err, result) => {
-                    console.log("error in add society = ",err);
-                    if (err) {
-                        return res.status(500).send({ code: 500, message: err });
-                    }
-                    else {
-                        console.log("result in add society = ",result);
-                        if (result.length > 0) {
-                            return res.status(409).send({ code: 409, message: "Society name already exists" });
-                        } else {
-                            if (result.affectedRows > 0) {
-                                return res.status(200).send({ code: 200, message: "Society added successfully" });
-                            }
-                        }
-                    }
-                })
+    // Add new society
+    Addsociety: async (req, res) => {
+        try {
+            const data = req.body;
+            console.log("society data:", data);
 
-
+            // Check if society name is unique
+            const existing = await societyModel.uniqueName(data.society_name);
+            if (existing.length > 0) {
+                return res.status(409).json({ code: 409, message: "Society name already exists" });
             }
-        })
+
+            // Add new society
+            const result = await societyModel.addSociety(data);
+            if (result.affectedRows > 0) {
+                return res.status(200).json({ code: 200, message: "Society added successfully" });
+            } else {
+                return res.status(500).json({ code: 500, message: "Failed to add society" });
+            }
+        } catch (err) {
+            console.error(err);
+            return res.status(500).json({ code: 500, message: err.message });
+        }
     },
 
-    // get all the society from db
-    getSociety: (req, res) => {
-        const page = req.params.page;
-        const limit = req.params.limit;
-        const offset = (page - 1) * limit;
+    // Get societies with pagination
+    getSociety: async (req, res) => {
+        try {
+            const page = parseInt(req.params.page) || 1;
+            const limit = parseInt(req.params.limit) || 10;
+            const offset = (page - 1) * limit;
 
-        societyModel.countTotal((err,result)=>{
-            if(err){
-                return res.status(500).send({code : 500 , message : err});
-            }
-            const total = result[0].total;
+            const total = await societyModel.countTotal();
             const totalPages = Math.ceil(total / limit);
-            societyModel.getSociety(limit , offset , (err, result) => {
-            if (err) {
-                return res.status(500).send({ code: 500, message: err });
-            } else {
-                return res.status(200).send({ code: 200, message: result , total : total , page : page , totalPages : totalPages});
-            }
-        })
-        })
+            const result = await societyModel.getSociety(limit, offset);
 
-        
+            return res.status(200).json({
+                code: 200,
+                message: result,
+                total,
+                page,
+                totalPages,
+            });
+        } catch (err) {
+            console.error(err);
+            return res.status(500).json({ code: 500, message: err.message });
+        }
     },
 
-    // remove the society from db;
-    deleteSociety: ((req, res) => {
-        const id = req.params.id;
-        console.log(id);
-        societyModel.deleteSociety(id, (err, result) => {
-            if (err) {
-                return res.status(500).send({ code: 500, message: err });
-            }
-            else {
-                return res.status(200).send({ code: 200, message: "Society deleted successfully" });
-            }
-        });
-    }),
-    // search the society by character wise
-    searchSocietyByName: (req, res) => {
-        const name = req.params.name;
-        societyModel.searchSocietyByName(name, (err, result) => {
-            if (err) {
-                return res.status(500).send({ code: 500, message: err });
-            } else {
-                return res.status(200).send({ code: 200, message: result });
-            }
-        })
+    // Delete society (soft delete)
+    deleteSociety: async (req, res) => {
+        try {
+            const id = req.params.id;
+            const result = await societyModel.deleteSociety(id);
+            return res.status(200).json({ code: 200, message: "Society deleted successfully" });
+        } catch (err) {
+            console.error(err);
+            return res.status(500).json({ code: 500, message: err.message });
+        }
     },
-    // search the society by id for the updation
-    getSocietyById: (req, res) => {
-        const id = req.params.id;
-        societyModel.getSocietyById(id, (err, result) => {
-            if (err) {
-                return res.status(500).send({ code: 500, message: err });
-            } else {
-                return res.status(200).send({ code: 200, message: result });
-            }
-        })
+
+    // Activate society
+    ActivateSociety: async (req, res) => {
+        try {
+            const id = req.params.id;
+            const result = await societyModel.ActivateSociety(id);
+            return res.status(200).json({ code: 200, message: "Society activated successfully" });
+        } catch (err) {
+            console.error(err);
+            return res.status(500).json({ code: 500, message: err.message });
+        }
     },
-    ActivateSociety : (req,res)=>{
-        const id = req.params.id;
-        societyModel.ActivateSociety(id,(err,result)=>{
-            if(err){
-                return res.status(500).send({code : 500 , message : err});
-            }else{
-                return res.status(200).send({code : 200 , message : "Society Activate succesfully"});
-            }
-        })
+
+    // Search society by name
+    searchSocietyByName: async (req, res) => {
+        try {
+            const name = req.params.name;
+            const result = await societyModel.searchSocietyByName(name);
+            return res.status(200).json({ code: 200, message: result });
+        } catch (err) {
+            console.error(err);
+            return res.status(500).json({ code: 500, message: err.message });
+        }
     },
-    updateSociety : (req,res)=>{
-        const id = req.params.id;
-        const data = req.body;
-        console.log(data)
-        societyModel.updateSociety(id , data , (err,result)=>{
-            if(err){
-                return res.status(500).send({code : 500 , message : err});
-            }else{
-                return res.status(200).send({code : 200 , message : "Society update succesfully"});
-            }
-        })
-    }
-}
-module.exports = { societyController };
+
+    // Get society by id
+    getSocietyById: async (req, res) => {
+        try {
+            const id = req.params.id;
+            const result = await societyModel.getSocietyById(id);
+            return res.status(200).json({ code: 200, message: result });
+        } catch (err) {
+            console.error(err);
+            return res.status(500).json({ code: 500, message: err.message });
+        }
+    },
+
+    // Update society
+    updateSociety: async (req, res) => {
+        try {
+            const id = req.params.id;
+            const data = req.body;
+            const result = await societyModel.updateSociety(id, data);
+            return res.status(200).json({ code: 200, message: "Society updated successfully" });
+        } catch (err) {
+            console.error(err);
+            return res.status(500).json({ code: 500, message: err.message });
+        }
+    },
+};
+
+module.exports = {societyController};
