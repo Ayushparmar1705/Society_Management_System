@@ -34,7 +34,7 @@ const societyModel = {
 
   ActivateSociety: (id, callback) => {
     const sql = "UPDATE Addsociety SET is_active = 1 WHERE sid = ?";
-    conn.query(sql, [id], callback);
+    return query(sql,[id],callback);
   },
 
   deleteSociety: async (id) => {
