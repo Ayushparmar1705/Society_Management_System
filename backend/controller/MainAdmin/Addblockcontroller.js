@@ -1,79 +1,51 @@
 const { blockModel } = require("../../model/MainAdmin/Addblockmodel");
+
 const blockController = {
-    // create the object to add new block in db
-    Addblock: async(req, res) => {
-        // request by the client
-        const data = req.body;
-        // check unique block name
-        // blockModel.uniqueName(data.name, (err, result) => {
-        //     if (err) {
-        //         return res.status(500).send({ code: 500, message: err });
-        //     }
-        //     if (result.length > 0) {
-        //         return res.status(409).send({ code: 409, message: "Block name already exists" });
-        //     }
-        //     // add the new block if not exists in db
-        //     else {
-        //         blockModel.addBlock(data, (err, result) => {
-        //             if (err) {
-        //                 return res.status(500).send({ code: 500, message: err });
-        //             }
-        //             else {
-        //                 if (result.length > 0) {
-        //                     return res.status(409).send({ code: 409, message: "Block name is alredy exists" });
-        //                 } else {
-        //                     if (result.affectedRows > 0) {
-        //                         return res.status(200).send({ code: 200, message: "Block added successfully" });
-        //                     }
-        //                 }
-        //             }
-        //         })
 
+    // Add new block
+    Addblock: async (req, res) => {
+        try {
+            const data = req.body;
 
-        //     }
-        // })
-
-
-        
-
-        blockModel.addBlock(data, (err, result) => {
-            if (err) {
-                return res.status(500).send({ code: 500, message: err });
+            // Check unique block name
+            const exists = await blockModel.uniqueName(data.block_name);
+            if (exists.length > 0) {
+                return res.status(409).send({ code: 409, message: "Block name already exists" });
             }
-            else {
-                if (result.affectedRows > 0) {
-                    return res.status(200).send({ code: 200, message: "Block added successfully" });
-                }
-            }
-        })
-    
 
-    },
-    // get the all society name from the database
-    getSocietyName: (req, res) => {
-        blockModel.getFlatsName((err, result) => {
-       
-            if (err) {
-                console.log(err);
-                return res.status(500).send({ code: 500, message: err });
+            // Insert
+            const result = await blockModel.addBlock(data);
+
+            if (result.affectedRows > 0) {
+                return res.status(200).send({ code: 200, message: "Block added successfully" });
             }
-            else {
-                console.log(result);
-                return res.status(200).send({ code: 200, message: result });
-            }
-        })
-    },
-    // get all the block from db
-    getBlock: (req, res) => {
-        blockModel.getBlock((err, result) => {
-            if (err) {
-                return res.status(500).send({ code: 500, message: err });
-            } else {
-                return res.status(200).send({ code: 200, message: result });
-            }
-        })
+
+            return res.status(500).send({ code: 500, message: "Failed to add block" });
+
+        } catch (err) {
+            return res.status(500).send({ code: 500, message: err });
+        }
     },
 
+    // Get societies
+    getSocietyName: async (req, res) => {
+        try {
+            const result = await blockModel.getFlatsName();
+            return res.status(200).send({ code: 200, message: result });
+        } catch (err) {
+            return res.status(500).send({ code: 500, message: err });
+        }
+    },
 
-}
+    // Get blocks
+    getBlock: async (req, res) => {
+        try {
+            const result = await blockModel.getBlock();
+            return res.status(200).send({ code: 200, message: result });
+        } catch (err) {
+            return res.status(500).send({ code: 500, message: err });
+        }
+    }
+};
+
 module.exports = { blockController };
