@@ -62,7 +62,7 @@ const {pool} = require("../../config/dbConfig");
 
 // module.exports = societyModel;
 
-const { query } = require("../../config/dbConfig");  // Use safe query wrapper
+const query = require("../../config/dbConfig");  // Use safe query wrapper
 
 const societyModel = {
   addSociety: async (data) => {
@@ -72,7 +72,7 @@ const societyModel = {
       VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
     `;
 
-    return await pool.query(sql, [
+    return await query(sql, [
       data.society_name,
       data.state,
       data.email,
@@ -85,17 +85,17 @@ const societyModel = {
 
   uniqueName: async (name) => {
     const sql = "SELECT * FROM Addsociety WHERE society_name = ?";
-    return await pool.query(sql, [name]);
+    return await query(sql, [name]);
   },
 
   getSociety: async (limit, offset) => {
     const sql = "SELECT * FROM Addsociety LIMIT ? OFFSET ?";
-    return await pool.query(sql, [parseInt(limit), parseInt(offset)]);
+    return await query(sql, [parseInt(limit), parseInt(offset)]);
   },
 
   deleteSociety: async (id) => {
     const sql = "UPDATE Addsociety SET is_active = 0 WHERE sid = ?";
-    return await pool.query(sql, [id]);
+    return await query(sql, [id]);
   },
 };
 
