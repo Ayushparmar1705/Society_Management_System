@@ -16,8 +16,8 @@ const societyController = {
             // add the new society if not exists in db
             else {
                 societyModel.addSociety(data, (err, result) => {
+                    console.log("error in add society = ",err);
                     if (err) {
-                        console.log("error in add society = ",err);
                         return res.status(500).send({ code: 500, message: err });
                     }
                     else {
