@@ -1,9 +1,11 @@
+// backend/config/dbConfig.js
 const mysql = require("mysql2/promise");
 const dotenv = require("dotenv");
 dotenv.config();
 
-async function getConnection() {
-  const pool = mysql.createPool({
+// Export a function that returns a pool
+function getPool() {
+  return mysql.createPool({
     host: process.env.MYSQLHOST,
     user: process.env.MYSQLUSER,
     password: process.env.MYSQLPASSWORD,
@@ -13,7 +15,6 @@ async function getConnection() {
     connectionLimit: 10,
     queueLimit: 0,
   });
-  return pool;
 }
 
-module.exports = { getConnection };
+module.exports = { getPool };
