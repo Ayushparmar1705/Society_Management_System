@@ -1,6 +1,8 @@
-const BASE_URL = "http://localhost:5000";
-// for network
-// const BASE_URL = "http://192.168.1.12:5000";
+// for local
+// const BASE_URL = "http://localhost:5000"
+
+// for live
+const BASE_URL = "https://society-management-backend-vpvs.onrender.com";
 const ApiEndpoints = {
     "get_flats": `${BASE_URL}/mainadmin/getsocietyname`,
     "getblockbyflatsname": (id) => `${BASE_URL}/users/getflatcodebysocietyid/${id}`,

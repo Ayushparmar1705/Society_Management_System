@@ -17,9 +17,11 @@ const societyController = {
             else {
                 societyModel.addSociety(data, (err, result) => {
                     if (err) {
+                        console.log("error in add society = ",err);
                         return res.status(500).send({ code: 500, message: err });
                     }
                     else {
+                        console.log("result in add society = ",result);
                         if (result.length > 0) {
                             return res.status(409).send({ code: 409, message: "Society name already exists" });
                         } else {
