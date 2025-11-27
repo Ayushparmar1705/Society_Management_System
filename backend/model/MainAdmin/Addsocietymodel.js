@@ -50,9 +50,10 @@ const societyModel = {
     const sql = "UPDATE Addsociety SET society_name = ? , state = ? , email = ? , phone = ? , address = ? , total_flats = ? , total_blocks = ? WHERE sid = ?";
     return await query(sql, [data.society_name, data.state, data.email, data.phone, data.address, data.total_flats, data.total_blocks, id], callback);
   },
-  searchSocietyByName:async(name,callback)=>{
-    const sql = `SELECT * FROM Addsociety like %${name}%`;
+  searchSocietyByName: async(name,callback)=>{
+    const sql = "SELECT * FROM Addsociety WHERE society_name like ?"
     return await query(sql,[name],callback);
+
   }
 };
 
