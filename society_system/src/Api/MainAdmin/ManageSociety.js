@@ -48,7 +48,7 @@ const ManageSociety = {
             return dataResult;
         }
         catch (error) {
-            console.log(error);
+            console.log(error)
         }
     },
 
