@@ -6,7 +6,7 @@ const societyController = {
         try {
             const data = req.body;
            
-
+            console.log("Add society controller = ",data);
             // Check if society name is unique
             const existing = await societyModel.uniqueName(data.society_name);
             if (existing.length > 0) {
