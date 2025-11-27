@@ -3,17 +3,17 @@ const { query } = require("../../config/dbConfig");
 const societyModel = {
   addSociety: async (data) => {
 
-    console.log("society modal data = ",data);
+    console.log("society modal data = ", data);
     const current_date = new Date();
     const updated_date = new Date();
     const sql = "INSERT INTO Addsociety(society_name,state,email,phone,address,total_flats,total_blocks,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?)";
-    
 
-    return await query(sql, [data.name,data.state,data.email,data.phone,data.address,data.total_flats,data.total_blocks,current_date,updated_date]);
+
+    return await query(sql, [data.name, data.state, data.email, data.phone, data.address, data.total_flats, data.total_blocks, current_date, updated_date]);
   },
 
 
-  countTotal : async()=>{
+  countTotal: async () => {
     const sql = "SELECT COUNT(*) as total from Addsociety";
     const result = await query(sql);
     return result[0].total;
@@ -31,10 +31,21 @@ const societyModel = {
     return await query(sql);
   },
 
+
+  ActivateSociety: (id, callback) => {
+    const sql = "UPDATE Addsociety SET is_active = 1 WHERE sid = ?";
+    conn.query(sql, [id], callback);
+  },
+
   deleteSociety: async (id) => {
     const sql = "UPDATE Addsociety SET is_active = 0 WHERE sid = ?";
     return await query(sql, [id]);
   },
+
+  updateSociety: (id, data, callback) => {
+    const sql = "UPDATE Addsociety SET society_name = ? , state = ? , email = ? , phone = ? , address = ? , total_flats = ? , total_blocks = ? WHERE sid = ?";
+    conn.query(sql, [data.society_name, data.state, data.email, data.phone, data.address, data.total_flats, data.total_blocks, id], callback);
+  }
 };
 
 module.exports = societyModel;
