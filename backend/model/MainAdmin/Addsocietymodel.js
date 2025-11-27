@@ -12,6 +12,12 @@ const societyModel = {
     return await query(sql, [data.name,data.state,data.email,data.phone,data.address,data.total_flats,data.total_blocks,current_date,updated_date]);
   },
 
+
+  countTotal : async()=>{
+    const sql = "SELECT COUNT(Addsociety) from Addsociety";
+    return await query(sql);
+  },
+
   uniqueName: async (name) => {
     const sql = "SELECT * FROM Addsociety WHERE society_name = ?";
     return await query(sql, [name]);
