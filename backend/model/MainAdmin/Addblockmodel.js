@@ -29,4 +29,4 @@ const blockModel = {
   }
 };
 
-module.exports = blockModel;
+module.exports = {blockModel};
