@@ -1,7 +1,15 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-app.use(cors());
+app.use(cors({
+    origin:[
+        "https://society-management-system-afb5.onrender.com",
+        "http://localhost:3000"
+    ],
+    methods:["GET","PUT","POST","DELETE"],
+    allowedHeaders:["Content-Type","Authorization"],
+    credentials:true
+}))
 const societyroutes = require("./routes/MainAdmin/Addsocietyroutes");
 const blockroutes = require("./routes/MainAdmin/Addblockroutes");
 const flatsroutes = require("./routes/MainAdmin/Addflatsroutes");
