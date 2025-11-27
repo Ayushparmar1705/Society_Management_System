@@ -41,6 +41,10 @@ const societyModel = {
     const sql = "UPDATE Addsociety SET is_active = 0 WHERE sid = ?";
     return await query(sql, [id]);
   },
+   getSocietyById: async(id, callback) => {
+        const sql = "SELECT * FROM Addsociety WHERE sid = ?";
+        return await query(sql, [id], callback);
+    },
 
   updateSociety: async(id, data, callback) => {
     const sql = "UPDATE Addsociety SET society_name = ? , state = ? , email = ? , phone = ? , address = ? , total_flats = ? , total_blocks = ? WHERE sid = ?";
