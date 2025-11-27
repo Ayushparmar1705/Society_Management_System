@@ -52,10 +52,13 @@ const blockController = {
     // get the all society name from the database
     getSocietyName: (req, res) => {
         blockModel.getFlatsName((err, result) => {
+       
             if (err) {
+                console.log(err);
                 return res.status(500).send({ code: 500, message: err });
             }
             else {
+                console.log(result);
                 return res.status(200).send({ code: 200, message: result });
             }
         })
