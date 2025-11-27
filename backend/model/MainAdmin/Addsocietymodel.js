@@ -4,13 +4,12 @@ const societyModel = {
   addSociety: async (data) => {
 
     console.log("society modal data = ",data);
-    const sql = `
-      INSERT INTO Addsociety 
-      (society_name, state, email, phone, address, total_flats, total_blocks, created_at, updated_at)
-      VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
-    `;
+    const current_date = new Date();
+    const updated_date = new Date();
+    const sql = "INSERT INTO Addsociety(society_name,state,email,phone,address,total_flats,total_blocks,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?)";
+    
 
-    return await query(sql, [data.name,data.state,data.email,data.phone,data.address,data.total_flats,data.total_blocks]);
+    return await query(sql, [data.name,data.state,data.email,data.phone,data.address,data.total_flats,data.total_blocks,current_date,updated_date]);
   },
 
   uniqueName: async (name) => {
