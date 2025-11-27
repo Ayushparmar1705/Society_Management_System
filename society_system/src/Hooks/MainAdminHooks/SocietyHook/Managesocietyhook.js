@@ -18,7 +18,7 @@ export default function Managesocietyhook() {
             const getSociety = async () => {
                 const result = await ManageSociety.societyDetails(page , 5);
                 // set the result into the society list
-                console.log(result);
+                
                 if (result.code === 200) {
                     setSocietyList(result.message);
                     setDuplicateList(result.message);

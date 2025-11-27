@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { toast } from "react-toastify";
 
 
-export default function AddSocietypage({ handleOnChange, handleOnClick }) {
+export default function AddSocietypage({ handleOnChange, handleOnClick , loading}) {
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (!token) {
