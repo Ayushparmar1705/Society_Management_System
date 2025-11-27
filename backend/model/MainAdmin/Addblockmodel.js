@@ -15,7 +15,7 @@ const blockModel = {
 
   getFlatsName: async () => {
     const sql = "SELECT sid, society_name FROM Addsociety WHERE is_active = 1";
-    const [rows] = await query(sql);
+    const rows = await query(sql);
     return rows;
   },
 
