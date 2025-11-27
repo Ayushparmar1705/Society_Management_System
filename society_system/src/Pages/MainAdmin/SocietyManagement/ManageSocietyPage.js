@@ -1,17 +1,17 @@
 import { Building2, Key, Layout, Mail, Map, MapPin, Phone, Play } from 'lucide-react';
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 export default function ManageSocietyPage({ page, setPage, totalPage, loading, societyList, handleSearch, handleDelete, ActivateSociety }) {
   const navigate = useNavigate();
   return (
     <div className='mt-[10px]'>
       {loading ? (
-        <div className='w-full'>
+        <div className='w-full flex justify-center items-center h-[300px]'>
           <img className='h-[100px] w-[100px] m-auto' src='/Assets/loading.gif' alt='Loading' />
         </div>
       ) : (
         <div>
           <p className='text-[20px] text-center font-semibold'>Manage Society</p>
-          
+
           {/* Search Input */}
           <input
             type='search'
@@ -25,7 +25,7 @@ export default function ManageSocietyPage({ page, setPage, totalPage, loading, s
             {societyList.map((data, index) => (
               <div key={index}>
                 <div className='hover:scale-[1.04] hover:border-2 hover:border-gray-200 transition-transform duration-200 border-2 border-gray-100 p-4 rounded w-[350px] h-500 '>
-                  
+
                   {/* Header */}
                   <div className={`text-white p-[10px] font-bold rounded ${data.is_active === 1 ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-black' : 'bg-gradient-to-r from-gray-500 to-gray-600'}`}>
                     <div className='flex justify-between items-center'>
@@ -37,24 +37,24 @@ export default function ManageSocietyPage({ page, setPage, totalPage, loading, s
 
                   {/* Info */}
                   <div className='flex w-full flex-col p-5 gap-2'>
-                    
+
                     <div className='flex items-center'>
                       <Mail className="h-4 w-4 text-blue-500 mr-3" />
                       <div>
                         <span className='text-sm text-gray-400'>Mail</span>
-                      <p>{data.email}</p>
+                        <p>{data.email}</p>
                       </div>
                     </div>
                     <div className='flex items-center'>
 
                       <Phone className="h-4 w-4 text-green-500 mr-3" />
-                      
+
                       <div>
                         <span className='text-sm text-gray-400'>Phone</span>
-                                              <p>{data.phone}</p>
+                        <p>{data.phone}</p>
 
-                        </div>                    
                       </div>
+                    </div>
                     <div className='flex items-center'>
                       <MapPin className='text-blue-500 h-5 w-5 mr-3' />
                       <div>
@@ -91,7 +91,7 @@ export default function ManageSocietyPage({ page, setPage, totalPage, loading, s
                         />
                         <img
                           onClick={() => {
-                              navigate(`/mainadmin/update-page/`,{state : {id : data.sid}})
+                            navigate(`/mainadmin/update-page/`, { state: { id: data.sid } })
                           }}
                           src='/Assets/edit.png'
                           alt='Edit'

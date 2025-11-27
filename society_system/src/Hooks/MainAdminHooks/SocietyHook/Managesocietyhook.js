@@ -27,7 +27,6 @@ export default function Managesocietyhook() {
                 else{
                     setTotalPage(1);
                 }
-                setLoading(false);
             }
 
             getSociety();
@@ -71,13 +70,16 @@ export default function Managesocietyhook() {
     const handleDelete = async (sid) => {
         try {
             setLoading(true);
-            if(loading){
-                toast.success("just second to deactivate society");
+          
+            const result = await ManageSociety.deleteSociety(sid);
+            if(result.code === 500)
+            {
+                toast.error(result.message);
             }
-            else{
-                toast.success("Society deleted succesfully");
+            else
+            {
+                toast.success(result.message);
             }
-            await ManageSociety.deleteSociety(sid);
 
            
         }
