@@ -10,6 +10,10 @@ app.use(cors({
     allowedHeaders:["Content-Type","Authorization"],
     credentials:true
 }))
+
+
+app.options("*", cors());
+app.use(express.json());
 const societyroutes = require("./routes/MainAdmin/Addsocietyroutes");
 const blockroutes = require("./routes/MainAdmin/Addblockroutes");
 const flatsroutes = require("./routes/MainAdmin/Addflatsroutes");
