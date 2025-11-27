@@ -3,8 +3,8 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const pool = mysql.createPool({
-  host: process.env.MYSQLHOST,        // yamabiko.proxy.rlwy.net
-  user: process.env.MYSQLUSER,        // root
+  host: process.env.MYSQLHOST,
+  user: process.env.MYSQLUSER,
   password: process.env.MYSQLPASSWORD,
   database: process.env.MYSQLDATABASE,
   port: process.env.MYSQLPORT || 3306,
@@ -13,21 +13,25 @@ const pool = mysql.createPool({
   queueLimit: 0,
   connectTimeout: 10000,
   ssl: { rejectUnauthorized: true },
-  enableKeepAlive: true,               // keeps connection alive
-  keepAliveInitialDelay: 0             // optional, send ping immediately
+  enableKeepAlive: true,
+  keepAliveInitialDelay: 0
 });
 
-// Safe query helper that retries if connection lost
+// Robust query function
 async function query(sql, params) {
+  let connection;
   try {
-    const [results] = await pool.execute(sql, params);
-    return results;
+    connection = await pool.getConnection();        // Get a fresh connection
+    const [rows] = await connection.execute(sql, params);
+    return rows;
   } catch (err) {
     if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-      console.warn('Connection lost, retrying query...');
-      return query(sql, params);  // retry once
+      console.warn('Connection lost. Retrying...');
+      return query(sql, params); // retry
     }
     throw err;
+  } finally {
+    if (connection) connection.release();           // Always release connection back to pool
   }
 }
 
