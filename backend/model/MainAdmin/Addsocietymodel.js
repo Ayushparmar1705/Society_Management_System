@@ -52,7 +52,7 @@ const societyModel = {
   },
   searchSocietyByName: async(name,callback)=>{
     const sql = "SELECT * FROM Addsociety WHERE society_name like ?"
-    return await query(sql,[name],callback);
+    return await query(sql,[`%${name}%`],callback);
 
   }
 };
