@@ -78,6 +78,7 @@ const societyController = {
     searchSocietyByName: async (req, res) => {
         try {
             const name = req.params.name;
+            console.log(name);
             const result = await societyModel.searchSocietyByName(name);
             return res.status(200).json({ code: 200, message: result });
         } catch (err) {
