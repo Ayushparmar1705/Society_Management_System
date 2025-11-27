@@ -14,8 +14,9 @@ const societyModel = {
 
 
   countTotal : async()=>{
-    const sql = "SELECT COUNT(*) from Addsociety";
-    return await query(sql);
+    const sql = "SELECT COUNT(*) as total from Addsociety";
+    const result = await query(sql);
+    return result[0].total;
   },
 
   uniqueName: async (name) => {
