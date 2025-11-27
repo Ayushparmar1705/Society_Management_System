@@ -25,10 +25,10 @@ const societyModel = {
   },
 
   getSociety: async (limit, offset) => {
-    const limit = parseInt(limit);
-    const offset = parseInt(offset);
-    const sql = `SELECT * FROM Addsociety LIMIT ${limit} OFFSET ${offset}`;
-    return await query(sql, [limit,offset]);
+    const slimit = parseInt(limit);
+    const soffset = parseInt(offset);
+    const sql = `SELECT * FROM Addsociety LIMIT ${slimit} OFFSET ${soffset}`;
+    return await query(sql);
   },
 
   deleteSociety: async (id) => {
