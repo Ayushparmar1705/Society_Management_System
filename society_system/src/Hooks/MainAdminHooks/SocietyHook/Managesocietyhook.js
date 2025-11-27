@@ -8,25 +8,25 @@ export default function Managesocietyhook() {
     const [societyList, setSocietyList] = useState([]);
     const [loading, setLoading] = useState(true);
     const [duplicateList, setDuplicateList] = useState([]);
-    const [page , setPage] = useState(1);
-    const [totalPage , setTotalPage] = useState(1);
+    const [page, setPage] = useState(1);
+    const [totalPage, setTotalPage] = useState(1);
     const fetchedSocietyList = async () => {
         // set loading is true when the data is fetching
         setLoading(true);
         // get the society details from the api
         try {
-            
-                const result = await ManageSociety.societyDetails(page , 5);
-                // set the result into the society list
-                
-                if (result.code === 200) {
-                    setSocietyList(result.message);
-                    setDuplicateList(result.message);
-                    setTotalPage(result.totalPages);
-                }
-                else{
-                    setTotalPage(1);
-                }
+
+            const result = await ManageSociety.societyDetails(page, 5);
+            // set the result into the society list
+
+            if (result.code === 200) {
+                setSocietyList(result.message);
+                setDuplicateList(result.message);
+                setTotalPage(result.totalPages);
+            }
+            else {
+                setTotalPage(1);
+            }
         }
         catch (error) {
 
@@ -67,18 +67,16 @@ export default function Managesocietyhook() {
     const handleDelete = async (sid) => {
         try {
             setLoading(true);
-          
+
             const result = await ManageSociety.deleteSociety(sid);
-            if(result.code === 500)
-            {
+            if (result.code === 500) {
                 toast.error(result.message);
             }
-            else
-            {
+            else {
                 toast.success(result.message);
             }
 
-           
+
         }
         catch (error) {
             setLoading(false);

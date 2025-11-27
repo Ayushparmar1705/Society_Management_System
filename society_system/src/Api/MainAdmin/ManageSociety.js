@@ -17,9 +17,9 @@ const ManageSociety = {
         }
     },
 
-    societyDetails: async (page , limit) => {
+    societyDetails: async (page, limit) => {
         try {
-            const result = await fetch(ApiEndpoints.get_society(page , limit));
+            const result = await fetch(ApiEndpoints.get_society(page, limit));
             const dataResult = await result.json();
             return dataResult;
         }
@@ -41,7 +41,7 @@ const ManageSociety = {
     },
     searchSociety: async (name) => {
         try {
-            
+
             const result = await fetch(ApiEndpoints.get_society_byname(name));
             const dataResult = await result.json();
             console.log(dataResult);
@@ -52,39 +52,39 @@ const ManageSociety = {
         }
     },
 
-    getSocietyById : async(id)=>{
-        try{
+    getSocietyById: async (id) => {
+        try {
             const result = await fetch(ApiEndpoints.search_by_id(id));
             const dataResult = await result.json();
             console.log(dataResult);
             return dataResult;
         }
-        catch(error){
+        catch (error) {
             console.log(error);
         }
     },
-    ActivateSociety : async(id)=>{
-        try{
+    ActivateSociety: async (id) => {
+        try {
             const result = await fetch(ApiEndpoints.Activate_society(id));
             const dataResult = await result.json();
             return dataResult;
-        }catch(error){
+        } catch (error) {
             console.log(error);
         }
     },
-    updateSociety : async(id , formData)=>{
-        try{
-            const result = await fetch(ApiEndpoints.update_society(id),{
-                method : "POST",
-                headers : {
-                    "Content-Type" : "application/json",
+    updateSociety: async (id, formData) => {
+        try {
+            const result = await fetch(ApiEndpoints.update_society(id), {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
                 },
-                body : JSON.stringify(formData)
+                body: JSON.stringify(formData)
             });
             const data = await result.json();
             return data;
         }
-        catch(error){
+        catch (error) {
             console.log(error);
         }
     }
