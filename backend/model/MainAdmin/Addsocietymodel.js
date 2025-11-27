@@ -1,3 +1,4 @@
+const {pool} = require("../../config/dbConfig");
 
 // const societyModel = {
 //   addSociety: async (data) => {
@@ -61,7 +62,7 @@
 
 // module.exports = societyModel;
 
-const pool = require("../../config/dbConfig");  // Use safe query wrapper
+const { query } = require("../../config/dbConfig");  // Use safe query wrapper
 
 const societyModel = {
   addSociety: async (data) => {
