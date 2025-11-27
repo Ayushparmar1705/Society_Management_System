@@ -32,9 +32,9 @@ const societyModel = {
   },
 
 
-  ActivateSociety: (id, callback) => {
+  ActivateSociety: async(id, callback) => {
     const sql = "UPDATE Addsociety SET is_active = 1 WHERE sid = ?";
-    return query(sql,[id],callback);
+    return await query(sql,[id],callback);
   },
 
   deleteSociety: async (id) => {
@@ -42,9 +42,9 @@ const societyModel = {
     return await query(sql, [id]);
   },
 
-  updateSociety: (id, data, callback) => {
+  updateSociety: async(id, data, callback) => {
     const sql = "UPDATE Addsociety SET society_name = ? , state = ? , email = ? , phone = ? , address = ? , total_flats = ? , total_blocks = ? WHERE sid = ?";
-    conn.query(sql, [data.society_name, data.state, data.email, data.phone, data.address, data.total_flats, data.total_blocks, id], callback);
+    return await query(sql, [data.society_name, data.state, data.email, data.phone, data.address, data.total_flats, data.total_blocks, id], callback);
   }
 };
 
