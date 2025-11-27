@@ -80,6 +80,7 @@ const societyController = {
             const name = req.params.name;
             console.log(name);
             const result = await societyModel.searchSocietyByName(name);
+            console.log("My result for society search = ",result);
             return res.status(200).json({ code: 200, message: result });
         } catch (err) {
             console.error(err);
