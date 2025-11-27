@@ -8,7 +8,7 @@ const societyController = {
            
             console.log("Add society controller = ",data);
             // Check if society name is unique
-            const existing = await societyModel.uniqueName(data.society_name);
+            const existing = await societyModel.uniqueName(data.name);
             if (existing.length > 0) {
                 return res.status(409).json({ code: 409, message: "Society name already exists" });
             }
