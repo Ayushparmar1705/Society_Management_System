@@ -8,15 +8,7 @@ const societyModel = {
       VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
     `;
 
-    return await query(sql, [
-      data.society_name,
-      data.state,
-      data.email,
-      data.phone,
-      data.address,
-      data.total_flats,
-      data.total_blocks,
-    ]);
+    return await query(sql, [data.name,data.state,data.email,data.phone,data.address,data.total_flats,data.total_blocks]);
   },
 
   uniqueName: async (name) => {
