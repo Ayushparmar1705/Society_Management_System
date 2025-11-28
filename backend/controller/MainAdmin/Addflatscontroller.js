@@ -1,14 +1,14 @@
 const { flatsModel } = require("../../model/MainAdmin/Addflatsmodel");
 const flatsController = {
     // create the object to add new block in db
-    Addflats: (req, res) => {
+    Addflats: async (req, res) => {
         // request by the client
         const data = req.body;
         console.log(data);
 
 
 
-        flatsModel.getBlocksById(data.bid, (err, result) => {
+        flatsModel.getBlocksById(data.bid, async (err, result) => {
             if (err) {
                 return res.status(500).send({ code: 500, message: err });
             }
@@ -24,75 +24,64 @@ const flatsController = {
                 "balcony_area": data.balcony_area,
                 "flat_code": blockResult + " - " + data.flat_number,
             }
-            console.log("final sending the data in mysql = ", newdata);
-            flatsModel.addFlats(newdata, (err, result) => {
-                if (err) {
-                    return res.status(500).send({ code: 500, message: err });
-                }
-                else {
-                    if (result.affectedRows > 0) {
-                        return res.status(200).send({ code: 200, message: "Flat added successfully" });
-                    }
-                }
-            })
+            const result = await flatsModel.addFlats(newdata);
+            try {
+                res.status(200).send({ code: 200, message: result });
+            } catch (err) {
+                res.status(500).send({ code: 500, message: err });
+            }
         })
 
 
 
     },
     // get the all society name from the database
-    getSocietyName: (req, res) => {
-        flatsModel.getFlatsName((err, result) => {
-            if (err) {
-                return res.status(500).send({ code: 500, message: err });
-            }
-            else {
-                return res.status(200).send({ code: 200, message: result });
-            }
-        })
+    getSocietyName: async (req, res) => {
+        const result = await flatsModel.getSocietyName();
+        try {
+            res.status(200).send({ code: 200, message: result });
+        } catch (err) {
+            res.status(500).send({ code: 500, message: err });
+        }
     },
     // get all the block from db
-    getBlock: (req, res) => {
-        flatsModel.getBlocks((err, result) => {
-            if (err) {
-                return res.status(500).send({ code: 500, message: err });
-            } else {
-                return res.status(200).send({ code: 200, message: result });
-            }
-        })
+    getBlock: async (req, res) => {
+        const result = await flatsModel.getBlocks();
+        try {
+            res.status(200).send({ code: 200, message: result });
+        } catch (err) {
+            res.status(500).send({ code: 500, message: err });
+        }
     },
-    getFlats: (req, res) => {
+    getFlats: async (req, res) => {
         const page = req.params.page;
         const limit = req.params.limit;
         const offset = (page - 1) * limit;
-        flatsModel.countTotal((err, result) => {
+        flatsModel.countTotal(async (err, result) => {
             if (err) {
                 return res.status(500).send({ code: 500, message: err });
             }
             else {
                 const total = result[0].total;
                 const totalPages = Math.ceil(total / limit);
-                flatsModel.getFlats(limit, offset, (err, result) => {
-                    if (err) {
-                        return res.status(500).send({ code: 500, message: err });
-                    } else {
-                        return res.status(200).send({ code: 200, message: result, totalPages: totalPages, total: total });
-                    }
-                })
+                const result = await flatsModel.getFlats(limit, offset);
+                try {
+                    res.status(200).send({ code: 200, message: result });
+                } catch (err) {
+                    res.status(500).send({ code: 500, message: err });
+                }
             }
         })
 
     },
-    getBlockByFlatsName: (req, res) => {
+    getBlockByFlatsName: async (req, res) => {
         const id = req.params.id;
-        flatsModel.getBlockByFlatsId(id, (err, result) => {
-            if (err) {
-                return res.status(500).send({ code: 500, message: err });
-            }
-            else {
-                return res.status(200).send({ code: 200, message: result });
-            }
-        });
+        const result = await flatsModel.getBlockByFlatsId(id);
+        try {
+            res.status(200).send({ code: 200, message: result });
+        } catch (err) {
+            res.status(500).send({ code: 500, message: err });
+        }
     }
 
 

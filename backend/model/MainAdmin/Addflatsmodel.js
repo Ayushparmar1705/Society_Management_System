@@ -11,7 +11,7 @@ const flatsModel = {
         const sql = "SELECT * FROM Addflats WHERE flat_number = ? AND floor_number = ?";
         return query(sql, [name], callback);
     },
-    getFlatsName : (callback)=>{
+    getSocietyName : (callback)=>{
         const sql = "SELECT sid , society_name FROM Addsociety WHERE is_active = 1";
         return query(sql,callback);
     },
@@ -24,6 +24,7 @@ const flatsModel = {
         return query(sql ,[bid] , callback);
     },
     getBlocks : (callback)=>{
+
         const sql = "SELECT * FROM Addblock WHERE is_active = 1";
         return query(sql,callback);
     },
@@ -38,4 +39,4 @@ const flatsModel = {
         return query(countSql,callback);
     }
 }
-module.exports = { flatsModel };
+module.exports = { flatsModel }
