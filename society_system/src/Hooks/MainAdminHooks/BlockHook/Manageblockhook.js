@@ -39,6 +39,8 @@ export default function Manageblockhook() {
                 toast.success(result.message);
             }
 
+        }catch(err){
+            console.log(err);
         }
     }
 
