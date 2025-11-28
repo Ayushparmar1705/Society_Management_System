@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export default function UserHeader() {
   const [myToken, setMyToken] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("token");
     console.log("token", token)
-    if (token != "Admin") {
+    if (token === "Admin") {
+      navigate("/https://society-management-system-afb5.onrender.com/mainadmin/login");
+
+    } else {
       setMyToken(token);
-      return;
     }
   }, [])
 
