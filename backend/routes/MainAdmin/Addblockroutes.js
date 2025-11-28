@@ -6,5 +6,6 @@ router.get("/getsocietyname",blockController.getSocietyName);
 router.post("/addblock", blockController.Addblock);
 router.get("/getblock", blockController.getBlock);
 router.get("/inactiveblock/:bid",blockController.inActiveblock);
+router.get("/activeblock/:bid",blockController.Activeblock);
 
 module.exports = router;
