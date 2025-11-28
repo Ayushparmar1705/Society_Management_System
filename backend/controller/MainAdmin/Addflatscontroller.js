@@ -62,6 +62,7 @@ const flatsController = {
         const limit = req.params.limit;
         const offset = (page - 1) * limit;
         const countTotal = await flatsModel.countTotal();
+        console.log("total count = ",countTotal);
         const total = countTotal[0].total;
         const totalPages = Math.ceil(total / limit);
         const result = await flatsModel.getFlats(limit, offset);
