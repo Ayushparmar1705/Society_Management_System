@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function UserHeader() {
   const [myToken, setMyToken] = useState('');
@@ -11,6 +12,7 @@ export default function UserHeader() {
     console.log("token", token)
     if (token === "Admin") {
       navigate("/mainadmin/login");
+      toast.success("You are not visiting the home page");
 
     } else {
       setMyToken(token);
