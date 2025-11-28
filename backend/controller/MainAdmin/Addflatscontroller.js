@@ -24,9 +24,9 @@ const flatsController = {
                 "balcony_area": data.balcony_area,
                 "flat_code": blockResult + " - " + data.flat_number,
             }
-            const result = await flatsModel.addFlats(newdata);
+            const result1 = await flatsModel.addFlats(newdata);
             try {
-                res.status(200).send({ code: 200, message: result });
+                res.status(200).send({ code: 200, message: result1 });
             } catch (err) {
                 res.status(500).send({ code: 500, message: err });
             }
