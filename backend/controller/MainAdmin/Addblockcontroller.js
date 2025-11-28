@@ -31,7 +31,7 @@ const blockController = {
     getSocietyName: async (req, res) => {
         try {
             const result = await blockModel.getFlatsName();
-            console.log("result of the society name = ",result);
+            console.log("result of the society name = ", result);
             return res.status(200).send({ code: 200, message: result });
         } catch (err) {
             return res.status(500).send({ code: 500, message: err });
@@ -43,6 +43,16 @@ const blockController = {
         try {
             const result = await blockModel.getBlock();
             return res.status(200).send({ code: 200, message: result });
+        } catch (err) {
+            return res.status(500).send({ code: 500, message: err });
+        }
+    },
+
+    inActiveblock: async (req, res) => {
+        const bid = req.params.bid;
+        try {
+            const result = await blockModel.inactive_block(bid);
+            return res.status(200).send({ code: 200, message: "Block inactive succesfully" });
         } catch (err) {
             return res.status(500).send({ code: 500, message: err });
         }

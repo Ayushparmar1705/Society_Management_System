@@ -30,6 +30,11 @@ const blockModel = {
     `;
     const rows = await query(sql);
     return rows;
+  },
+  inactive_block:async()=>{
+    const sql = "UPDATE SET is_active = 0 WHERE bid = ?";
+    const rows = await query(sql);
+    return rows;
   }
 };
 

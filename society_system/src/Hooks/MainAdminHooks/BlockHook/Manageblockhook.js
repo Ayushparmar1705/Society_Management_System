@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import ManageBlock from '../../../Api/MainAdmin/ManageBlock';
 import ManageBlockPage from '../../../Pages/MainAdmin/BlockManagement/ManageBlockPage';
-
+import {toast} from "react-toastify";
 export default function Manageblockhook() {
     const [blockList, setBlockList] = useState([]);
     const [duplicateBlock, setduplicateBlock] = useState([]);
@@ -25,10 +25,22 @@ export default function Manageblockhook() {
         getBlocks()
         
     }, []);
-   console.log(blockList);
 
 
-    
+    const inActiveBlock = (bid)=>{
+        try{
+            const result = await ManageBlock.inActiveBlock(bid);
+            if(result.code === 500)
+            {
+                toast.error(result.message);
+            }
+            else
+            {
+                toast.success(result.message);
+            }
 
-    return <ManageBlockPage isLoading={isLoading} blockList={blockList} ></ManageBlockPage>
+        }
+    }
+
+    return <ManageBlockPage inActiveBlock={inActiveBlock} isLoading={isLoading} blockList={blockList} ></ManageBlockPage>
 }

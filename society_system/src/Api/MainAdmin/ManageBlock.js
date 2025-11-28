@@ -1,37 +1,47 @@
 import ApiEndpoints from "../../Apiroutes/MainAdminRoutes/MainAdminEndpoints"
 
 const ManageBlock = {
-    addBlock : async(blockData)=>{
-        try{
-            const result = await fetch(ApiEndpoints.add_block,{
-                method : "POST",
-                headers : {
-                    "Content-Type" : "application/json",
+    addBlock: async (blockData) => {
+        try {
+            const result = await fetch(ApiEndpoints.add_block, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
                 },
-                body : JSON.stringify(blockData),
+                body: JSON.stringify(blockData),
             });
             const data = await result.json();
             return data;
         }
-        catch(error){
+        catch (error) {
             console.log(error);
         }
     },
-    getSocietyName : async()=>{
-        try{
+    getSocietyName: async () => {
+        try {
             const result = await fetch(ApiEndpoints.get_society_name);
             const data = await result.json();
             return data.message;
         }
-        catch(error){
+        catch (error) {
             console.log(error);
         }
     },
-    getBlock : async()=>{
-        try{
+    getBlock: async () => {
+        try {
             const result = await fetch(ApiEndpoints.get_block);
             const data = await result.json();
             return data.message;
+        }
+        catch (error) {
+            console.log(error);
+        }
+    },
+    inActiveBlock: async (bid) => {
+        try {
+            const result = await fetch(ApiEndpoints.inactiveblock);
+            const data = await result.json();
+            return data.json();
         }
         catch(error){
             console.log(error);
