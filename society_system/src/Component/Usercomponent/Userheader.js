@@ -10,7 +10,7 @@ export default function UserHeader() {
     const token = localStorage.getItem("token");
     console.log("token", token)
     if (token === "Admin") {
-      navigate("https://society-management-system-afb5.onrender.com/mainadmin/login");
+      navigate("/mainadmin/login");
 
     } else {
       setMyToken(token);
