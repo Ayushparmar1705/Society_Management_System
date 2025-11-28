@@ -32,7 +32,7 @@ const blockModel = {
     return rows;
   },
   inactive_block:async(bid)=>{
-    const sql = "UPDATE SET is_active = 0 WHERE bid = ?";
+    const sql = "UPDATE Addblock SET is_active = 0 WHERE bid = ?";
     const rows = await query(sql,[bid]);
     return rows;
   }
