@@ -27,7 +27,7 @@ export default function Manageblockhook() {
     }, []);
 
 
-    const inActiveBlock = (bid)=>{
+    const inActiveBlock = async(bid)=>{
         try{
             const result = await ManageBlock.inActiveBlock(bid);
             if(result.code === 500)
