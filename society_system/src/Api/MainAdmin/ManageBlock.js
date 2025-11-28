@@ -41,7 +41,7 @@ const ManageBlock = {
         try {
             const result = await fetch(ApiEndpoints.inactiveblock(bid));
             const data = await result.json();
-            return data.json();
+            return data
         }
         catch(error){
             console.log(error);
