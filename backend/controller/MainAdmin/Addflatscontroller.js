@@ -13,6 +13,7 @@ const flatsController = {
                 return res.status(500).send({ code: 500, message: err });
             }
             const blockResult = result[0]["block_name"];
+            console.log(blockResult);
             const newdata = {
                 "sid": data.sid,
                 "bid": data.bid,
@@ -25,6 +26,7 @@ const flatsController = {
                 "flat_code": blockResult + " - " + data.flat_number,
             }
             const result1 = await flatsModel.addFlats(newdata);
+            console.log(result1);
             try {
                 res.status(200).send({ code: 200, message: result1 });
             } catch (err) {
