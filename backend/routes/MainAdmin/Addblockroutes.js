@@ -5,6 +5,6 @@ const { blockController } = require("../../controller/MainAdmin/Addblockcontroll
 router.get("/getsocietyname",blockController.getSocietyName);
 router.post("/addblock", blockController.Addblock);
 router.get("/getblock", blockController.getBlock);
-
+router.get("/inactiveblock/:bid",blockController.inActiveblock);
 
 module.exports = router;
