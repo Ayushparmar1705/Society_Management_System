@@ -60,5 +60,5 @@ export default function Manageblockhook() {
         }
     }
 
-    return <ManageBlockPage ActiveBlock={ActiveBlock} inActiveBlock={inActiveBlock} isLoading={isLoading} blockList={blockList} ></ManageBlockPage>
+    return <ManageBlockPage getBlocks={getBlocks} ActiveBlock={ActiveBlock} inActiveBlock={inActiveBlock} isLoading={isLoading} blockList={blockList} ></ManageBlockPage>
 }
