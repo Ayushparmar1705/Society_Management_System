@@ -39,7 +39,7 @@ const ManageBlock = {
     },
     inActiveBlock: async (bid) => {
         try {
-            const result = await fetch(ApiEndpoints.inactiveblock);
+            const result = await fetch(ApiEndpoints.inactiveblock(bid));
             const data = await result.json();
             return data.json();
         }
