@@ -30,6 +30,7 @@ export default function Manageblockhook() {
     const inActiveBlock = async(bid)=>{
         try{
             const result = await ManageBlock.inActiveBlock(bid);
+            console.log(result);
             if(result.code === 500)
             {
                 toast.error(result.message);
