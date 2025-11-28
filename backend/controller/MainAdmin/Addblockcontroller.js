@@ -62,7 +62,7 @@ const blockController = {
         const bid = req.params.bid;
         try {
             const result = await blockModel.active_block(bid);
-            return res.status(200).send({ code: 500, message: result });
+            return res.status(200).send({ code: 200, message: "Block Active succesfully" });
         } catch (error) {
             return res.status(500).send({ code: 500, message: error });
         }

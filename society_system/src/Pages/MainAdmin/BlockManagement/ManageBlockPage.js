@@ -3,7 +3,7 @@ import React from 'react'
 import { BiCube } from 'react-icons/bi';
 import { MdEmail } from 'react-icons/md';
 
-export default function ManageBlockPage({ isLoading, blockList , inActiveBlock , ActiveBlock}) {
+export default function ManageBlockPage({ isLoading, blockList , inActiveBlock , ActiveBlock }) {
     return (
     <div className='mt-[10px]'>
       {isLoading ? (

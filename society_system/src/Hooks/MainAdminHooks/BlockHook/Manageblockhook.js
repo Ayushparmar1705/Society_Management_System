@@ -34,6 +34,7 @@ export default function Manageblockhook() {
             if(result.code === 500)
             {
                 toast.error(result.message);
+                getBlocks();
             }
             else
             {
@@ -50,6 +51,7 @@ export default function Manageblockhook() {
             if(result.code === 500)
             {
                 toast.error(result.message);
+                getBlocks();
             }
             else
             {
@@ -60,5 +62,5 @@ export default function Manageblockhook() {
         }
     }
 
-    return <ManageBlockPage getBlocks={getBlocks} ActiveBlock={ActiveBlock} inActiveBlock={inActiveBlock} isLoading={isLoading} blockList={blockList} ></ManageBlockPage>
+    return <ManageBlockPage ActiveBlock={ActiveBlock} inActiveBlock={inActiveBlock} isLoading={isLoading} blockList={blockList} ></ManageBlockPage>
 }
