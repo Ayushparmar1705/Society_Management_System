@@ -2,7 +2,7 @@ const { query } = require("../../config/dbConfig");
 
 const flatsModel = {
     addFlats: (data, callback) => {
-
+        
         const sql = "INSERT INTO Addflats(sid , bid , flat_number , floor_number , flat_type , flat_price , flat_area , balcony_area , flat_code) VALUES(?,?,?,?,?,?,?,?,?)";
         return query(sql, [data.sid , data.bid , data.flat_number , data.floor_number , data.flat_type , data.flat_price , data.flat_area , data.balcony_area , data.flat_code], callback);
 
