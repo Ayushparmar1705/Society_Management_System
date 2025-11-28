@@ -25,7 +25,7 @@ const blockModel = {
 
   getBlock: async () => {
     const sql = `
-      SELECT b.bid,b.block_name,b.created_at,b.updated_at,b.email,b.is_active,b.phone,s.sid,s.society_name,s.total_flats,s.total_blocks FROM Addblock b INNER JOIN Addsociety s ON b.sid = s.sid`;
+      SELECT b.bid,b.block_name,b.created_at,b.updated_at,b.is_active,s.sid,s.email,s.phone,s.society_name,s.total_flats,s.total_blocks FROM Addblock b INNER JOIN Addsociety s ON b.sid = s.sid`;
     const rows = await query(sql);
     console.log("rows for the get block = ",rows);
     return rows;
