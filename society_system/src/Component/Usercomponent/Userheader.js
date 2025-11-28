@@ -11,8 +11,8 @@ export default function UserHeader() {
     const token = localStorage.getItem("token");
     console.log("token", token)
     if (token === "Admin") {
-      navigate("/mainadmin/login");
       toast.success("You are not visiting the home page");
+      navigate("/mainadmin/login");
 
     } else {
       setMyToken(token);
