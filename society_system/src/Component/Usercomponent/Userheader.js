@@ -8,7 +8,7 @@ export default function UserHeader() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     console.log("token", token)
-    if (token !== "Admin") {
+    if (token != "Admin") {
       setMyToken(token);
       return;
     }
