@@ -44,6 +44,21 @@ export default function Manageblockhook() {
             console.log(err);
         }
     }
+    const ActiveBlock = async(bid)=>{
+        try{
+            const result = await ManageBlock.ActiveBlock(bid);
+            if(result.code === 500)
+            {
+                toast.error(result.message);
+            }
+            else
+            {
+                toast.success(result.message);
+            }
+        }catch(err){
+            console.log(err);
+        }
+    }
 
-    return <ManageBlockPage inActiveBlock={inActiveBlock} isLoading={isLoading} blockList={blockList} ></ManageBlockPage>
+    return <ManageBlockPage ActiveBlock={ActiveBlock} inActiveBlock={inActiveBlock} isLoading={isLoading} blockList={blockList} ></ManageBlockPage>
 }

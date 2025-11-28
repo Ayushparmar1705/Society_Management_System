@@ -52,12 +52,22 @@ const blockController = {
         const bid = req.params.bid;
         try {
             const result = await blockModel.inactive_block(bid);
-            console.log("result of in active block = ",result);
+            console.log("result of in active block = ", result);
             return res.status(200).send({ code: 200, message: "Block inactive succesfully" });
         } catch (err) {
             return res.status(500).send({ code: 500, message: err });
         }
+    },
+    Activeblock: async (req, res) => {
+        const bid = req.params.bid;
+        try {
+            const result = await blockModel.active_block(bid);
+            return res.status(200).send({ code: 500, message: result });
+        } catch (error) {
+            return res.status(500).send({ code: 500, message: error });
+        }
     }
+
 };
 
 module.exports = { blockController };

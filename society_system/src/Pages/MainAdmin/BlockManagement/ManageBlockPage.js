@@ -3,7 +3,7 @@ import React from 'react'
 import { BiCube } from 'react-icons/bi';
 import { MdEmail } from 'react-icons/md';
 
-export default function ManageBlockPage({ isLoading, blockList , inActiveBlock}) {
+export default function ManageBlockPage({ isLoading, blockList , inActiveBlock , ActiveBlock}) {
     return (
     <div className='mt-[10px]'>
       {isLoading ? (
@@ -75,11 +75,14 @@ export default function ManageBlockPage({ isLoading, blockList , inActiveBlock})
                       <div className='flex justify-between border-t pt-2 mt-2 border-gray-200'>
                         <button onClick={()=>{
                           inActiveBlock(data.bid);
-                        }} className='bg-gray-500 hover:bg-gray-600 p-2 w-full rounded text-white mt-2 transition-all duration-200'>in Active</button>
+                        }} className='bg-gray-500 hover:bg-gray-600 p-2 w-full rounded text-black mt-2 transition-all duration-200'>in Active</button>
                   
                       </div>
                     ) : (
                       <button
+                        onClick={()=>{
+                          ActiveBlock(data.bid);
+                        }}
                         className='bg-blue-500 hover:bg-blue-600 p-2 w-full rounded text-white mt-2 transition-all duration-200'
                       >
                         Activate

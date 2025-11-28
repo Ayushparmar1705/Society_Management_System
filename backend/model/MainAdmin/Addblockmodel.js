@@ -34,6 +34,11 @@ const blockModel = {
     const sql = "UPDATE Addblock SET is_active = 0 WHERE bid = ?";
     const rows = await query(sql,[bid]);
     return rows;
+  },
+  active_block:async(bid)=>{
+    const sql = "UPDATE Addblock SET is_active = 1 WHERE bid = ?";
+    const rows = await query(sql,[bid]);
+    return rows;
   }
 };
 

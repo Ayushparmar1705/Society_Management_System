@@ -46,6 +46,15 @@ const ManageBlock = {
         catch(error){
             console.log(error);
         }
+    },
+    ActiveBlock : async(bid)=>{
+        try{
+            const result = await fetch(ApiEndpoints.activeblock(bid));
+            const data = await result.json();
+            return data;
+        }catch(err){
+            console.log(err);
+        }
     }
 }
 export default ManageBlock;
