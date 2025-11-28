@@ -2,25 +2,24 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 export default function UserHeader() {
-  const [myToken , setMyToken] = useState('');
+  const [myToken, setMyToken] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-  useEffect(()=>{
+  useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log("token" , token)
-    if(token)
-    {
+    console.log("token", token)
+    if (token !== "admin") {
       setMyToken(token);
       return;
     }
-  },[])
- 
+  }, [])
+
 
   const links = [
     { name: "Home", path: "/" },
     { name: "About Us", path: "/about" },
     { name: "Contact Us", path: "/contact" },
-    { name: myToken?'Dashboard':'Login', path: myToken?'/dashboard':'/login' },
+    { name: myToken ? 'Dashboard' : 'Login', path: myToken ? '/dashboard' : '/login' },
   ];
 
   return (
@@ -40,9 +39,8 @@ export default function UserHeader() {
             <Link
               key={link.name}
               to={link.path}
-              className={`font-semibold hover:text-blue-500 transition-all duration-200 ${
-                location.pathname === link.path ? "text-blue-600" : "text-gray-800"
-              }`}
+              className={`font-semibold hover:text-blue-500 transition-all duration-200 ${location.pathname === link.path ? "text-blue-600" : "text-gray-800"
+                }`}
             >
               {link.name}
             </Link>
@@ -92,9 +90,8 @@ export default function UserHeader() {
 
       {/* Mobile Dropdown */}
       <div
-        className={`md:hidden bg-white overflow-hidden transition-all duration-300 ease-in-out ${
-          isMenuOpen ? "max-h-60" : "max-h-0"
-        }`}
+        className={`md:hidden bg-white overflow-hidden transition-all duration-300 ease-in-out ${isMenuOpen ? "max-h-60" : "max-h-0"
+          }`}
       >
         <nav className="flex flex-col px-6 pb-4">
           {links.map((link) => (
@@ -102,9 +99,8 @@ export default function UserHeader() {
               key={link.name}
               to={link.path}
               onClick={() => setIsMenuOpen(false)} // close on click
-              className={`py-2 text-base font-medium hover:text-blue-500 transition-all duration-200 ${
-                location.pathname === link.path ? "text-blue-600" : "text-gray-800"
-              }`}
+              className={`py-2 text-base font-medium hover:text-blue-500 transition-all duration-200 ${location.pathname === link.path ? "text-blue-600" : "text-gray-800"
+                }`}
             >
               {link.name}
             </Link>
