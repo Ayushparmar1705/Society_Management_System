@@ -60,6 +60,8 @@ const flatsController = {
     getFlats: async (req, res) => {
         const page = req.params.page;
         const limit = req.params.limit;
+
+        console.log(page,limit);
         const offset = (page - 1) * limit;
         const countTotal = await flatsModel.countTotal();
         console.log("total count = ",countTotal);
