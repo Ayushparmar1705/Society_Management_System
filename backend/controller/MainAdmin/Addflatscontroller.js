@@ -30,6 +30,7 @@ const flatsController = {
             try {
                 res.status(200).send({ code: 200, message: result1 });
             } catch (err) {
+                console.log(err);
                 res.status(500).send({ code: 500, message: err });
             }
         })
