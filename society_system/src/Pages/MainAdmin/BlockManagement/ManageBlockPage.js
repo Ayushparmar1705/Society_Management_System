@@ -75,7 +75,7 @@ export default function ManageBlockPage({ isLoading, blockList , inActiveBlock})
                       <div className='flex justify-between border-t pt-2 mt-2 border-gray-200'>
                         <button onClick={()=>{
                           inActiveBlock(data.bid);
-                        }} className='bg-blue-500 hover:bg-blue-600 p-2 w-full rounded text-white mt-2 transition-all duration-200'>in Active</button>
+                        }} className='bg-gray-500 hover:bg-gray-600 p-2 w-full rounded text-white mt-2 transition-all duration-200'>in Active</button>
                   
                       </div>
                     ) : (
