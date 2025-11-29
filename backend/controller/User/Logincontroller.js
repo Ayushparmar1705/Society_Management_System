@@ -44,7 +44,7 @@ const loginController = {
                 try {
                     await transpoter.sendMail(mailOption);
                 } catch (err) {
-                    console.log(err);
+                    console.log(err)
                 }
             }
 
