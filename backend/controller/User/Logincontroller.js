@@ -18,13 +18,21 @@ const loginController = {
         }
         else {
             const otp = genretOTP();
-            const transporter = nodemailer.createTransport({
-                service: "gmail",
-                auth: {
-                    user: "ayus  hparmar1705@gmail.com",
-                    pass: process.env.GMAIL_PASSWORD,
+            // const transporter = nodemailer.createTransport({
+            //     service: "gmail",
+            //     auth: {
+            //         user: "ayus  hparmar1705@gmail.com",
+            //         pass: process.env.GMAIL_PASSWORD,
+            //     }
+            // })
+            const transpoter = nodemailer.createTransport({
+                host : process.env.MAILGUN_HOST,
+                port : process.env.MAILGUN_PORT,
+                auth : {
+                    user : process.env.MAILGUN_USER,
+                    pass : process.env.MAILGUN_PASS,
                 }
-            })
+            });
             const sendMainFunction = async () => {
 
                 const mailOption = {
@@ -34,7 +42,7 @@ const loginController = {
                     text: `Your OTP ${otp}. don't share the OTP to anyone`
                 }
                 try {
-                    await transporter.sendMail(mailOption);
+                    await transpoter.sendMail(mailOption);
                 } catch (err) {
                     console.log(err);
                 }
