@@ -17,9 +17,7 @@ const SignupController = {
             const result = await Usersignup.Signup(data);
             return res.status(200).send({ code: 200, message: "User account created succesfully" });
         } catch (err) {
-            if (err.errno === 1062) {
-                return res.status(500).send({ code: 500, message: "Phone number alredy exists" });
-            }
+            console.log(err);
         }
 
     },
