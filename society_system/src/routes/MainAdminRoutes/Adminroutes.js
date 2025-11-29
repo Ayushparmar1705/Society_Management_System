@@ -30,7 +30,7 @@ export default function Adminroutes() {
         <Route path="/mainadmin/add-flats" element={<Layout><Addflathook></Addflathook></Layout>}></Route>
         <Route path="/mainadmin/manage-flats" element={<Layout><Manageflathook></Manageflathook></Layout>}></Route>
         <Route path="/mainadmin/update-page" element={<Layout><Updatesocietyhook></Updatesocietyhook></Layout>}></Route>
-        <Routes path="/mainadmin/update-flats" element={<Layout><UpdateFlatsPage></UpdateFlatsPage></Layout>}></Routes>
+        <Route path="/mainadmin/update-flats" element={<Layout><UpdateFlatsPage></UpdateFlatsPage></Layout>}></Route>
       </Routes>
 
     </div>
