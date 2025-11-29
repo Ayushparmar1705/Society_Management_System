@@ -3,6 +3,8 @@ require("dotenv").config();
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 const createConnection = require("../../config/MongoDbConfig");
+import FormData from "form-data";
+import Mailgun from "mailgun.js";
 const db = require("../../config/dbConfig");
 const jwt = require("jsonwebtoken")
 const genretOTP = () => {
@@ -18,49 +20,29 @@ const loginController = {
             return res.status(500).send({ code: "approval", message: "Waiting for chairman approval" });
         }
         else {
-            const otp = genretOTP();
-            // const transporter = nodemailer.createTransport({
-            //     service: "gmail",
-            //     auth: {
-            //         user: "ayushparmar1705@gmail.com",
-            //         pass: process.env.GMAIL_PASSWORD,
-            //     }
-            // })
-            // const sendMainFunction = async () => {
 
-            //     const mailOption = {
-            //         from: "ayushparmar1705@gmail.com",
-            //         to: email,
-            //         subject: `OTP for urbanhome`,
-            //         text: `Your OTP ${otp}. don't share the OTP to anyone`
-            //     }
-            //     try {
-            //         await transporter.sendMail(mailOption);
-            //     } catch (err) {
-            //         console.log(err);
-            //     }
 
-            // }
-            const transpoter = nodemailer.createTransport({
-                host: process.env.MAILGUN_HOST,
-                port: process.env.MAILGUN_PORT,
-                secure: false,
-                auth: {
-                    user: process.env.MAILGUN_USER,
-                    pass: process.env.MAILGUN_PASS,
-                }
-            })
+            const mailgun = new Mailgun(FormData);
+            const mg = mailgun.client({
+                username: "api",
+                key: process.env.API_KEY,
 
-            console.log(process.env.MAILGUN_USER);
-            console.log(process.env.MAILGUN_PASS);
-            console.log(process.env.MAILGUN_HOST);
-            console.log(process.env.MAILGUN_PORT);
-            await transpoter.sendMail({
-                from: `"UrbanHome" <${process.env.MAILGUN_USER}>`, // Correct format
-                to: "recipient@example.com",
-                subject: "OTP for UrbanHome",
-                text: `Your OTP is ${otp}. Don't share it!`,
             });
+            const otp = genretOTP();
+            try {
+                const data = await mg.messages.create("sandbox91b71e47fdd04c2b9cb132573c009658.mailgun.org", {
+                    from: "Urbanhome <postmaster@sandbox91b71e47fdd04c2b9cb132573c009658.mailgun.org>",
+                    to: ["ayush <ayushparmar1705@gmail.com"],
+                    subject: 'Urbanhome OTP. dont share to anyone',
+                    text: `urbanhome otp ${otp}`
+                })
+            } catch (error) {
+                console.log(error);
+            }
+            console.log(data);
+
+
+
             await createConnection.otpVerification.insert(otp, email);
             return res.status(200).send({ code: 200, message: "otp send in your main", result: result });
         }
