@@ -1,5 +1,4 @@
-const { query } = require("../../config/dbConfig");
-
+const { query } = require("../../../config/dbConfig");
 const Dashboardmodel = {
     countTotalMembers: (callback) => {
         // count total residence
