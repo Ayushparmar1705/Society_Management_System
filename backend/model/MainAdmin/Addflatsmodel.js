@@ -34,7 +34,7 @@ const flatsModel = {
         
 
 
-        return query(sql, [parseInt(limit), parseInt(offset)]);
+        return query(sql);
     },
     countTotal: () => {
         const countSql = "SELECT COUNT(*) AS total FROM Addflats";
