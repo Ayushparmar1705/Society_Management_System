@@ -36,11 +36,8 @@ const loginController = {
                 }
                 await transporter.sendMail(mailOption);
             }
-            try{
-                await  sendMainFunction();
-            }catch(err){
-                console.log(err);
-            }
+            
+            await sendMainFunction();
             await createConnection.otpVerification.insert(otp,email);
             return res.status(200).send({code:200,message:"otp send in your main",result:result});
         }
