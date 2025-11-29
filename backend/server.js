@@ -44,7 +44,7 @@ app.use("/mainadmin", societyroutes);
 app.use("/mainadmin", blockroutes);
 app.use("/mainadmin", flatsroutes);
 app.use("/users", usersignuproutes);
-app.use("/users", userloginroutes);
+app.use("/users", userloginroutes)
 app.use("/auth", memberManagement);
 app.use("/auth", dashboardRoutes);
 app.use("/auth", ParkingAllocationRoutes);

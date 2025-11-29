@@ -13,6 +13,7 @@ const loginController = {
         const { email } = req.body;
 
         const result = await Userlogin.login(email);
+        console.log(result);
         if (result[0].role === "residence" && result[0].user_status === 0) {
             return res.status(500).send({ code: "approval", message: "Waiting for chairman approval" });
         }
@@ -54,12 +55,6 @@ const loginController = {
                 subject: "OTP for urbanhome",
                 text: `Your OTP ${otp}. don't share the OTP to anyone`,
             })
-
-            try {
-                await sendMainFunction();
-            } catch (err) {
-                console.log(err)
-            }
             await createConnection.otpVerification.insert(otp, email);
             return res.status(200).send({ code: 200, message: "otp send in your main", result: result });
         }
