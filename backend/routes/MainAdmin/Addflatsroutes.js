@@ -5,6 +5,7 @@ const { flatsController } = require("../../controller/MainAdmin/Addflatscontroll
 router.post("/addflats", flatsController.Addflats);
 router.get("/getflats/:page/:limit", flatsController.getFlats);
 router.get("/getblockbyflatname/:id",flatsController.getBlockByFlatsName);
+router.get("/getflatbyid/:id",flatsController.getFlatById);
 // router.get("/deletesociety/:id", flatsController.);
 // router.get("/searchsociety/:name",societyController.searchSocietyByName);
 // router.get("/searchbyid/:id",societyController.getSocietyById);

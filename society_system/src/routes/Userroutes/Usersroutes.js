@@ -33,8 +33,8 @@ export default function Usersroutes() {
       <Route path='/allocate-parking' element={<ParkingAllocationHook></ParkingAllocationHook>}></Route>
       <Route path='/view-parking' element={<ViewAllocateParkingHook></ViewAllocateParkingHook>}></Route>
       <Route path='/managevisitor' element={<ManageVisitor></ManageVisitor>}></Route>
-      
-      
+
+
     </Routes>
   )
 }
