@@ -18,7 +18,7 @@ const MainAdminApiEndPoints = {
     "add_flats": `${BASE_URL}/mainadmin/addflats`,
     "getblockbyflatsname": (id) => `${BASE_URL}/mainadmin/getblockbyflatname/${id}`,
     "getFlats": (page, limit) => `${BASE_URL}/mainadmin/getFlats/${page}/${limit}`,
-    "getFlatById": (id) => `${BASE_URL}/mainadmin/getflatbyid/${id}`,
+    "getFlatById": (id) => `${BASE_URL}/mainadmin/getFlatById/${id}`,
     "update_society": (id) => `${BASE_URL}/mainadmin/updatesociety/${id}`,
 
 }
