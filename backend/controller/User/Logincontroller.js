@@ -9,41 +9,44 @@ const genretOTP = () => {
     return crypto.randomInt(100000, 999999);
 }
 const loginController = {
-    loginUser: async(req, res) => {
+    loginUser: async (req, res) => {
         const { email } = req.body;
 
         const result = await Userlogin.login(email);
-        if(result[0].role === "residence" && result[0].user_status === 0)
-        {
-            return res.status(500).send({code:"approval",message:"Waiting for chairman approval"});
+        if (result[0].role === "residence" && result[0].user_status === 0) {
+            return res.status(500).send({ code: "approval", message: "Waiting for chairman approval" });
         }
-        else
-        {
+        else {
             const otp = genretOTP();
-            const sendMainFunction = async()=>{
-                const transporter = nodemailer.createTransport({
-                    service:"gmail",
-                    auth:{
-                        user:"ayushparmar1705@gmail.com",
-                        pass:process.env.GMAIL_PASSWORD,
-                    }
-                })
-                const mailOption = {
-                    from:"ayushparmar1705@gmail.com",
-                    to:email,
-                    subject:`OTP for urbanhome`,
-                    text:`Your OTP ${otp}. don't share the OTP to anyone`
+            const transporter = nodemailer.createTransport({
+                service: "gmail",
+                auth: {
+                    user: "ayus  hparmar1705@gmail.com",
+                    pass: process.env.GMAIL_PASSWORD,
                 }
-                await transporter.sendMail(mailOption);
+            })
+            const sendMainFunction = async () => {
+
+                const mailOption = {
+                    from: "ayushparmar1705@gmail.com",
+                    to: email,
+                    subject: `OTP for urbanhome`,
+                    text: `Your OTP ${otp}. don't share the OTP to anyone`
+                }
+                try {
+                    await transporter.sendMail(mailOption);
+                } catch (err) {
+                    console.log(err);
+                }
             }
-            
-            try{
+
+            try {
                 await sendMainFunction();
-            }catch(err){
+            } catch (err) {
                 console.log(err);
             }
-            await createConnection.otpVerification.insert(otp,email);
-            return res.status(200).send({code:200,message:"otp send in your main",result:result});
+            await createConnection.otpVerification.insert(otp, email);
+            return res.status(200).send({ code: 200, message: "otp send in your main", result: result });
         }
         // Userlogin.login(email, async (err, result) => {
         //     if (err) {
@@ -102,7 +105,7 @@ const loginController = {
 
                         const token = jwt.sign({ id: result[0].uid }, process.env.JWT_SECRET, { expiresIn: "1h" })
                         const sid = jwt.sign({ sid: result[0].sid }, process.env.JWT_SECRET, { expiresIn: "1h" })
-                        return res.status(200).send({ code: 200, message: "Otp verify succesfully", role: result[0].role, _token: token, sid: sid , society_id : result[0].society_id , flat_id : result[0].fid})
+                        return res.status(200).send({ code: 200, message: "Otp verify succesfully", role: result[0].role, _token: token, sid: sid, society_id: result[0].society_id, flat_id: result[0].fid })
                     }
                 }
                 else {
