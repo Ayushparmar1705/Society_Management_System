@@ -29,7 +29,7 @@ const flatsModel = {
         return query(sql);
     },
     getFlats: (limit, offset) => {
-        const sql = "SELECT a.fid , s.sid , b.bid  , a.floor_number , a.flat_type , a.flat_code , a.is_active , s.society_name , s.total_flats , s.total_blocks , s.is_active  FROM Addflats a LEFT JOIN Addblock b ON a.bid = b.bid LEFT JOIN Addsociety s ON a.sid = s.sid LIMIT ? OFFSET ?";
+        const sql = `SELECT a.fid , s.sid , b.bid  , a.floor_number , a.flat_type , a.flat_code , a.is_active as flat_isactive , s.society_name , s.total_flats , s.total_blocks , s.is_active as society_isactive  FROM Addflats a LEFT JOIN Addblock b ON a.bid = b.bid LEFT JOIN Addsociety s ON a.sid = s.sid LIMIT ${limit} OFFSET ${offset}`;
 
         
 
