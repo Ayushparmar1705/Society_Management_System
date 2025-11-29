@@ -24,6 +24,7 @@ export default function Manageflathook() {
     const getFlatsById = async(id)=>{
         try{
             const data = await Manageflats.getFlatById(id);
+            console.log(data);
             const result = await data.message;
             setOneFlats(result);
             navigate("/mainadmin/update-flats",{state:{oneflats}})
