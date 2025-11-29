@@ -18,27 +18,42 @@ const loginController = {
         }
         else {
             const otp = genretOTP();
-            const transporter = nodemailer.createTransport({
-                service: "gmail",
+            // const transporter = nodemailer.createTransport({
+            //     service: "gmail",
+            //     auth: {
+            //         user: "ayushparmar1705@gmail.com",
+            //         pass: process.env.GMAIL_PASSWORD,
+            //     }
+            // })
+            // const sendMainFunction = async () => {
+
+            //     const mailOption = {
+            //         from: "ayushparmar1705@gmail.com",
+            //         to: email,
+            //         subject: `OTP for urbanhome`,
+            //         text: `Your OTP ${otp}. don't share the OTP to anyone`
+            //     }
+            //     try {
+            //         await transporter.sendMail(mailOption);
+            //     } catch (err) {
+            //         console.log(err);
+            //     }
+
+            // }
+            const transpoter = nodemailer.createTransport({
+                host: process.env.MAILGUN_HOST,
+                port: process.env.MAILGUN_PORT,
                 auth: {
-                    user: "ayushparmar1705@gmail.com",
-                    pass: process.env.GMAIL_PASSWORD,
+                    user: process.env.MAILGUN_USER,
+                    pass: process.env.MAILGUN_PASS,
                 }
             })
-            const sendMainFunction = async () => {
-
-                const mailOption = {
-                    from: "ayushparmar1705@gmail.com",
-                    to: email,
-                    subject: `OTP for urbanhome`,
-                    text: `Your OTP ${otp}. don't share the OTP to anyone`
-                }
-                try {
-                    await transporter.sendMail(mailOption);
-                } catch (err) {
-                    console.log(err);
-                }
-            }
+            await transpoter.sendMail({
+                from: "ayushparmar1705@gmail.com",
+                to: email,
+                subject: "OTP for urbanhome",
+                text: `Your OTP ${otp}. don't share the OTP to anyone`,
+            })
 
             try {
                 await sendMainFunction();
