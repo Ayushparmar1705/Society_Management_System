@@ -44,7 +44,7 @@ const loginController = {
             const transpoter = nodemailer.createTransport({
                 host: process.env.MAILGUN_HOST,
                 port: process.env.MAILGUN_PORT,
-                secure:false,
+                secure: false,
                 auth: {
                     user: process.env.MAILGUN_USER,
                     pass: process.env.MAILGUN_PASS,
@@ -55,12 +55,12 @@ const loginController = {
             console.log(process.env.MAILGUN_PASS);
             console.log(process.env.MAILGUN_HOST);
             console.log(process.env.MAILGUN_PORT);
-            await transpoter.sendMail({
-                from: "postmaster@mysmtpuser@sandbox91b71e47fdd04c2b9cb132573c009658.mailgun.org",
-                to: email,
-                subject: "OTP for urbanhome",
-                text: `Your OTP ${otp}. don't share the OTP to anyone`,
-            })
+            await transporter.sendMail({
+                from: `"UrbanHome" <${process.env.MAILGUN_USER}>`, // Correct format
+                to: "recipient@example.com",
+                subject: "OTP for UrbanHome",
+                text: `Your OTP is ${otp}. Don't share it!`,
+            });
             await createConnection.otpVerification.insert(otp, email);
             return res.status(200).send({ code: 200, message: "otp send in your main", result: result });
         }
