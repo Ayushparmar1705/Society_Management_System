@@ -1,13 +1,13 @@
 const { query } = require("../../config/dbConfig");
 
 const Usersignup = {
-    getFlatcodebysocietyId: (sid, callback) => {
+    getFlatcodebysocietyId: (sid) => {
         const sql = "SELECT fid , flat_code FROM Addflats WHERE sid = ?";
-        query(sql, [sid], callback)
+        return query(sql, [sid])
     },
-    Signup: (data, callback) => {
+    Signup: (data) => {
         const sql = "INSERT INTO users(sid , fid , username , email , phone , role) VALUES(?,?,?,?,?,?)";
-        query(sql, [data.society_id, data.flat_id, data.username, data.email, data.phone, data.role], callback);
+        return query(sql, [data.society_id, data.flat_id, data.username, data.email, data.phone, data.role]);
     },
   
 }
