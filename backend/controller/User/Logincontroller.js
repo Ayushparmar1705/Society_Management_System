@@ -33,7 +33,7 @@ const loginController = {
             try {
                 const data = await mg.messages.create("sandbox91b71e47fdd04c2b9cb132573c009658.mailgun.org", {
                     from: "Urbanhome <postmaster@sandbox91b71e47fdd04c2b9cb132573c009658.mailgun.org>",
-                    to: ["ayush <ayushparmar1705@gmail.com"],
+                    to:  email,
                     subject: 'Urbanhome OTP. dont share to anyone',
                     text: `urbanhome otp ${otp}`
                 })
