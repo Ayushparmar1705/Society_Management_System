@@ -49,6 +49,8 @@ const loginController = {
                     pass: process.env.MAILGUN_PASS,
                 }
             })
+
+            console.log(process.env.MAILGUN_HOST);
             await transpoter.sendMail({
                 from: "ayushparmar1705@gmail.com",
                 to: email,
