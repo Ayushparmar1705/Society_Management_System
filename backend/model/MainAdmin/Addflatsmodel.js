@@ -39,6 +39,10 @@ const flatsModel = {
     countTotal: () => {
         const countSql = "SELECT COUNT(*) AS total FROM Addflats";
         return query(countSql);
+    },
+    getOneFlats: (id)=>{
+        const sql = "SELECT * FROM Addflats WHERE fid = ?";
+        return query(sql,[id]);
     }
 }
 module.exports = { flatsModel }

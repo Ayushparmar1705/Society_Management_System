@@ -1,6 +1,6 @@
 import { Building2, Home, Key, Layout, MapPin, Phone } from 'lucide-react';
 
-export default function ManageflatsPage({ loading, page, totalPage, setPage, flatsData }) {
+export default function ManageflatsPage({ loading, page, totalPage, setPage, flatsData , getFlatsById}) {
   return (
     <div className='mt-[10px]'>
       {loading ? (
@@ -25,7 +25,7 @@ export default function ManageflatsPage({ loading, page, totalPage, setPage, fla
                 <div className='hover:scale-[1.04] hover:border-2 hover:border-gray-200 transition-transform duration-200 border-2 border-gray-100 p-4 rounded w-[350px] h-[400px]'>
 
                   {/* Header */}
-                  <div className={`text-white p-[10px] font-bold rounded ${data.is_active === 1 ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-black' : 'bg-gradient-to-r from-gray-500 to-gray-600'}`}>
+                  <div className={`text-white p-[10px] font-bold rounded ${data.flat_isactive === 1 ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-black' : 'bg-gradient-to-r from-gray-500 to-gray-600'}`}>
                     <div className='flex justify-between items-center'>
                       <p>{data.society_name}</p>
                       <Building2 className="h-8 w-8 text-white opacity-90" />
@@ -69,7 +69,7 @@ export default function ManageflatsPage({ loading, page, totalPage, setPage, fla
                         />
                         <img
                           onClick={() => {
-                            // Edit logic here
+                              getFlatsById(data.fid);
                           }}
                           src='/Assets/edit.png'
                           alt='Edit'

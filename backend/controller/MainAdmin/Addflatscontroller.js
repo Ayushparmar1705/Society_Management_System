@@ -61,10 +61,10 @@ const flatsController = {
         const page = req.params.page;
         const limit = req.params.limit;
 
-        console.log(page,limit);
+        console.log(page, limit);
         const offset = (page - 1) * limit;
         const countTotal = await flatsModel.countTotal();
-        console.log("total count = ",countTotal);
+        console.log("total count = ", countTotal);
         const total = countTotal[0].total;
         const totalPages = Math.ceil(total / limit);
         const result = await flatsModel.getFlats(limit, offset);
@@ -78,6 +78,15 @@ const flatsController = {
     getBlockByFlatsName: async (req, res) => {
         const id = req.params.id;
         const result = await flatsModel.getBlockByFlatsId(id);
+        try {
+            res.status(200).send({ code: 200, message: result });
+        } catch (err) {
+            res.status(500).send({ code: 500, message: err });
+        }
+    },
+    getFlatById: async (req, res) => {
+        const id = req.params.id;
+        const result = await flatsModel.getOneFlats(id);
         try {
             res.status(200).send({ code: 200, message: result });
         } catch (err) {
