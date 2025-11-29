@@ -60,7 +60,7 @@ export default function ManageflatsPage({ loading, page, totalPage, setPage, fla
                     </div>
 
                     {/* Action Buttons */}
-                    {data.is_active === 1 ? (
+                    {data.flat_isactive === 1 ? (
                       <div className='flex justify-between border-t pt-2 mt-2 border-gray-200'>
                         <img
                           src='/Assets/delete.png'
