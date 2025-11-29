@@ -3,8 +3,9 @@ require("dotenv").config();
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 const createConnection = require("../../config/MongoDbConfig");
-import FormData from "form-data";
-import Mailgun from "mailgun.js";
+const FormData = require("form-data");
+const Mailgun = require("mailgun.js");
+
 const db = require("../../config/dbConfig");
 const jwt = require("jsonwebtoken")
 const genretOTP = () => {
