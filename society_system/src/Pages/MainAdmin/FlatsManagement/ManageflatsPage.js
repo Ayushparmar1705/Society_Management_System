@@ -30,7 +30,7 @@ export default function ManageflatsPage({ loading, page, totalPage, setPage, fla
                       <p>{data.society_name}</p>
                       <Building2 className="h-8 w-8 text-white opacity-90" />
                     </div>
-                    <p>{data.is_active === 1 ? 'Active' : 'Not Active'}</p>
+                    <p>{data.flats_isactive === 1 ? 'Active' : 'Not Active'}</p>
                   </div>
 
                   {/* Info */}
