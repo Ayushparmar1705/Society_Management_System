@@ -1,11 +1,17 @@
 const { MongoClient } = require("mongodb")
-const uri = "mongodb://localhost:27017/"
-const client = new MongoClient(uri);
+// const uri = "mongodb://localhost:27017/"
 
+const dotenv = require("dotenv");
+dotenv.config();
+
+const client = new MongoClient(process.env.MONGODB_URL);
+const connectDB = async () => {
+    await client.connect();
+}
 const otpVerification = {
-    insert: async (otp , email) => {
+    insert: async (otp, email) => {
         try {
-            await client.connect();
+            connectDB();
             const database = client.db("otp");
             const collection = database.collection("otp_collection");
             const result = await collection.insertOne({ otp, email }
@@ -14,15 +20,15 @@ const otpVerification = {
             console.error(err)
         }
     },
-    verification: async (email,otp) => {
+    verification: async (email, otp) => {
 
-        await client.connect();
+        connectDB();
         const database = client.db("otp");
         const collection = database.collection("otp_collection");
         const result = await collection.findOne({
             email: email,
             otp: Number(otp),
-   
+
         })
 
         return result
