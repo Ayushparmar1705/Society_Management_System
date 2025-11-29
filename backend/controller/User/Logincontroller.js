@@ -55,7 +55,7 @@ const loginController = {
             console.log(process.env.MAILGUN_PASS);
             console.log(process.env.MAILGUN_HOST);
             console.log(process.env.MAILGUN_PORT);
-            await transporter.sendMail({
+            await transpoter.sendMail({
                 from: `"UrbanHome" <${process.env.MAILGUN_USER}>`, // Correct format
                 to: "recipient@example.com",
                 subject: "OTP for UrbanHome",
