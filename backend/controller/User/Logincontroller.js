@@ -50,7 +50,10 @@ const loginController = {
                 }
             })
 
-            console.log(process.env.MAILGUN_HOST,process.env.MAILGUN_PORT,process.env.MAILGUN_USER,process.env.MAILGUN_PASS);
+            console.log(process.env.MAILGUN_USER);
+            console.log(process.env.MAILGUN_PASS);
+            console.log(process.env.MAILGUN_HOST);
+            console.log(process.env.MAILGUN_PORT);
             await transpoter.sendMail({
                 from: "postmaster@sandbox91b71e47fdd04c2b9cb132573c009658.mailgun.org",
                 to: email,
