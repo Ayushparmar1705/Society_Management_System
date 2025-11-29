@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Manageflats from '../../../Api/MainAdmin/ManageFlats';
 import ManageflatsPage from '../../../Pages/MainAdmin/FlatsManagement/ManageflatsPage';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 export default function Manageflathook() {
     const [flatsData, setFlatsData] = useState([]);
     const [page, setPage] = useState(1);
@@ -23,10 +23,10 @@ export default function Manageflathook() {
 
     const getFlatsById = async(id)=>{
         try{
-            const data = await Manageflats.getFlatsById(id);
+            const data = await Manageflats.getFlatById(id);
             const result = await data.message;
             setOneFlats(result);
-            navigate("/update-flats",{state:{oneflats}})
+            navigate("/mainadmin/update-flats",{state:{oneflats}})
 
         }catch(err){
             console.log(err);
