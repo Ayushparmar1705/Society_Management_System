@@ -61,7 +61,7 @@ const loginController = {
             else {
                 const token = jwt.sign({ id: result[0].uid }, process.env.JWT_SECRET, { expiresIn: "1h" });
                 console.log(result);
-                return res.status(200).send({ code: 200, message: "OTP verify succcesfully", role: result[0].role, _token: token, uid: result[0].uid, society_id: result[0].society_id, flat_id: result[0].fid });
+                return res.status(200).send({ code: 200, message: "OTP verify succcesfully", role: result[0].role, _token: token, uid: result[0].uid, society_id: result[0].sid, flat_id: result[0].fid });
             }
         } else {
             return res.status(500).send({ code: 500, message: "User not found" });
