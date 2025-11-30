@@ -13,7 +13,7 @@ export default function MemberHook() {
 
 
     const society_id = localStorage.getItem("society_id");
-   
+
 
 
 
@@ -23,16 +23,17 @@ export default function MemberHook() {
             setLoading(true)
             const result = await Membermanagement.allMembers(society_id);
             setMember(result);
-            console.log("member management = ",result);
+            console.log("member management = ", result);
         } catch (err) {
             console.log(err);
-            setLoading(false);
+            
         }
         finally {
             setLoading(false);
         }
     }
     const MemberRequest = async (id) => {
+
         try {
             const result = await Membermanagement.approveMembers(id);
             console.log(result);
@@ -46,6 +47,7 @@ export default function MemberHook() {
         } catch (err) {
             console.log(err);
         }
+
     }
 
     useEffect(() => {
