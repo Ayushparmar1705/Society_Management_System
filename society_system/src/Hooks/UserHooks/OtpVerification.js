@@ -47,5 +47,5 @@ export default function OtpVerification() {
         }, [timeLeft]);
 
     }
-    return <OtpVerificationpage timer={timeLeft} validotp={validotp} otp={otp} setOtp={setOtp} handleVerifyotp={handleVerifyotp}></OtpVerificationpage>
+    return <OtpVerificationpage timer={timeLeft}  otp={otp} setOtp={setOtp} handleVerifyotp={handleVerifyotp}></OtpVerificationpage>
 }
