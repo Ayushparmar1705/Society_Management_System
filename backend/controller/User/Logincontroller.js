@@ -69,7 +69,7 @@ const loginController = {
                     role: result[0].role,
                     _token: token,
                     uid: result[0].uid,
-                    society_id: result[0].society_id,
+                    society_id: result[0].sid,
                     flat_id: result[0].fid,
                 });
             }
