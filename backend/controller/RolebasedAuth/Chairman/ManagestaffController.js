@@ -1,35 +1,20 @@
 const { Managestaffmodel } = require("../../../model/RolebasedAuth/Chairman/ManageStaffModel");
 
 const Managestaffcontroller = {
-    Addstaff: (req, res) => {
+    Addstaff: async (req, res) => {
         const data = req.body;
         const id = req.params.id;
-        Managestaffmodel.Addstaff(id, data, (err, result) => {
-            if (err) {
-                if (err.code === "ER_DUP_ENTRY") {
-                    return res.status(500).send({ code: 409, message: "Email Alredy Exists" });
-                }
-                else {
-
-                    return res.status(500).send({ code: 500, message: err });
-                }
-            }
-            else {
-                console.log(result);
-                return res.status(200).send({ code: 200, message: "Staff Add succesfully", result });
-            }
-        })
+        const result = await Managestaffmodel.Addstaff(data,id);
+        if (result) {
+            return res.status(200).send({ code: 200, message: "staff add succesfully" })
+        }
     },
-    Managestaff: (req, res) => {
+    Managestaff: async (req, res) => {
         const id = req.params.id;
-        Managestaffmodel.Managestaff(id, (err, result) => {
-            if (err) {
-                return res.status(500).send({ code: 500, message: err });
-            }
-            else {
-                return res.status(200).send({ code: 200, message: result });
-            }
-        })
+        const result = await Managestaffmodel.Managestaff(id);
+        if (result) {
+            return res.status(200).send({ code: 200, message: result });
+        }
     },
     deleteStaff: (req, res) => {
         const id = req.params.id;
