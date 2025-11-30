@@ -13,14 +13,14 @@ export default function OtpVerification() {
     const [otp, setOtp] = useState("");
     const handleVerifyotp = async () => {
         const result = await ManageLogin.verifyOTP(email, otp)
-        console.log(result);
+        console.log("otp verify result = ",result);
 
         if (result.code === 200) {
 
             if (result.role === 'chairman') {
                 localStorage.setItem("token", result._token)
                 localStorage.setItem("society_name", society_name);
-                localStorage.setItem("society_id", result.sid);
+                localStorage.setItem("society_id", result.society_id);
                 navigate("/dashboard")
                 toast.success(result.message);
             }
