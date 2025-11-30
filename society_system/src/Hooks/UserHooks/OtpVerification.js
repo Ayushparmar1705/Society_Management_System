@@ -39,13 +39,16 @@ export default function OtpVerification() {
             toast.error(result.message);
         }
 
-        useEffect(() => {
 
-            setInterval(() => {
-                setTimeleft(t => t - 1);
-            }, 1000);
-        }, [timeLeft]);
 
     }
-    return <OtpVerificationpage timer={timeLeft}  otp={otp} setOtp={setOtp} handleVerifyotp={handleVerifyotp}></OtpVerificationpage>
+
+
+    useEffect(() => {
+
+        setInterval(() => {
+            setTimeleft(t => t - 1);
+        }, 1000);
+    }, [timeLeft]);
+    return <OtpVerificationpage timer={timeLeft} otp={otp} setOtp={setOtp} handleVerifyotp={handleVerifyotp}></OtpVerificationpage>
 }
