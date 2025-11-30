@@ -14,7 +14,7 @@ export default function MemberManagement({ member, loading, MemberRequest }) {
             ) : (
 
                 loading ? (
-                    <img className='m-[auto]' src='/Assets/loading.gif' alt='Noimage' ></img>
+                    <img className='m-[auto] h-100 w-100' src='/Assets/loading.gif' alt='Noimage' ></img>
                 ) : (
                     <div className='w-full font-bold font-2xl'>
                         <p className='text-black text-center text-2xl m-[auto]'>Member Management</p>
