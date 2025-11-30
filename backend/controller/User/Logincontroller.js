@@ -60,37 +60,12 @@ const loginController = {
             }
             else {
                 const token = jwt.sign({ id: result[0].uid }, process.env.JWT_SECRET, { expiresIn: "1h" });
-                return res.status(200).send({code:200,message:"OTP verify succcesfully",role:result[0].role,_token:token,uid:result[0].uid,society_id:result[0].society_id,flat_id:result[0].fid});
+                return res.status(200).send({ code: 200, message: "OTP verify succcesfully", role: result[0].role, _token: token, uid: result[0].uid, society_id: result[0].society_id, flat_id: result[0].fid });
             }
-        }else{
-            return res.status(500).send({code:500,message:"User not found"});
+        } else {
+            return res.status(500).send({ code: 500, message: "User not found" });
         }
-        // db.query(sql, [otpdata.email], async (err, result) => {
-        //     if (err) {
-        //         return res.status(500).send({ message: err })
-        //     }
-        //     else {
-        //         if (result.length > 0) {
 
-        //             const verificationResult = await createConnection.otpVerification.verification(otpdata.email, otpdata.otp)
-
-
-
-        //             if (verificationResult === null) {
-        //                 return res.status(500).send({ message: "Invalid otp" })
-        //             }
-        //             else {
-
-        //                 const token = jwt.sign({ id: result[0].uid, sid: result[0].sid }, process.env.JWT_SECRET, { expiresIn: "1h" })
-        //                 return res.status(200).send({ code: 200, message: "Otp verify succesfully", role: result[0].role, _token: token, sid: sid, society_id: result[0].society_id, flat_id: result[0].fid })
-        //             }
-        //         }
-        //         else {
-        //             return res.status(404).send({ code: 404, message: "User not found" })
-        //         }
-
-        //     }
-        // })
 
 
     }
