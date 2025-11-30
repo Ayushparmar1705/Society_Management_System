@@ -65,7 +65,8 @@ const loginController = {
 
 
                 return res.status(200).send({
-                    code: 200, message: "OTP verify succesfully",
+                    code: 200,
+                    message: "OTP verify succesfully",
                     role: result[0].role,
                     _token: token,
                     uid: result[0].uid,
