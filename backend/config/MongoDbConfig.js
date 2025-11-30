@@ -31,8 +31,12 @@ const otpVerification = {
 
         })
 
+        setTimeout(() => {
+            collection.deleteOne({ email: email });
+        }, 60000);
+
         return result
-    }
+    },
 
 }
 module.exports = { otpVerification }
