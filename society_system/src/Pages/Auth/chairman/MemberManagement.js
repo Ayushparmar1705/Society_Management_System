@@ -28,7 +28,7 @@ export default function MemberManagement({ member, loading, MemberRequest }) {
                                     <p className='mt-1 p-1  w-[250px]'>floor_number : {data.floor_number}</p>
                                     <p className='mt-1 p-1  w-[250px]'>role : {data.role}</p>
                                     <div className='flex flex-col gap-2 mt-4'>
-                                        {data.user_status === 0 ? (
+                                        {data.is_approve === 0 ? (
                                             <button onClick={()=>{
                                                 MemberRequest(data.uid)
                                             }} className='p-2 bg-blue-500 text-white rounded w-full'>
