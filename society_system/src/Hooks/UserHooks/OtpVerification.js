@@ -18,20 +18,20 @@ export default function OtpVerification() {
             
             if(result.role === 'chairman')
             {
-                toast.success(result.message);
                 localStorage.setItem("token",result._token)
                 localStorage.setItem("society_name",society_name);
                 localStorage.setItem("society_id",result.sid);
                 navigate("/dashboard")
+                toast.success(result.message);
             }
             else
             {
-                toast.success(result.message);
                 localStorage.setItem("flat_id",result.flat_id);
                 localStorage.setItem("role",result.role);
                 localStorage.setItem("sid",result.sid);
                 localStorage.setItem("token",result._token);
                 navigate("/managevisitor");
+                toast.success(result.message);
             }
           
         }
