@@ -9,15 +9,17 @@ export default function MemberManagement({ member, loading, MemberRequest }) {
             <Loginchairmanheader></Loginchairmanheader>
 
 
-            {member.length === 0 ? (
-                <p className='text-center text-xl w-full font-bold'>No member found</p>
+            {loading ? (
+                <div className='w-full flex justify-center items-center h-[300px]'>
+                    <img className='h-[100px] w-[100px] m-auto' src='/Assets/loading.gif' alt='Loading' />
+                </div>
             ) : (
 
-                loading ? (
-                    <div className='w-full flex justify-center items-center h-[300px]'>
-                        <img className='h-[100px] w-[100px] m-auto' src='/Assets/loading.gif' alt='Loading' />
-                    </div>
+                member.length === 0 ? (
+                    <p className='text-center text-xl w-full font-bold'>No member found</p>
                 ) : (
+
+
                     <div className='w-full font-bold font-2xl'>
                         <p className='text-black text-center text-2xl m-[auto]'>Member Management</p>
                         <div className='flex  gap-4 p-5 flex-wrap justify-between font-semibold'>
@@ -48,6 +50,7 @@ export default function MemberManagement({ member, loading, MemberRequest }) {
                             ))}
                         </div>
                     </div>
+
                 )
 
             )}
