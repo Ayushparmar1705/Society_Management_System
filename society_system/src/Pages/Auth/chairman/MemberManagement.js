@@ -14,7 +14,9 @@ export default function MemberManagement({ member, loading, MemberRequest }) {
             ) : (
 
                 loading ? (
-                    <img className='m-[auto] h-100 w-100' src='/Assets/loading.gif' alt='Noimage' ></img>
+                    <div className='w-full flex justify-center items-center h-[300px]'>
+                        <img className='h-[100px] w-[100px] m-auto' src='/Assets/loading.gif' alt='Loading' />
+                    </div>
                 ) : (
                     <div className='w-full font-bold font-2xl'>
                         <p className='text-black text-center text-2xl m-[auto]'>Member Management</p>
@@ -29,7 +31,7 @@ export default function MemberManagement({ member, loading, MemberRequest }) {
                                     <p className='mt-1 p-1  w-[250px]'>role : {data.role}</p>
                                     <div className='flex flex-col gap-2 mt-4'>
                                         {data.is_approve === 0 ? (
-                                            <button onClick={()=>{
+                                            <button onClick={() => {
                                                 MemberRequest(data.uid)
                                             }} className='p-2 bg-blue-500 text-white rounded w-full'>
                                                 Approve
