@@ -1,6 +1,6 @@
 import React from 'react'
 import OTPInput from "react-otp-input"
-export default function OtpVerificationpage({ otp, setOtp , handleVerifyotp}) {
+export default function OtpVerificationpage({ otp, setOtp , handleVerifyotp , timer}) {
     return (
         <div className='flex justify-center items-center h-screen'>
             <div className='rounded-xl text-lg p-2 bg-blue-500 h-3/5 w-3/5 flex flex-col text-white justify-center items-center'>
@@ -25,6 +25,7 @@ export default function OtpVerificationpage({ otp, setOtp , handleVerifyotp}) {
                     renderInput={(props) => <input {...props} />}
                 />
                 <button onClick={handleVerifyotp} className='p-2 text-black bg-white text-black rounded mt-10 w-2/5'>Verify</button>
+                <p>OTP valid only ${timer}</p>
             </div>
         </div>
     )
