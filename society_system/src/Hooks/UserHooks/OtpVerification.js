@@ -18,6 +18,7 @@ export default function OtpVerification() {
             
             if(result.role === 'chairman')
             {
+                toast.success(result.message);
                 localStorage.setItem("token",result._token)
                 localStorage.setItem("society_name",society_name);
                 localStorage.setItem("society_id",result.sid);
@@ -25,6 +26,7 @@ export default function OtpVerification() {
             }
             else
             {
+                toast.success(result.message);
                 localStorage.setItem("flat_id",result.flat_id);
                 localStorage.setItem("role",result.role);
                 localStorage.setItem("sid",result.sid);
