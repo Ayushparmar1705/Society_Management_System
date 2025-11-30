@@ -9,10 +9,12 @@ const memberController = {
         try {
 
 
-            const result = memberManagement.res(society_name);
+            const result = memberManagement.residenceManagement(society_name);
+            console.log("member management from backend side = ",result);
             if (result) {
                 return res.status(200).send({ code: 200, message: result });
             }
+            
 
             // memberManagement.residenceManagement(society_name, (err, result) => {
             //     if (err) {
