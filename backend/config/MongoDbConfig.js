@@ -30,11 +30,6 @@ const otpVerification = {
             otp: Number(otp),
 
         })
-
-        setTimeout(() => {
-            collection.deleteOne({ email: email });
-        }, 60000);
-
         return result
     },
 

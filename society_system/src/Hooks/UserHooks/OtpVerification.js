@@ -4,15 +4,13 @@ import { useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { ManageLogin } from '../../Api/User/ManageLogin';
 import { toast } from "react-toastify"
-import { useEffect } from 'react';
+
 export default function OtpVerification() {
     const location = useLocation();
     const navigate = useNavigate();
     const email = location.state?.email
     const society_name = location.state?.society_name;
     const [otp, setOtp] = useState("");
-
-    const [timeLeft, setTimeleft] = useState(60);
     const handleVerifyotp = async () => {
         const result = await ManageLogin.verifyOTP(email, otp)
 
@@ -44,13 +42,5 @@ export default function OtpVerification() {
     }
 
 
-    useEffect(() => {
-        if(timeLeft === 0) return;
-        const interval = setInterval(() => {
-            setTimeleft(t => t - 1);
-        }, 1000);
-
-        return ()=> clearInterval(interval);
-    }, [timeLeft]);
-    return <OtpVerificationpage timer={timeLeft} otp={otp} setOtp={setOtp} handleVerifyotp={handleVerifyotp}></OtpVerificationpage>
+    return <OtpVerificationpage  otp={otp} setOtp={setOtp} handleVerifyotp={handleVerifyotp}></OtpVerificationpage>
 }
