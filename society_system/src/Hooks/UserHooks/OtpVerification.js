@@ -13,6 +13,7 @@ export default function OtpVerification() {
     const [otp, setOtp] = useState("");
     const handleVerifyotp = async () => {
         const result = await ManageLogin.verifyOTP(email, otp)
+        console.log(result);
 
         if (result.code === 200) {
 
