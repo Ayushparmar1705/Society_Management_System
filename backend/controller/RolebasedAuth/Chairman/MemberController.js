@@ -9,7 +9,7 @@ const memberController = {
         try {
 
 
-            const result = memberManagement.residenceManagement(society_name);
+            const result = await memberManagement.residenceManagement(society_name);
             console.log("member management from backend side = ",result);
             if (result) {
                 return res.status(200).send({ code: 200, message: result });
