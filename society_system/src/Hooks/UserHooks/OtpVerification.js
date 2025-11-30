@@ -45,10 +45,12 @@ export default function OtpVerification() {
 
 
     useEffect(() => {
-
-        setInterval(() => {
+        if(timeLeft === 0) return;
+        const interval = setInterval(() => {
             setTimeleft(t => t - 1);
         }, 1000);
+
+        return ()=> clearInterval(interval);
     }, [timeLeft]);
     return <OtpVerificationpage timer={timeLeft} otp={otp} setOtp={setOtp} handleVerifyotp={handleVerifyotp}></OtpVerificationpage>
 }

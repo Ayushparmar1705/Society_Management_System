@@ -25,7 +25,7 @@ export default function OtpVerificationpage({ otp, setOtp , handleVerifyotp , ti
                     renderInput={(props) => <input {...props} />}
                 />
                 <button onClick={handleVerifyotp} className='p-2 text-black bg-white text-black rounded mt-10 w-2/5'>Verify</button>
-                <p>OTP valid only ${timer}</p>
+                <p>OTP valid only {timer}</p>
             </div>
         </div>
     )
