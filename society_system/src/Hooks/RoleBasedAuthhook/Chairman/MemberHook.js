@@ -13,7 +13,7 @@ export default function MemberHook() {
 
 
     const society_id = localStorage.getItem("society_id");
-    const sid = jwtDecode(society_id).sid;
+   
 
 
 
@@ -21,7 +21,7 @@ export default function MemberHook() {
     const fetchMember = async () => {
         try {
             setLoading(true)
-            const result = await Membermanagement.allMembers(sid);
+            const result = await Membermanagement.allMembers(society_id);
             setMember(result);
             console.log("member management = ",result);
         } catch (err) {
