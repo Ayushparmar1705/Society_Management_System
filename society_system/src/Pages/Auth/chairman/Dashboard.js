@@ -1,7 +1,7 @@
 import React from 'react'
 import Loginchairmanheader from '../../../Component/Usercomponent/Loginchairmanheader'
 
-export default function Dashboard({ countResidence , countStaff}) {
+export default function Dashboard({ countResidence , countStaff ,totalAllocateParking}) {
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
       {/* Sidebar */}
@@ -28,7 +28,7 @@ export default function Dashboard({ countResidence , countStaff}) {
 
           <div className="p-6 bg-purple-500 text-white rounded-xl shadow-md text-center w-full sm:w-[280px] md:w-[320px] hover:shadow-lg transition duration-200">
             <p className="text-lg font-medium">Parking Slots</p>
-            <p className="text-3xl font-bold mt-2">58</p>
+            <p className="text-3xl font-bold mt-2">{totalAllocateParking}</p>
           </div>
         </div>
       </div>

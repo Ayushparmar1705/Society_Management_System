@@ -14,6 +14,7 @@ export default function DashboardHook() {
         const result = await DashboardManagement.countResidence(sid);
         if (result.code === 200) {
             console.log(result.message);
+            console.log(result);
             setCountresidnece(result.message);
             
         }
@@ -35,10 +36,23 @@ export default function DashboardHook() {
         }
     
     }
+     const totalAllocateParking = async () => {
+        const result = await DashboardManagement.countParking(sid);
+        if (result.code === 200) {
+            console.log(result.message);
+            setCountStaff(result.message);
+
+            
+        }
+        else {
+            console.log(result.code)
+        }
+    
+    }
    
     useEffect(()=>{
         totalResidence();
         totalStaff();
     },[]);
-    return <Dashboard countResidence={countResidence} countStaff={countStaff}></Dashboard>
+    return <Dashboard countResidence={countResidence} countStaff={countStaff} totalAllocateParking={totalAllocateParking}></Dashboard>
 }

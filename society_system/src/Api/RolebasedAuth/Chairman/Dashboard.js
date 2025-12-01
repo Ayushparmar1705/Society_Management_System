@@ -10,8 +10,12 @@ const DashboardManagement = {
     countStaff: async (id) => {
         const data = await fetch(ApiEndpoint.totalStaff(id))
         const result = await data.json();
-        console.log("staff : ",result)
         return result;
     },
+    countParking: async(id)=>{
+        const data = await fetch(ApiEndpoint.totalParking(id));
+        const result = await data.json();
+        return result;
+    }
 }
 export default DashboardManagement
