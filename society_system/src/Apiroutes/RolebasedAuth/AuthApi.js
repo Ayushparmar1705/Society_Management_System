@@ -7,8 +7,8 @@ const ApiEndpoint = {
 
     MemberManagement: (society_name) => `${BASE_URL}/auth/member/${society_name}`,
     Approve : (id)=> `${BASE_URL}/auth/approve/${id}`,
-    totalResidence: (id) => `${BASE_URL}/auth/totalresidence/:${id}`,
-    totalParking:(id)=>`${BASE_URL}/auth/totalparking/:${id}`,
+    totalResidence: (id) => `${BASE_URL}/auth/totalresidence/${id}`,
+    totalParking:(id)=>`${BASE_URL}/auth/totalparking/${id}`,
     Addstaff: (id) => `${BASE_URL}/auth/add-staff/${id}`,
     Managestaff: (id) => `${BASE_URL}/auth/manage-staff/${id}`,
     InActivestaff: (id) => `${BASE_URL}/auth/inactive-staff/${id}`,

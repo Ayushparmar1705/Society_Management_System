@@ -14,8 +14,7 @@ export default function DashboardHook() {
     const totalResidence = async () => {
         const result = await DashboardManagement.countResidence(sid);
         if (result.code === 200) {
-            console.log(result.message);
-            console.log(result);
+         
             setCountresidnece(result.message);
 
         }
