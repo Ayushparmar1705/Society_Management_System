@@ -2,7 +2,7 @@ const { query } = require("../../../config/dbConfig");
 const Dashboardmodel = {
     countTotalMembers: (id) => {
         // count total residence
-        const sql = "SELECT count(*) FROM users WHERE role = 'residence' WHERE cid = ?"
+        const sql = "SELECT count(*) FROM users WHERE role = 'residence' AND cid = ?"
         return query(sql,[id]);
     },
     countTotalStaff : (id )=>{
