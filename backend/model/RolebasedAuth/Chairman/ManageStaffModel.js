@@ -5,9 +5,9 @@ const Managestaffmodel = {
         const sql = "INSERT INTO staff(cid , name , email , phone , role) VALUES(?,?,?,?,?)"
         return query(sql, [cid, data.name, data.email, data.phone, data.role], callback);
     },
-    Managestaff: (id, callback) => {
+    Managestaff: (id) => {
         const sql = "SELECT * FROM staff WHERE cid = ?";
-        return query(sql, [id], callback);
+        return query(sql, [id]);
     },
     DeleteStaff: (id, callback) => {
 
