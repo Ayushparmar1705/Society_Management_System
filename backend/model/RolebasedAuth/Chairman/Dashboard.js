@@ -1,14 +1,14 @@
 const { query } = require("../../../config/dbConfig");
 const Dashboardmodel = {
-    countTotalMembers: (callback) => {
+    countTotalMembers: (id) => {
         // count total residence
-        const sql = "SELECT count(*) FROM users WHERE role = 'residence'"
-        return query(sql,callback);
+        const sql = "SELECT count(*) FROM users WHERE role = 'residence' WHERE cid = ?"
+        return query(sql,[id]);
     },
-    countTotalStaff : (id , callback)=>{
-        console.log(id);
+    countTotalStaff : (id )=>{
+
         const sql = "SELECT count(*) FROM staff WHERE cid = ?"
-        return query(sql,[id] , callback);
+        return query(sql,[id] );
     },
 
 }
