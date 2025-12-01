@@ -4,66 +4,69 @@ const Managestaffcontroller = {
     Addstaff: async (req, res) => {
         const data = req.body;
         const id = req.params.id;
-        console.log("id = ",id);
-        const result = await Managestaffmodel.Addstaff(id,data);
+        console.log("id = ", id);
+        const result = await Managestaffmodel.Addstaff(id, data);
         if (result) {
             return res.status(200).send({ code: 200, message: "staff add succesfully" })
         }
     },
     Managestaff: async (req, res) => {
         const id = req.params.id;
-        const result = await Managestaffmodel.Managestaff(id);
-        if (result) {
-            return res.status(200).send({ code: 200, message: result });
+        try {
+            const result = await Managestaffmodel.Managestaff(id);
+            if (result) {
+                return res.status(200).send({ code: 200, message: result });
+            }
+        } catch (err) {
+            return res.status(500).send({ code: 500, message: err });
         }
     },
-    deleteStaff: (req, res) => {
+    deleteStaff: async (req, res) => {
         const id = req.params.id;
-        Managestaffmodel.DeleteStaff(id, (err, _) => {
-            if (err) {
-                console.log(err)
-                return res.status(500).send({ code: 500, message: err });
+        try {
+            const result = await Managestaffmodel.DeleteStaff(id);
+            if (result) {
+                return res.status(200).send({ code: 200, message: "Staff in Active succesfully" });
             }
-            else {
-                return res.status(200).send({ code: 200, message: "Staff inactive succesfully" });
-            }
-        })
+        } catch (err) {
+            return res.status(500).send({ code: 500, message: err });
+        }
+
 
     },
-    ActiveStaff: (req, res) => {
+    ActiveStaff: async (req, res) => {
         const id = req.params.id;
-        Managestaffmodel.ActiveStaff(id, (err, _) => {
-            if (err) {
-                console.log(err)
-                return res.status(500).send({ code: 500, message: err });
+        const result = await Managestaffmodel.ActiveStaff(id);
+        try {
+            if (result) {
+                return res.status(200).send({ code: 200, message: "Staff activate succesfully" });
             }
-            else {
-                return res.status(200).send({ code: 200, message: "Staff Active succesfully" });
-            }
-        })
-
+        } catch (err) {
+            return res.status(500).send({ code: 500, message: err });
+        }
     },
-    getOneStaff: (req, res) => {
+    getOneStaff: async (req, res) => {
         const id = req.params.id
-        Managestaffmodel.getOneStaff(id, (err, result) => {
-            if (err) {
-                return res.status(500).send({ code: 500, message: err });
-            } else {
-                return res.status(200).send({ code: 200, message: result })
+        try {
+            const result = await Managestaffmodel.getOneStaff(id);
+            if (result) {
+                return res.status(200).send({ code: 200, message: result });
             }
-        })
+        } catch (err) {
+            return res.status(500).send({ code: 500, message: err });
+        }
     },
-    updateStaff: (req, res) => {
+    updateStaff: async (req, res) => {
         const id = req.params.id;
         const data = req.body;
-        Managestaffmodel.updateStaff(id, data, (err, _) => {
-            if (err) {
-                console.log(err);
-                return res.status(500).send({ code: 500, message: err });
-            } else {
-                return res.status(200).send({ code: 200, message: "Staff Updated succesfully" });
+        try {
+            const result = await Managestaffmodel.updateStaff(id,data);
+            if (result) {
+                return res.status(200).send({ code: 200, message: "Staff updated succesfully" });
             }
-        })
+        } catch (err) {
+            return res.status(500).send({ code: 500, message: err });
+        }
     }
 }
 
