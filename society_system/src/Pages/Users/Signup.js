@@ -40,7 +40,7 @@ export default function Signup({ societyData, flatCode, handleOnChange, getFlatC
           </div>
           <div className='p-4'>
             <select name='flat_id' onChange={handleOnChange} className='p-2 border-2 rounded w-full border-gray-200 focus:outline-none  focus:border-blue-400 focus:transition focus:duration-100 rounded-lg'>
-              {flatCode.length === 0 ? <option defaultChecked disabled>No flats found</option> : flatCode.map((data, index) => (
+              {flatCode.length === 0 ? <option  disabled>No flats found</option> : flatCode.map((data, index) => (
                 console.log("fid = ", data.fid),
                 <option value={data.fid} key={index}>{data.flat_code}</option>
               ))}
