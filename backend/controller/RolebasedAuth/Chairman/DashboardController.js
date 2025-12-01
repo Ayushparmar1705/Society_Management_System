@@ -2,7 +2,7 @@ const { Dashboardmodel } = require("../../../model/RolebasedAuth/Chairman/Dashbo
 
 const Dashboardcontroller = {
     // create the controller logic to count total residence
-    totalResidence: async (_, res) => {
+    totalResidence: async (req, res) => {
          const id = req.params.id;
          
         // call the countTotalMembers function from DashboardModel
