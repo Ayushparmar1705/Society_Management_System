@@ -6,22 +6,23 @@ import { jwtDecode } from 'jwt-decode';
 
 export default function DashboardHook() {
     const [countResidence, setCountresidnece] = useState(0);
-    const [countStaff , setCountStaff] = useState(0);
-        const token = localStorage.getItem("token");
-        const decodedToken = jwtDecode(token).id;
-        const sid = localStorage.getItem("society_id");
+    const [countStaff, setCountStaff] = useState(0);
+    const [countParking,setCountParking] = useState(0);
+    const token = localStorage.getItem("token");
+    const decodedToken = jwtDecode(token).id;
+    const sid = localStorage.getItem("society_id");
     const totalResidence = async () => {
         const result = await DashboardManagement.countResidence(sid);
         if (result.code === 200) {
             console.log(result.message);
             console.log(result);
             setCountresidnece(result.message);
-            
+
         }
         else {
             console.log(result.code)
         }
-    
+
     }
     const totalStaff = async () => {
         const result = await DashboardManagement.countStaff(decodedToken);
@@ -29,30 +30,31 @@ export default function DashboardHook() {
             console.log(result.message);
             setCountStaff(result.message);
 
-            
+
         }
         else {
             console.log(result.code)
         }
-    
+
     }
-     const totalAllocateParking = async () => {
+    const totalAllocateParking = async () => {
         const result = await DashboardManagement.countParking(sid);
         if (result.code === 200) {
             console.log(result.message);
-            setCountStaff(result.message);
+            setCountParking(result.message);
 
-            
+
         }
         else {
             console.log(result.code)
         }
-    
+
     }
-   
-    useEffect(()=>{
+
+    useEffect(() => {
         totalResidence();
         totalStaff();
-    },[]);
-    return <Dashboard countResidence={countResidence} countStaff={countStaff} totalAllocateParking={totalAllocateParking}></Dashboard>
+        totalAllocateParking();
+    }, []);
+    return <Dashboard countResidence={countResidence} countStaff={countStaff} countParking={countParking}></Dashboard>
 }
