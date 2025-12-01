@@ -4,9 +4,11 @@ const Dashboardcontroller = {
     // create the controller logic to count total residence
     totalResidence: async (_, res) => {
          const id = req.params.id;
+         
         // call the countTotalMembers function from DashboardModel
         try {
             const result = await Dashboardmodel.countTotalMembers(id);
+            console.log("residence = ",result);
             if (result) {
                 return res.status(200).send({ code: 200, message: result[0]['COUNT(*)'] });
             }
