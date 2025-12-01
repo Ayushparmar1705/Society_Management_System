@@ -1,10 +1,11 @@
-import React from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import React, { useEffect } from 'react'
 import Loginchairmanheader from '../../../Component/Usercomponent/Loginchairmanheader';
 
 export default function Updatestaff({handleOnChange , handleOnClick , formData }) {
     
-
+    useEffect(()=>{
+        console.log(formData);
+    },[])
     return (
         <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
             {/* Sidebar */}
