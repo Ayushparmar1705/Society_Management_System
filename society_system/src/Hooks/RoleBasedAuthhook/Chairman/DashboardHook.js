@@ -37,7 +37,7 @@ export default function DashboardHook() {
 
     }
     const totalAllocateParking = async () => {
-        const result = await DashboardManagement.countParking(sid);
+        const result = await DashboardManagement.countParking(decodedToken);
         if (result.code === 200) {
             console.log(result.message);
             setCountParking(result.message);
