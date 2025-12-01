@@ -2,10 +2,6 @@ import React, { useEffect } from 'react'
 import Loginchairmanheader from '../../../Component/Usercomponent/Loginchairmanheader';
 
 export default function Updatestaff({handleOnChange , handleOnClick , formData }) {
-    
-    useEffect(()=>{
-        console.log(formData);
-    },[])
     return (
         <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
             {/* Sidebar */}
@@ -31,7 +27,7 @@ export default function Updatestaff({handleOnChange , handleOnClick , formData }
                                 type="text"
                                 name="name"
                                 id="name"
-                                value={formData.fullname}
+                                value={formData.name}
                                 className="w-full border-2 border-gray-300 rounded-md p-3 focus:border-blue-400 focus:outline-none peer"
                                 placeholder=" "
                             />

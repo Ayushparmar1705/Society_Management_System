@@ -13,7 +13,7 @@ export default function UpdatestaffHook() {
 
 
     const [formData, setFormData] = useState({
-        name: result.message[0].name,
+        name: result.message[0].fullname,
         email: result.message[0].email,
         phone: result.message[0].phone,
         role: result.message[0].role,
