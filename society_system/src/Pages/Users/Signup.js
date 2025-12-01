@@ -27,10 +27,14 @@ export default function Signup({ societyData, flatCode, handleOnChange, getFlatC
               handleOnChange(e);
               getFlatCodeBySocietyName(e.target.value);
             }} className='p-2 border-2 rounded w-full border-gray-200 focus:outline-none  focus:border-blue-400 focus:transition focus:duration-100 rounded-lg' name='society_id'>
-              <option defaultChecked disabled>Select the society</option>
-              {societyData.map((data, index) => (
-                <option key={index} value={data.sid}>{data.society_name}</option>
-              ))}
+              {societyData.length === 0 ? (
+                <option>No flat found</option>
+              ) : (
+
+                societyData.map((data, index) => (
+                  <option key={index} value={data.sid}>{data.society_name}</option>
+                ))
+              )}
             </select>
 
           </div>
