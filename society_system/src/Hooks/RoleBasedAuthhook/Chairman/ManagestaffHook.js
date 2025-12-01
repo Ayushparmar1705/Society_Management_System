@@ -51,6 +51,7 @@ export default function ManagestaffHook() {
 
     const getOnestaff = async(id)=>{
         const data = await StaffManagement.editStaff(id);
+        console.log(data);
 
         navigate("/update-staff",{state : {data : data}})
     }
