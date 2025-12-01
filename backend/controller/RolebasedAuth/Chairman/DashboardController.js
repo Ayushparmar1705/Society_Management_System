@@ -35,7 +35,7 @@ const Dashboardcontroller = {
 
         try {
             const result = await Dashboardmodel.countTotalParkingSlot(id);
-            console.log(result[0]["count(*)"]);
+            console.log(result[0]);
             if (result) {
                 return res.status(200).send({ code: 200, message: result[0]['count(*)'] });
             }
