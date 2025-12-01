@@ -46,7 +46,7 @@ export default function UpdatestaffHook() {
                 toast.error("Error to inserting the staff")
             }
             else {
-                toast.success("Staff add succesfully")
+                toast.success(result.message)
             }
         }
     }
