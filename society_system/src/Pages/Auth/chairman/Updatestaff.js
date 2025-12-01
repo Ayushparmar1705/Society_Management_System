@@ -30,7 +30,7 @@ export default function Updatestaff({handleOnChange , handleOnClick , formData }
                                 type="text"
                                 name="name"
                                 id="name"
-                                value={formData.name}
+                                value={formData.fullname}
                                 className="w-full border-2 border-gray-300 rounded-md p-3 focus:border-blue-400 focus:outline-none peer"
                                 placeholder=" "
                             />

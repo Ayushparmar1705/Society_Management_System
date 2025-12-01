@@ -24,7 +24,7 @@ const Managestaffmodel = {
         return query(sql, [id]);
     },
     updateStaff : (id , data )=>{
-        const sql = "UPDATE staff SET name = ? , email = ? , phone = ? , role = ? WHERE sid = ?";
+        const sql = "UPDATE staff SET fullname = ? , email = ? , phone = ? , role = ? WHERE sid = ?";
         return query(sql,[data.name , data.email , data.phone , data.role , id]);
     }
 }
