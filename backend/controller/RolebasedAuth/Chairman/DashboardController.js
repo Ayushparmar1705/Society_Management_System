@@ -28,6 +28,20 @@ const Dashboardcontroller = {
             return res.status(500).send({ code: 500, message: err });
         }
 
+    },
+    parkingSlot:async(req,res)=>{
+        const id = req.params.id;
+        // call the countTotalMembers function from DashboardModel
+
+        try {
+            const result = await Dashboardmodel.countTotalParkingSlot(id);
+            if (result) {
+                return res.status(200).send({ code: 200, message: result[0]['count(*)'] });
+            }
+        } catch (err) {
+            return res.status(500).send({ code: 500, message: err });
+        }
+
     }
 }
 module.exports = { Dashboardcontroller }
