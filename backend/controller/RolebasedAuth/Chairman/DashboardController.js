@@ -8,7 +8,7 @@ const Dashboardcontroller = {
         try {
             const result = await Dashboardmodel.countTotalMembers(id);
             if (result) {
-                return res.status(200).send({ code: 200, message: result[0]['count(*)'] });
+                return res.status(200).send({ code: 200, message: result[0]['COUNT(*)'] });
             }
         } catch (err) {
             return res.status(500).send({ code: 500, message: err });
@@ -35,9 +35,9 @@ const Dashboardcontroller = {
 
         try {
             const result = await Dashboardmodel.countTotalParkingSlot(id);
-            console.log(result[0]);
+            console.log(result[0]['COUNT(*)']);
             if (result) {
-                return res.status(200).send({ code: 200, message: result[0]['count(*)'] });
+                return res.status(200).send({ code: 200, message: result[0]['COUNT(*)'] });
             }
         } catch (err) {
             return res.status(500).send({ code: 500, message: err });
