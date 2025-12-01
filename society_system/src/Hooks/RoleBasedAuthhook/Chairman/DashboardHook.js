@@ -12,7 +12,7 @@ export default function DashboardHook() {
     const decodedToken = jwtDecode(token).id;
     const sid = localStorage.getItem("society_id");
     const totalResidence = async () => {
-        const result = await DashboardManagement.countResidence(decodedToken);
+        const result = await DashboardManagement.countResidence(sid);
         if (result.code === 200) {
          
             setCountresidnece(result.message);
