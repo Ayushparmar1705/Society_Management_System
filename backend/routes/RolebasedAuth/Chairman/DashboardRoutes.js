@@ -4,4 +4,5 @@ const router = express.Router();
 
 router.get("/totalresidence/:id",Dashboardcontroller.totalResidence)
 router.get("/totalstaff/:id",Dashboardcontroller.totalStaff)
+router.get("/totalparking/:id",Dashboardcontroller.parkingSlot);
 module.exports = router
