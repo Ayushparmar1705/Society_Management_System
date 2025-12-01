@@ -9,7 +9,7 @@ export default function ParkingAllocationHook() {
 
 
     const societyToken = localStorage.getItem("society_id");
-    const societydecodedToken = jwtDecode(societyToken).sid;
+   
 
 
     const [flatCode, setFlatCode] = useState([]);
@@ -22,7 +22,7 @@ export default function ParkingAllocationHook() {
     });
 
     const getFlatCodeFunc = async () => {
-        const result = await ParkingAllocationApi.getFlats(societydecodedToken);
+        const result = await ParkingAllocationApi.getFlats(societyToken);
         console.log(result);
         setFlatCode(result.message);
     }
