@@ -5,7 +5,7 @@ const Managestaffcontroller = {
         const data = req.body;
         const id = req.params.id;
         console.log("id = ",id);
-        const result = await Managestaffmodel.Addstaff(data,id);
+        const result = await Managestaffmodel.Addstaff(id,data);
         if (result) {
             return res.status(200).send({ code: 200, message: "staff add succesfully" })
         }
