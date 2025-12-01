@@ -8,11 +8,11 @@ const Dashboardmodel = {
     countTotalStaff : (id )=>{
 
         const sql = "SELECT count(*) FROM staff WHERE cid = ?"
-        return query(sql,[id] );
+        return query(sql,[id]);
     },
     countTotalParkingSlot:(id)=>{
-        const sql = "SELECT COUNT(*) from Allocateparking WHERE cid = ?"
-        return query(sql,[id] );
+        const sql = "SELECT COUNT(*) FROM Allocateparking WHERE cid = ?"
+        return query(sql,[id]);
     }
 
 }
