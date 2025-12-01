@@ -16,7 +16,7 @@ export default function MemberManagement({ result = [], loading = false, inActiv
                     <div className='flex gap-4 p-5 flex-wrap font-semibold lg:flex md:flex md:flex-row md:justify-center sm:flex sm:flex-row sm:justify-center max-[639px]:flex max-[639px]:justify-center sm:w-[100%]'>
                         {result.map((data, index) => (
                             <div key={index} className='p-5 rounded bg-gray-50 shadow w-[300px]'>
-                                <p className='mt-1 p-1 w-[250px]'>Name: {data.name}</p>
+                                <p className='mt-1 p-1 w-[250px]'>Name: {data.fullname}</p>
                                 <p className='mt-1 p-1 w-[250px]'>Email: {data.email}</p>
                                 <p className='mt-1 p-1 w-[250px]'>Phone: {data.phone}</p>
                                 <p className='mt-1 p-1 w-[250px]'>Role: {data.role}</p>
