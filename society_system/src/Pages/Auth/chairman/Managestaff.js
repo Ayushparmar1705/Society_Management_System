@@ -8,7 +8,9 @@ export default function MemberManagement({ result = [], loading = false, inActiv
             <Loginchairmanheader />
 
             {loading ? (
-                <img className='m-[auto]' src='/Assets/loading.gif' alt='Loading...' />
+                <div className='w-full flex justify-center items-center h-[300px]'>
+                    <img className='h-[100px] w-[100px] m-auto' src='/Assets/loading.gif' alt='Loading' />
+                </div>
             ) : (
                 <div className='w-full lg:mt-[0px] font-bold font-2xl md:mt-[0px] sm:mt-[70px] max-[639px]:mt-[70px]'>
                     <p className='w-full text-center text-2xl'>Security Management</p>
