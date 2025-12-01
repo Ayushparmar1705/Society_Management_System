@@ -7,10 +7,11 @@ import { jwtDecode } from 'jwt-decode';
 export default function DashboardHook() {
     const [countResidence, setCountresidnece] = useState(0);
     const [countStaff , setCountStaff] = useState(0);
-    const token = localStorage.getItem("token");
-    const decodedToken = jwtDecode(token).id;
+        const token = localStorage.getItem("token");
+        const decodedToken = jwtDecode(token).id;
+        const sid = localStorage.getItem("society_id");
     const totalResidence = async () => {
-        const result = await DashboardManagement.countResidence(decodedToken);
+        const result = await DashboardManagement.countResidence(sid);
         if (result.code === 200) {
             console.log(result.message);
             setCountresidnece(result.message);
