@@ -24,7 +24,7 @@ const ManageVisitorController = {
         // })
     },
     Managevisitor: (req, res) => {
-        const society_id = req.params.society_id;
+        const society_id = req.params;
         console.log(society_id);
         const result = ManageVisitorModal.Managevisitor(society_id);
         if(result){
