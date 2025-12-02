@@ -83,7 +83,6 @@
 //     }
 // }
 // module.exports = { loginController }
-
 const { Userlogin } = require("../../model/User/Login");
 require("dotenv").config();
 const nodemailer = require("nodemailer");
@@ -92,80 +91,101 @@ const createConnection = require("../../config/MongoDbConfig");
 const db = require("../../config/dbConfig");
 const jwt = require("jsonwebtoken");
 
-const genretOTP = () => {
-    return crypto.randomInt(100000, 999999);
-};
+// Generate a 6-digit OTP
+const generateOTP = () => crypto.randomInt(100000, 999999);
 
-// Nodemailer transporter
+// Nodemailer transporter using SendGrid
 const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.sendgrid.net",
+    port: 587,
     auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_APP_PASSWORD,
+        user: "apikey", // literally "apikey"
+        pass: process.env.SENDGRID_API_KEY, // your SendGrid API key
     },
 });
 
-loginUser: async (req, res) => {
-    const { email } = req.body;
+const loginController = {
+    loginUser: async (req, res) => {
+        try {
+            const { email } = req.body;
 
-    const result = await Userlogin.login(email);
-    console.log(result);
+            const result = await Userlogin.login(email);
 
-    if (result[0].role === "residence" && result[0].user_status === 0) {
-        return res.status(500).send({ code: "approval", message: "Waiting for chairman approval" });
-    }
+            if (!result || result.length === 0) {
+                return res.status(404).send({ code: 404, message: "User not found" });
+            }
 
-    const otp = genretOTP();
+            // Check for residence approval
+            if (result[0].role === "residence" && result[0].user_status === 0) {
+                return res.status(403).send({
+                    code: "approval",
+                    message: "Waiting for chairman approval",
+                });
+            }
 
-    try {
-        await transporter.sendMail({
-            from: `"Urbanhome" <${process.env.GMAIL_USER}>`,
-            to: email,
-            subject: "Urbanhome OTP - Do not share",
-            text: `Your Urbanhome OTP is: ${otp}`,
-        });
+            // Generate OTP
+            const otp = generateOTP();
 
-        console.log("OTP email sent");
-    } catch (error) {
-        console.log("Email error:", error);
-        return res.status(500).send({ code: 500, message: "Failed to send email" });
-    }
+            // Send OTP via email
+            await transporter.sendMail({
+                from: `"Urbanhome" <ayushparmar1705@gmail.com>`, // verified sender in SendGrid
+                to: email,
+                subject: "Urbanhome OTP - Do not share",
+                text: `Your Urbanhome OTP is: ${otp}`,
+            });
 
-    await createConnection.otpVerification.insert(otp, email);
+            console.log("OTP email sent to:", email);
 
-    return res.status(200).send({
-        code: 200,
-        message: "OTP sent to your email",
-        result: result,
-    });
-}
+            // Save OTP in DB
+            await createConnection.otpVerification.insert(otp, email);
 
-verifyOTP: async (req, res) => {
-    const { otp, email } = req.body;
+            return res.status(200).send({
+                code: 200,
+                message: "OTP sent to your email",
+                result: result,
+            });
+        } catch (error) {
+            console.error("Error in loginUser:", error);
+            return res.status(500).send({ code: 500, message: "Failed to send OTP email" });
+        }
+    },
 
-    const sql = "SELECT * FROM users WHERE email = ?";
-    const result = await db.query(sql, [email]);
+    verifyOTP: async (req, res) => {
+        try {
+            const { otp, email } = req.body;
 
-    if (result.length === 0) {
-        return res.status(500).send({ code: 500, message: "User not found" });
-    }
+            const sql = "SELECT * FROM users WHERE email = ?";
+            const result = await db.query(sql, [email]);
 
-    const verificationResult = await createConnection.otpVerification.verification(email, otp);
-    if (!verificationResult) {
-        return res.status(500).send({ message: "Invalid OTP" });
-    }
+            if (!result || result.length === 0) {
+                return res.status(404).send({ code: 404, message: "User not found" });
+            }
 
-    const token = jwt.sign({ id: result[0].uid }, process.env.JWT_SECRET, { expiresIn: "1h" });
+            const verificationResult = await createConnection.otpVerification.verification(email, otp);
+            if (!verificationResult) {
+                return res.status(400).send({ code: 400, message: "Invalid OTP" });
+            }
 
-    return res.status(200).send({
-        code: 200,
-        message: "OTP verified successfully",
-        role: result[0].role,
-        _token: token,
-        uid: result[0].uid,
-        society_id: result[0].sid,
-        flat_id: result[0].fid,
-    });
-},
+            const token = jwt.sign(
+                { id: result[0].uid },
+                process.env.JWT_SECRET,
+                { expiresIn: "1h" }
+            );
 
-    module.exports = { loginController };
+            return res.status(200).send({
+                code: 200,
+                message: "OTP verified successfully",
+                role: result[0].role,
+                _token: token,
+                uid: result[0].uid,
+                society_id: result[0].sid,
+                flat_id: result[0].fid,
+            });
+        } catch (error) {
+            console.error("Error in verifyOTP:", error);
+            return res.status(500).send({ code: 500, message: "OTP verification failed" });
+        }
+    },
+};
+
+module.exports = { loginController };
