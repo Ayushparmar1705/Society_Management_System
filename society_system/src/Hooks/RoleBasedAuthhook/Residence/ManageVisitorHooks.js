@@ -12,14 +12,9 @@ export default function ManageVisitor() {
 
     const fetchVisitor = async () => {
         const token = localStorage.getItem("token");
-        console.log("token" , jwtDecode(token));
-        const sid = localStorage.getItem("sid");
-        const decodedSid = jwtDecode(token);
-        console.log("sid = ",decodedSid);
+        const decodedSid = jwtDecode(token).id;
         const fid = localStorage.getItem("flat_id");
-
-        console.log("fid = ",fid);
-        const result = await ManageResidence.Managevisitor(decodedSid.sid,jwtDecode(fid).fid);
+        const result = await ManageResidence.Managevisitor(decodedSid,fid);
         console.log(result);
         setVisitor(result.message);
     }
