@@ -6,12 +6,13 @@ import { useEffect, useState } from 'react';
 export default function Managevisitorhooks() {
     const [result, setResult] = useState([]);
     const [loading, setLoading] = useState(false);
+   
     const token = localStorage.getItem("token");
-    console.log("view member token = ",token);
+    const society_id = jwtDecode(token).society_id;
     const getVisitor = async () => {
         try {
             setLoading(true);
-            const data = await ManageVisitor.viewVisitor(jwtDecode(token).society_id);
+            const data = await ManageVisitor.viewVisitor(society_id);
             setResult(data.message);
         } catch (e) {
             console.log(e);
