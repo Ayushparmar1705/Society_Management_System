@@ -105,72 +105,67 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-const loginController = {
-    loginUser: async (req, res) => {
-        const { email } = req.body;
+loginUser: async (req, res) => {
+    const { email } = req.body;
 
-        const result = await Userlogin.login(email);
-        console.log(result);
+    const result = await Userlogin.login(email);
+    console.log(result);
 
-        if (result[0].role === "residence" && result[0].user_status === 0) {
-            return res.status(500).send({ code: "approval", message: "Waiting for chairman approval" });
-        }
+    if (result[0].role === "residence" && result[0].user_status === 0) {
+        return res.status(500).send({ code: "approval", message: "Waiting for chairman approval" });
+    }
 
-        const otp = genretOTP();
+    const otp = genretOTP();
 
-        try {
-            // Send OTP Email
-            await transporter.sendMail({
-                host:"telnet smtp.gmail.com 587",
-                from: `"Urbanhome" <${process.env.GMAIL_PASSWORD}>`,
-                to: email,
-                subject: "Urbanhome OTP - Do not share",
-                text: `Your Urbanhome OTP is: ${otp}`,
-            });
-
-            console.log("OTP email sent");
-        } catch (error) {
-            console.log("Email error:", error);
-            return res.status(500).send({ code: 500, message: "Failed to send email" });
-        }
-
-        // Save OTP in DB
-        await createConnection.otpVerification.insert(otp, email);
-
-        return res.status(200).send({
-            code: 200,
-            message: "OTP sent to your email",
-            result: result,
+    try {
+        await transporter.sendMail({
+            from: `"Urbanhome" <${process.env.GMAIL_USER}>`,
+            to: email,
+            subject: "Urbanhome OTP - Do not share",
+            text: `Your Urbanhome OTP is: ${otp}`,
         });
-    },
 
-    verifyOTP: async (req, res) => {
-        const { otp, email } = req.body;
+        console.log("OTP email sent");
+    } catch (error) {
+        console.log("Email error:", error);
+        return res.status(500).send({ code: 500, message: "Failed to send email" });
+    }
 
-        const sql = "SELECT * FROM users WHERE email = ?";
-        const result = await db.query(sql, [email]);
+    await createConnection.otpVerification.insert(otp, email);
 
-        if (result.length === 0) {
-            return res.status(500).send({ code: 500, message: "User not found" });
-        }
+    return res.status(200).send({
+        code: 200,
+        message: "OTP sent to your email",
+        result: result,
+    });
+}
 
-        const verificationResult = await createConnection.otpVerification.verification(email, otp);
-        if (!verificationResult) {
-            return res.status(500).send({ message: "Invalid OTP" });
-        }
+verifyOTP: async (req, res) => {
+    const { otp, email } = req.body;
 
-        const token = jwt.sign({ id: result[0].uid }, process.env.JWT_SECRET, { expiresIn: "1h" });
+    const sql = "SELECT * FROM users WHERE email = ?";
+    const result = await db.query(sql, [email]);
 
-        return res.status(200).send({
-            code: 200,
-            message: "OTP verified successfully",
-            role: result[0].role,
-            _token: token,
-            uid: result[0].uid,
-            society_id: result[0].sid,
-            flat_id: result[0].fid,
-        });
-    },
-};
+    if (result.length === 0) {
+        return res.status(500).send({ code: 500, message: "User not found" });
+    }
 
-module.exports = { loginController };
+    const verificationResult = await createConnection.otpVerification.verification(email, otp);
+    if (!verificationResult) {
+        return res.status(500).send({ message: "Invalid OTP" });
+    }
+
+    const token = jwt.sign({ id: result[0].uid }, process.env.JWT_SECRET, { expiresIn: "1h" });
+
+    return res.status(200).send({
+        code: 200,
+        message: "OTP verified successfully",
+        role: result[0].role,
+        _token: token,
+        uid: result[0].uid,
+        society_id: result[0].sid,
+        flat_id: result[0].fid,
+    });
+},
+
+    module.exports = { loginController };
