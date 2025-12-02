@@ -15,7 +15,7 @@ export default function ManageVisitor() {
         console.log("token" , jwtDecode(token));
         const sid = localStorage.getItem("sid");
         const decodedSid = jwtDecode(token);
-        console.log("sid = ",decodedSid.sid);
+        console.log("sid = ",decodedSid);
         const fid = localStorage.getItem("flat_id");
 
         console.log("fid = ",fid);
