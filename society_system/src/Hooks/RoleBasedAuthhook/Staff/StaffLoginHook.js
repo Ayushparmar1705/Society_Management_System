@@ -17,9 +17,6 @@ export default function StaffLoginHook() {
 
     const handleOnClick = async()=>{
         const result = await Managestaff.login(formData)
-        console.log("staff login data = ",result);
-        const decoded = jwtDecode(result.token);
-        console.log(decoded);
         if(result.code === 500)
         {
             toast.error("User not found...");
@@ -27,8 +24,6 @@ export default function StaffLoginHook() {
         else
         {
             localStorage.setItem("token",result.token);
-            localStorage.setItem("cid",decoded.cid);
-          
             navigate("/staffdashboard");
         }
     }
