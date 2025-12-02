@@ -23,10 +23,11 @@ const ManageVisitorController = {
         //     }
         // })
     },
-    Managevisitor: (req, res) => {
+    Managevisitor: async(req, res) => {
         const society_id = req.params.society_id;
         console.log(society_id);
-        const result = ManageVisitorModal.Managevisitor(society_id);
+        const result = await ManageVisitorModal.Managevisitor(society_id);
+        console.log(result);
         if(result){
             return res.status(200).send({code:200,message:result});
         }
