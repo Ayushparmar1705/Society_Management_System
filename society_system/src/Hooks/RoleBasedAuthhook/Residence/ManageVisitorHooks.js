@@ -9,7 +9,7 @@ export default function ManageVisitor() {
 
 
     const [visitor, setVisitor] = useState([]);
-    if(localStorage.getItem("token")) return;
+    
     const fetchVisitor = async () => {
         const token = localStorage.getItem("token");
         const sid = localStorage.getItem("sid");
