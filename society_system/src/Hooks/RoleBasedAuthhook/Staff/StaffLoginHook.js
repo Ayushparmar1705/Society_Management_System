@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Managestaff from '../../../Api/RolebasedAuth/StaffLogin/StaffLogin';
 import StaffLogin from '../../../Pages/Staff/StaffLogin';
 import { toast } from 'react-toastify';
+import {jwtDecode} from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
 export default function StaffLoginHook() {
     const navigate = useNavigate();
@@ -16,7 +17,9 @@ export default function StaffLoginHook() {
 
     const handleOnClick = async()=>{
         const result = await Managestaff.login(formData)
-        console.log(result);
+        console.log("staff login data = ",result);
+        const decoded = jwtDecode(result.token);
+        console.log(decoded);
         if(result.code === 500)
         {
             toast.error("User not found...");
@@ -24,7 +27,7 @@ export default function StaffLoginHook() {
         else
         {
             localStorage.setItem("token",result.token);
-            localStorage.setItem("cid",result.cid);
+            localStorage.setItem("cid",decoded.cid);
           
             navigate("/staffdashboard");
         }
