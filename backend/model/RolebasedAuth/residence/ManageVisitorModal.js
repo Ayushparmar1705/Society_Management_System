@@ -3,9 +3,9 @@ const { query } = require("../../../config/dbConfig");
 
 const ManageVisitor = {
     // Get visitors with flat details using JOIN
-    getVisitorsByFlatId: (flat_id) => {
+    getVisitorsByFlatId: (society_id,flat_id) => {
         query = 'SELECT * FROM Addvisitor WHERE sid = ? AND flat_id = ?';
-        return db.query(sql, [flat_id]);
+        return db.query(sql, [society_id,flat_id]);
     },
 
     // Approve visitor example
