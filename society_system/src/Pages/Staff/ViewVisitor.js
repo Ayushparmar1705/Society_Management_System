@@ -29,7 +29,11 @@ export default function ViewVisitor({ result, loading }) {
               <p className="font-semibold text-white">
                 Flat Code: <span className="font-normal">{visitor.flat_code}</span>
               </p>
+              <p className='font-semibold text-white'>
+                Approval status: <span className='font-normal'>{visitor.is_approve}</span>
+              </p>
             </div>
+            
           ))}
         </div>
       </div>
