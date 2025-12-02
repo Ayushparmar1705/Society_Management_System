@@ -4,6 +4,6 @@ const { Managevisitorconytroller } = require("../../controller/RolebasedAuth/res
 const router = express.Router();
 
 
-router.get("/view_visitor/:fid",Managevisitorconytroller.manageVisitor);
+router.get("/view_visitor/:sid/:fid",Managevisitorconytroller.manageVisitor);
 router.get("/approve/:uid",Managevisitorconytroller.approve);
 module.exports = router;
