@@ -1,9 +1,17 @@
 const { ManageVisitorModal } = require("../../../model/RolebasedAuth/Staff/ManageVisitor");
 
 const ManageVisitorController = {
-    AddVisotor: (req, res) => {
+    AddVisotor: async (req, res) => {
         const data = req.body;
         console.log(data);
+        try {
+            const result = await ManageVisitorModal.Addvisitor(data);
+            if (result) {
+                return res.status(200).send({ code: 200, message: "Visitor Add succesfully" });
+            }
+        } catch (err) {
+            return res.status(500).send({ code: 500, message: err });
+        }
         ManageVisitorModal.Addvisitor(data, (err, result) => {
             if (err) {
                 console.log(err);
@@ -15,16 +23,15 @@ const ManageVisitorController = {
         })
     },
     Managevisitor: (req, res) => {
-        const id = req.params.id;
-        console.log(id);
-        ManageVisitorModal.Managevisitor(id, (err, result) => {
-            if (err) {
-                return res.status(500).send({ code: 500, message: err });
-            }
-            else {
-                return res.status(200).send({ code: 200, message: result });
-            }
-        })
+        const society_id = req.params.society_id;
+        console.log(society_id);
+        const result = ManageVisitorModal.Managevisitor(society_id);
+        if(result){
+            return res.status(200).send({code:200,message:result});
+        }
+        else{
+            return res.status(500).send({ code: 200, message: err });
+        }
     }
 }
 

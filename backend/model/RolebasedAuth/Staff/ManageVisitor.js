@@ -1,15 +1,14 @@
 const { query } = require("../../../config/dbConfig");
 
 const ManageVisitorModal = {
-    Addvisitor: (data, callback) => {
-        const sql = "INSERT INTO Addvisitor(sid , visitor_name, visitor_phone, flat_code) VALUES (?,?, ?, ?)";
-        const params = [data.staff_id , data.visitor_name, data.visitor_phone, parseInt(data.flat_code)];
-        return query(sql, params, callback);
+    Addvisitor: (data) => {
+        const sql = "INSERT INTO Addvisitor(sid , society_id , flat_id , visitor_name, visitor_phone, flat_code) VALUES (?,?, ?, ?,?,?)";
+        const params = [data.staff_id, data.society_id, data.flat_id, data.visitor_name, data.visitor_phone, parseInt(data.flat_code)];
+        return query(sql, params);
     },
-    Managevisitor: (id, callback) => {
-        const sql = "SELECT * FROM Addvisitor WHERE sid = ?";
-        console.log(id);
-        return query(sql, [id], callback);
+    Managevisitor: (society_id , flat_id) => {
+        const sql = "SELECT * FROM Addvisitor WHERE society_id = ?";
+        return query(sql, [society_id]);
     }
 };
 

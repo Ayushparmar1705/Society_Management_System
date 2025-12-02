@@ -3,6 +3,6 @@ const { ManageVisitorController } = require("../../../controller/RolebasedAuth/S
 const router = express.Router();
 
 router.post("/add-visitor",ManageVisitorController.AddVisotor);
-router.get("/get-visitor/:id",ManageVisitorController.Managevisitor);
+router.get("/get-visitor/:society_id",ManageVisitorController.Managevisitor);
 
 module.exports =  router

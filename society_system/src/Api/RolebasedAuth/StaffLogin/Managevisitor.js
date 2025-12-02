@@ -13,8 +13,8 @@ const ManageVisitor = {
         const result = await data.json();
         return result;
     },
-    viewVisitor: async (id) => {
-        const data = await fetch(ApiEndpoints.view_visitor(id));
+    viewVisitor: async (society_id) => {
+        const data = await fetch(ApiEndpoints.view_visitor(society_id));
         const result = await data.json();
         return result;
     }

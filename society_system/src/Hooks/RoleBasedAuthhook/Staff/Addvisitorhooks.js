@@ -6,17 +6,19 @@ import { jwtDecode } from "jwt-decode"
 import Managevisitor from '../../../Api/RolebasedAuth/StaffLogin/Managevisitor';
 export default function Addvisitorhooks() {
     const token = localStorage.getItem("token");
+    console.log(token);
     const decodedToken = jwtDecode(token).id;
+    console.log(token);
     const [formData, setFormData] = useState({
         "visitor_name": "",
         "visitor_phone": "",
         "flat_code": "",
-        "staff_id" : decodedToken
+        "staff_id" : decodedToken.sid
     })
 
 
     const [flatcode, setFlatCode] = useState([]);
-    const societyId = localStorage.getItem("cid");
+    const decoded = localStorage.getItem("token");
     
     const handleOnChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,7 +28,7 @@ export default function Addvisitorhooks() {
         if (!societyId) return;
         try {
 
-            const res = await Managesignup.getFlatsCode(societyId);
+            const res = await Managesignup.getFlatsCode(decoded.sid);
             if (res.code === 200) {
                 setFlatCode(res.message);
             }
