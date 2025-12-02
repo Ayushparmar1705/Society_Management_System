@@ -1,7 +1,7 @@
 const { query } = require("../../../config/dbConfig");
  // your DB connection
 
-const ManageVisitor = {
+const ManageVisitormodal = {
     // Get visitors with flat details using JOIN
     getVisitorsByFlatId: (society_id,flat_id) => {
         query = 'SELECT * FROM Addvisitor WHERE sid = ? AND flat_id = ?';
@@ -15,4 +15,4 @@ const ManageVisitor = {
     }
 };
 
-module.exports = {ManageVisitor};
+module.exports = {ManageVisitormodal};
