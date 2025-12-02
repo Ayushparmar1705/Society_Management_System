@@ -85,24 +85,17 @@
 // module.exports = { loginController }
 const { Userlogin } = require("../../model/User/Login");
 require("dotenv").config();
-const nodemailer = require("nodemailer");
+const sgMail = require("@sendgrid/mail");
 const crypto = require("crypto");
 const createConnection = require("../../config/MongoDbConfig");
 const db = require("../../config/dbConfig");
 const jwt = require("jsonwebtoken");
 
+// Set SendGrid API key
+sgMail.setApiKey(process.env.API_KEY);
+
 // Generate a 6-digit OTP
 const generateOTP = () => crypto.randomInt(100000, 999999);
-
-// Nodemailer transporter using SendGrid
-const transporter = nodemailer.createTransport({
-    host: "smtp.sendgrid.net",
-    port: 587,
-    auth: {
-        user: "apikey", // literally "apikey"
-        pass: process.env.SENDGRID_API_KEY, // your SendGrid API key
-    },
-});
 
 const loginController = {
     loginUser: async (req, res) => {
@@ -110,7 +103,6 @@ const loginController = {
             const { email } = req.body;
 
             const result = await Userlogin.login(email);
-
             if (!result || result.length === 0) {
                 return res.status(404).send({ code: 404, message: "User not found" });
             }
@@ -126,14 +118,15 @@ const loginController = {
             // Generate OTP
             const otp = generateOTP();
 
-            // Send OTP via email
-            await transporter.sendMail({
-                from: `"Urbanhome" <ayushparmar1705@gmail.com>`, // verified sender in SendGrid
-                to: email,
+            // Send OTP via SendGrid API
+            const msg = {
+                to: email, // recipient
+                from: "ayushparmar1705@gmail.com", // verified sender in SendGrid
                 subject: "Urbanhome OTP - Do not share",
                 text: `Your Urbanhome OTP is: ${otp}`,
-            });
+            };
 
+            await sgMail.send(msg);
             console.log("OTP email sent to:", email);
 
             // Save OTP in DB
@@ -144,6 +137,7 @@ const loginController = {
                 message: "OTP sent to your email",
                 result: result,
             });
+
         } catch (error) {
             console.error("Error in loginUser:", error);
             return res.status(500).send({ code: 500, message: "Failed to send OTP email" });
