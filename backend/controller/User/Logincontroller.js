@@ -121,7 +121,7 @@ const loginController = {
             // Send OTP via SendGrid API
             const msg = {
                 to: email, // recipient
-                from: "ayushparmar1705@gmail.com", // verified sender in SendGrid
+                from: "ayushparmarjira@gmail.com", // verified sender in SendGrid
                 subject: "Urbanhome OTP - Do not share",
                 text: `Your Urbanhome OTP is: ${otp}`,
             };
