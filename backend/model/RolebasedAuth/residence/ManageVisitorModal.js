@@ -15,4 +15,4 @@ const ManageVisitor = {
     }
 };
 
-module.exports = ManageVisitor;
+module.exports = {ManageVisitor};
