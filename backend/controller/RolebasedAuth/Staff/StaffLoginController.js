@@ -8,6 +8,7 @@ const StaffLoginController = {
         const data = req.body;
         try {
             const result = await StaffLoginModal.login(data);
+            console.log("Staff login data = ",result);
             if (result.length > 0) {
                 const secret = "securityJWT";
                 const token = jwt.sign({ id: result[0].sid, cid: result[0].cid }, secret, { expiresIn: "1h" });
