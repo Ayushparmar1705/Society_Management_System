@@ -13,13 +13,14 @@ export default function Addvisitorhooks() {
         "visitor_name": "",
         "visitor_phone": "",
         "flat_code": "",
-        "staff_id" : decodedToken.sid
+        "staff_id": decodedToken.sid,
+        "society_id": decodedToken.society_id,
     })
 
 
     const [flatcode, setFlatCode] = useState([]);
     const decoded = localStorage.getItem("token");
-    
+
     const handleOnChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -58,7 +59,7 @@ export default function Addvisitorhooks() {
 
 
 
-   
+
 
     return <AddVisitor handleOnChange={handleOnChange} handleOnClick={handleOnClick} flatcode={flatcode}></AddVisitor>
 }
