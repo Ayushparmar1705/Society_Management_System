@@ -14,7 +14,7 @@ const genretOTP = () => {
 
 // Configure Brevo client
 const brevoClient = new SibApiV3Sdk.TransactionalEmailsApi();
-brevoClient.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, process.env.BREVO_API_KEY);
+brevoClient.setApiKey(SibApiV3Sdk.TransactionalEmailsApi.apiKey, process.env.API_KEY);
 
 const loginController = {
     loginUser: async (req, res) => {
