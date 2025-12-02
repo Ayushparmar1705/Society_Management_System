@@ -121,7 +121,7 @@ const loginController = {
         try {
             // Send OTP Email
             await transporter.sendMail({
-                from: `"Urbanhome" <${process.env.GMAIL_USER}>`,
+                from: `"Urbanhome" <${process.env.GMAIL_PASSWORD}>`,
                 to: email,
                 subject: "Urbanhome OTP - Do not share",
                 text: `Your Urbanhome OTP is: ${otp}`,
