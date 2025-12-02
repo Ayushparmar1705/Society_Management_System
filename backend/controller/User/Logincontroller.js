@@ -35,7 +35,7 @@ const loginController = {
 
             // Prepare Brevo email
             const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail({
-                sender: { name: "Urbanhome", email: "ayushparmar1705@gmail.com" }, // replace with your verified Brevo sender
+                sender: { name: "abc", email: "ayushparmar1705@gmail.com" }, // replace with your verified Brevo sender
                 to: [{ email: email }],
                 subject: "Urbanhome OTP - don't share with anyone",
                 textContent: `Your Urbanhome OTP is ${otp}`,
