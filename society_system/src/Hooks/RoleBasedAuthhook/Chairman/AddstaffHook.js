@@ -10,6 +10,7 @@ export default function AddstaffHook() {
     const decodedToken = jwtDecode(token);
     const getId = decodedToken.id;
     const [formData, setFormData] = useState({
+        society_id: localStorage.getItem("society_id"),
         name: "",
         email: "",
         phone: "",
@@ -36,11 +37,11 @@ export default function AddstaffHook() {
 
         else {
             const result = await StaffManagement.Addstaff(formData, getId)
-           
+
             if (result.code === 500) {
                 toast.error(result.message)
             }
-          
+
             else {
                 toast.success("Staff add succesfully")
             }

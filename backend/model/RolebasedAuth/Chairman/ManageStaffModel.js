@@ -2,8 +2,8 @@ const { query } = require("../../../config/dbConfig");
 
 const Managestaffmodel = {
     Addstaff: (cid, data) => {
-        const sql = "INSERT INTO staff(cid , fullname , email , phone , role) VALUES(?,?,?,?,?)"
-        return query(sql, [cid, data.name, data.email, data.phone, data.role]);
+        const sql = "INSERT INTO staff(cid,society_id , fullname , email , phone , role) VALUES(?,?,?,?,?)"
+        return query(sql, [cid, data.society_id, data.name, data.email, data.phone, data.role]);
     },
     Managestaff: (id) => {
         const sql = "SELECT * FROM staff WHERE cid = ?";
@@ -23,9 +23,9 @@ const Managestaffmodel = {
         const sql = "SELECT * FROM staff WHERE sid = ?";
         return query(sql, [id]);
     },
-    updateStaff : (id , data )=>{
+    updateStaff: (id, data) => {
         const sql = "UPDATE staff SET fullname = ? , email = ? , phone = ? , role = ? WHERE sid = ?";
-        return query(sql,[data.name , data.email , data.phone , data.role , id]);
+        return query(sql, [data.name, data.email, data.phone, data.role, id]);
     }
 }
 module.exports = { Managestaffmodel }
