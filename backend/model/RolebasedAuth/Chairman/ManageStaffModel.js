@@ -2,7 +2,7 @@ const { query } = require("../../../config/dbConfig");
 
 const Managestaffmodel = {
     Addstaff: (cid, data) => {
-        const sql = "INSERT INTO staff(cid,society_id , fullname , email , phone , role) VALUES(?,?,?,?,?)"
+        const sql = "INSERT INTO staff(cid,society_id , fullname , email , phone , role) VALUES(?,?,?,?,?,?)"
         return query(sql, [cid, data.society_id, data.name, data.email, data.phone, data.role]);
     },
     Managestaff: (id) => {
