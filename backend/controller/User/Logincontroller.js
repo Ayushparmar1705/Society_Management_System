@@ -13,7 +13,7 @@ const generateOTP = () => {
 
 // Configure Brevo (formerly SendinBlue) client
 const defaultClient = SibApiV3Sdk.ApiClient.instance;
-defaultClient.authentications['api-key'].apiKey = process.env.API_KEY;
+defaultClient.authentications['api-key'].apiKey = process.env.BRAVO_API_KEY;
 
 const brevoClient = new SibApiV3Sdk.TransactionalEmailsApi();
 
