@@ -4,7 +4,7 @@
 // for live
 const BASE_URL = "https://society-management-backend-vpvs.onrender.com";
 const ResidenceEndPoints = {
-    "Manageresidence" : (flat_id)=>`${BASE_URL}/residence/view_visitor/${flat_id}`,
+    "Manageresidence" : (sid,fid)=>`${BASE_URL}/residence/view_visitor/${sid}/${fid}`,
     "approve": (vid) => `${BASE_URL}/residence/approve/${vid}`,
     "reject": (id) => `${BASE_URL}/residence/reject/${id}`,
    

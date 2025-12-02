@@ -1,8 +1,8 @@
 import ResidenceEndPoints from "../../../Apiroutes/UserRoutes/ResidenceRoutes";
 
 const ManageResidence = {
-    Managevisitor : async(flat_id)=>{
-        const data = await fetch(ResidenceEndPoints.Manageresidence(flat_id));
+    Managevisitor : async(sid,fid)=>{
+        const data = await fetch(ResidenceEndPoints.Manageresidence(sid,fid));
         const result = await data.json();
         return result;
     },

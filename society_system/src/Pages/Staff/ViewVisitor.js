@@ -30,10 +30,14 @@ export default function ViewVisitor({ result, loading }) {
                 Flat Code: <span className="font-normal">{visitor.flat_code}</span>
               </p>
               <p className='font-semibold text-white'>
-                Approval status: <span className='font-normal'>{visitor.is_approve}</span>
+                {visitor.is_approve === 1 ? (
+                  <span className='font-normal'>Approve</span>
+                ) : (
+                  <span className='font-normal'>Not approve</span>
+                )}
               </p>
             </div>
-            
+
           ))}
         </div>
       </div>

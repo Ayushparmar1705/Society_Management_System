@@ -1,28 +1,30 @@
 const ManageVisitor = require("../../../model/RolebasedAuth/residence/ManageVisitorModal")
 
 const Managevisitorconytroller = {
-    manageVisitor : (req,res)=>{
+    manageVisitor: async (req, res) => {
+        const society_id = req.params.sid;
         const flat_id = req.params.fid;
-        
-        ManageVisitor.getVisitorsByFlatId(flat_id,(err,result)=>{
-            if(err){
-                return res.status(500).send({code:500,message:err});
-            }else{
-                return res.status(200).send({code:200,message:result});
+        try {
+            const result = await ManageVisitor.getVisitorsByFlatId(society_id,flat_id);
+            if (result) {
+                return res.status(200).send({ code: 200, message: result });
             }
-        })
+        } catch (err) {
+            return res.status(500).send({ code: 500, message: err });
+        }
     },
-    approve:(req,res)=>{
+    approve: async (req, res) => {
         const vid = req.params.uid;
-        ManageVisitor.approveVisitor(vid,(err,_)=>{
-            if(err){
-                return res.status(500).send({code:500,message:err});
-            }else{
-                return res.status(200).send({code:200,message:"Member approve succesfully"});
+        try {
+            const result = await ManageVisitor.approveVisitor(vid);
+            if (result) {
+                return res.status(200).send({ code: 200, message: "Member approve succesfully" });
             }
-        })
 
+        } catch (err) {
+            return res.status(200).send({ code: 200, message: err });
+        }
     }
 }
 
-module.exports = {Managevisitorconytroller}
+module.exports = { Managevisitorconytroller }

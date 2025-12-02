@@ -3,15 +3,15 @@ const { query } = require("../../../config/dbConfig");
 
 const ManageVisitor = {
     // Get visitors with flat details using JOIN
-    getVisitorsByFlatId: (flat_id, callback) => {
-        query = 'SELECT * FROM Addvisitor WHERE sid = ?';
-        db.query(sql, [flat_id], callback);
+    getVisitorsByFlatId: (flat_id) => {
+        query = 'SELECT * FROM Addvisitor WHERE sid = ? AND flat_id = ?';
+        return db.query(sql, [flat_id]);
     },
 
     // Approve visitor example
-    approveVisitor: (vid, callback) => {
+    approveVisitor: (vid) => {
         query = "UPDATE Addvisitor set is_approve = 1 WHERE visitor_id = ?"
-        db.query(sql, [vid], callback);
+        return db.query(sql, [vid]);
     }
 };
 
