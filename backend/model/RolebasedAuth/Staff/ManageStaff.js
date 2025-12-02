@@ -1,11 +1,11 @@
 const { query } = require("../../../config/dbConfig");
 const StaffLoginModal = {
-    login: (data, callback) => {
+    login: (data) => {
 
         const sql = "SELECT * FROM staff WHERE email = ? AND phone = ?";
 
 
-        return query(sql, [data.email, data.phone], callback);
+        return query(sql, [data.email, data.phone]);
     },
 
 }
