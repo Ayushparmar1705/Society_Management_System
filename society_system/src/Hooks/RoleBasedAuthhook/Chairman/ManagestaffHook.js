@@ -19,7 +19,9 @@ export default function ManagestaffHook() {
     const decodedToken = jwtDecode(token).id
 
     const navigate = useNavigate();
+    
 
+    const [sort,setSort] = useState([]);
 
     // create the function which is fetch all staff details from db
     const fetchStaff = async () => {

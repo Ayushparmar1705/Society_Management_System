@@ -17,14 +17,14 @@ export default function UpdatestaffHook() {
         email: result.message[0].email,
         phone: result.message[0].phone,
         role: result.message[0].role,
-        sid : result.message[0].sid
+        sid: result.message[0].sid
     })
     const handleOnChange = (e) => {
         console.log(formData)
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
     const handleOnClick = async (id) => {
-        
+
         if (formData.name === "" || !isNaN(formData.name)) {
             toast.error("Invalid name");
         }
