@@ -14,7 +14,7 @@ export default function OtpVerification() {
     const handleVerifyotp = async () => {
         const result = await ManageLogin.verifyOTP(email, otp)
         console.log("otp verify result = ",result);
-
+        console.log(result.society_id);
         if (result.code === 200) {
 
             if (result.role === 'chairman') {

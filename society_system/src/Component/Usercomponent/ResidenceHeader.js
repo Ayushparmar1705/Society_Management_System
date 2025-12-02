@@ -116,7 +116,7 @@ export default function ResidenceHeader() {
 
                             <MenuItem
                                 className={`${subMenuStyles.color, subMenuStyles.backgroundcolor}`}
-                                component={<Link to="/view-parking" onClick={closeSidebar} />}
+                                component={<Link to="/managevisitor" onClick={closeSidebar} />}
                                 active={location.pathname === '/managevisitor'}
                             >
                                 Manage visitor
