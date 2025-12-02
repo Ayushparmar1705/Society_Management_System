@@ -11,8 +11,8 @@ const StaffLoginController = {
             console.log("Staff login data = ",result);
             if (result.length > 0) {
                 const secret = "securityJWT";
-                const token = jwt.sign({ id: result[0].sid }, secret, { expiresIn: "1h" });
-                return res.send({ code: 200, token: token , cid:result[0].cid});
+                const token = jwt.sign({ id: result[0].sid , cid:result[0].cid}, secret, { expiresIn: "1h" });
+                return res.send({ code: 200, token: token });
             }
         } catch (err) {
             return res.status(500).send({ code: 500, message: err });
