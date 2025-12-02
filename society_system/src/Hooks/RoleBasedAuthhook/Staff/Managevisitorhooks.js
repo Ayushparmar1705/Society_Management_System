@@ -8,10 +8,10 @@ export default function Managevisitorhooks() {
     const [loading, setLoading] = useState(false);
     const token = localStorage.getItem("token");
 
-    const getVisitor = async (society_id) => {
+    const getVisitor = async () => {
         try {
             setLoading(true);
-            const data = await ManageVisitor.viewVisitor(token.society_id);
+            const data = await ManageVisitor.viewVisitor(jwtDecode(token).society_id);
             setResult(data.message);
         } catch (e) {
             console.log(e);
