@@ -7,12 +7,6 @@ const blockController = {
         try {
             const data = req.body;
 
-            // Check unique block name
-            const exists = await blockModel.uniqueName(data.block_name);
-            if (exists.length > 0) {
-                return res.status(409).send({ code: 409, message: "Block name already exists" });
-            }
-
             // Insert
             const result = await blockModel.addBlock(data);
 

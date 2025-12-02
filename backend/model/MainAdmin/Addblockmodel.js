@@ -10,12 +10,7 @@ const blockModel = {
     return result;
   },
 
-  uniqueName: async (name) => {
-    const sql = "SELECT * FROM Addblock WHERE block_name = ?";
-    // use the rows not [rows] any anywhere which is any variable because [] return first index
-    const rows = await query(sql, [name]);
-    return rows;
-  },
+
 
   getFlatsName: async () => {
     const sql = "SELECT sid, society_name FROM Addsociety WHERE is_active = 1";
