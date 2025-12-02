@@ -10,6 +10,7 @@ const ManageVisitorController = {
                 return res.status(200).send({ code: 200, message: "Visitor Add succesfully" });
             }
         } catch (err) {
+            console.log(err);
             return res.status(500).send({ code: 500, message: err });
         }
         // ManageVisitorModal.Addvisitor(data, (err, result) => {
