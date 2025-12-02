@@ -93,7 +93,7 @@ const jwt = require("jsonwebtoken");
 
 // Set SendGrid API key
 sgMail.setApiKey(process.env.API_KEY);
-
+console.log(process.env.API_KEY)
 // Generate a 6-digit OTP
 const generateOTP = () => crypto.randomInt(100000, 999999);
 
