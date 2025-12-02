@@ -28,7 +28,7 @@ export default function Addvisitorhooks() {
     const getFlatCodeBySocietyName = async () => {
         try {
 
-            const res = await Managesignup.getFlatsCode(decoded.sid);
+            const res = await Managesignup.getFlatsCode(decodedToken.society_id);
             if (res.code === 200) {
                 setFlatCode(res.message);
             }
