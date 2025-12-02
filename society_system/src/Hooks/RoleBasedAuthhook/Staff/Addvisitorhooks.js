@@ -8,7 +8,7 @@ export default function Addvisitorhooks() {
     const token = localStorage.getItem("token");
     console.log(token);
     const decodedToken = jwtDecode(token).id;
-    console.log(token);
+    console.log(jwtDecode(token));
     const [formData, setFormData] = useState({
         "visitor_name": "",
         "visitor_phone": "",
