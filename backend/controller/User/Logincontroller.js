@@ -1,99 +1,85 @@
 const { Userlogin } = require("../../model/User/Login");
 require("dotenv").config();
+const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 const createConnection = require("../../config/MongoDbConfig");
+const FormData = require("form-data");
+const Mailgun = require("mailgun.js");
+
 const db = require("../../config/dbConfig");
-const jwt = require("jsonwebtoken");
-const SibApiV3Sdk = require("sib-api-v3-sdk");
-
-// Generate OTP
-const generateOTP = () => {
+const jwt = require("jsonwebtoken")
+const genretOTP = () => {
     return crypto.randomInt(100000, 999999);
-};
-
-// Configure Brevo (formerly SendinBlue) client
-const defaultClient = SibApiV3Sdk.ApiClient.instance;
-defaultClient.authentications['api-key'].apiKey = process.env.BRAVO_API_KEY;
-
-const brevoClient = new SibApiV3Sdk.TransactionalEmailsApi();
-
+}
 const loginController = {
     loginUser: async (req, res) => {
-        try {
-            const { email } = req.body;
+        const { email } = req.body;
 
-            const result = await Userlogin.login(email);
-            if (!result || result.length === 0) {
-                return res.status(404).send({ code: 404, message: "User not found" });
-            }
+        const result = await Userlogin.login(email);
+        console.log(result);
+        if (result[0].role === "residence" && result[0].user_status === 0) {
+            return res.status(500).send({ code: "approval", message: "Waiting for chairman approval" });
+        }
+        else {
 
-            if (result[0].role === "residence" && result[0].user_status === 0) {
-                return res.status(403).send({ code: "approval", message: "Waiting for chairman approval" });
-            }
 
-            const otp = generateOTP();
+            const mailgun = new Mailgun(FormData);
+            const mg = mailgun.client({
+                username: "api",
+                key: process.env.API_KEY,
 
-            // Prepare Brevo email
-            const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail({
-                sender: { name: "abc", email: "ayushparmar1705@gmail.com" }, // replace with your verified Brevo sender
-                to: [{ email: email }],
-                subject: "Urbanhome OTP - don't share with anyone",
-                textContent: `Your Urbanhome OTP is ${otp}`,
-                // htmlContent: `<p>Your Urbanhome OTP is <strong>${otp}</strong></p>`, // optional HTML version
             });
+            const otp = genretOTP();
+            try {
+                const data = await mg.messages.create("sandbox91b71e47fdd04c2b9cb132573c009658.mailgun.org", {
+                    from: "Urbanhome <postmaster@sandbox91b71e47fdd04c2b9cb132573c009658.mailgun.org>",
+                    to: email,
+                    subject: 'Urbanhome OTP. dont share to anyone',
+                    text: `urbanhome otp ${otp}`
+                })
+                console.log(data);
+            } catch (error) {
+                console.log(error);
+            }
 
-            // Send email via Brevo
-            const data = await brevoClient.sendTransacEmail(sendSmtpEmail);
-            console.log("Brevo email response:", data);
 
-            // Store OTP for verification (MongoDB)
+
             await createConnection.otpVerification.insert(otp, email);
-
-            return res.status(200).send({
-                code: 200,
-                message: "OTP sent to your email",
-                result: result,
-            });
-        } catch (error) {
-            console.error("Login error:", error);
-            return res.status(500).send({ code: 500, message: "Internal server error" });
+            return res.status(200).send({ code: 200, message: "otp send in your main", result: result });
         }
+
     },
-
     verifyOTP: async (req, res) => {
-        try {
-            const { email, otp } = req.body;
-
-            const result = await db.query("SELECT * FROM users WHERE email = ?", [email]);
-            if (!result || result.length === 0) {
-                return res.status(404).send({ code: 404, message: "User not found" });
+        const otpdata = req.body;
+        const sql = "SELECT * FROM users WHERE email = ?";
+        const result = await db.query(sql, [otpdata.email]);
+        if (result.length > 0) {
+            const verificationResult = await createConnection.otpVerification.verification(otpdata.email, otpdata.otp);
+            if (verificationResult === null) {
+                return res.status(500).send({ message: "Invalid OTP" });
             }
+            else {
+                const token = jwt.sign({ id: result[0].uid }, process.env.JWT_SECRET, { expiresIn: "1h" });
+                console.log(result);
+                // return res.status(200).send({ code: 200, message: "OTP verify succcesfully", role: result[0].role, _token: token, uid: result[0].uid, society_id: result[0].society_id, flat_id: result[0].fid });
 
-            const verificationResult = await createConnection.otpVerification.verification(email, otp);
-            if (!verificationResult) {
-                return res.status(400).send({ message: "Invalid OTP" });
+
+                return res.status(200).send({
+                    code: 200,
+                    message: "OTP verify succesfully",
+                    role: result[0].role,
+                    _token: token,
+                    uid: result[0].uid,
+                    society_id: result[0].sid,
+                    flat_id: result[0].fid,
+                });
             }
-
-            const token = jwt.sign(
-                { id: result[0].uid },
-                process.env.JWT_SECRET,
-                { expiresIn: "1h" }
-            );
-
-            return res.status(200).send({
-                code: 200,
-                message: "OTP verified successfully",
-                role: result[0].role,
-                _token: token,
-                uid: result[0].uid,
-                society_id: result[0].sid,
-                flat_id: result[0].fid,
-            });
-        } catch (error) {
-            console.error("OTP verification error:", error);
-            return res.status(500).send({ code: 500, message: "Internal server error" });
+        } else {
+            return res.status(500).send({ code: 500, message: "User not found" });
         }
-    }
-};
 
-module.exports = { loginController };
+
+
+    }
+}
+module.exports = { loginController }
