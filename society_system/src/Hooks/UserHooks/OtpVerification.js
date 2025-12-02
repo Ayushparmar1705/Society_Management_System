@@ -27,7 +27,7 @@ export default function OtpVerification() {
             else {
                 localStorage.setItem("flat_id", result.flat_id);
                 localStorage.setItem("role", result.role);
-                localStorage.setItem("sid", result.sid);
+                localStorage.setItem("sid", result.society_id);
                 localStorage.setItem("token", result._token);
                 navigate("/managevisitor");
                 toast.success(result.message);
