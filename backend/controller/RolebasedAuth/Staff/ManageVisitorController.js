@@ -12,15 +12,15 @@ const ManageVisitorController = {
         } catch (err) {
             return res.status(500).send({ code: 500, message: err });
         }
-        ManageVisitorModal.Addvisitor(data, (err, result) => {
-            if (err) {
-                console.log(err);
-                return res.status(500).send({ code: 500, message: err });
-            } else {
-                console.log(result);
-                return res.status(200).send({ code: 200, message: "Visitor add succesfully" });
-            }
-        })
+        // ManageVisitorModal.Addvisitor(data, (err, result) => {
+        //     if (err) {
+        //         console.log(err);
+        //         return res.status(500).send({ code: 500, message: err });
+        //     } else {
+        //         console.log(result);
+        //         return res.status(200).send({ code: 200, message: "Visitor add succesfully" });
+        //     }
+        // })
     },
     Managevisitor: (req, res) => {
         const society_id = req.params.society_id;
