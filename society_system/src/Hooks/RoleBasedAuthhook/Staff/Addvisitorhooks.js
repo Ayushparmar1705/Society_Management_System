@@ -13,8 +13,8 @@ export default function Addvisitorhooks() {
         "visitor_name": "",
         "visitor_phone": "",
         "flat_code": "",
-        "staff_id": decodedToken.sid,
-        "society_id": decodedToken.society_id,
+        "staff_id": decodedToken,
+        "society_id": jwtDecode(token).society_id,
     })
 
 
