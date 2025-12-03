@@ -1,4 +1,4 @@
-import { Building2, Home, Key, Layout, MapPin, Phone } from 'lucide-react';
+import { Building2, Home, Key, Layout } from 'lucide-react';
 
 export default function ManageflatsPage({ loading, page, totalPage, setPage, flatsData , getFlatsById}) {
   return (
