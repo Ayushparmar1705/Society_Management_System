@@ -41,6 +41,7 @@ const VisitorRoutes = require("./routes/RolebasedAuth/Staff/ManageVisitorRoutes"
 const residenceRoutes = require("./routes/residenceRoutes/residenceRoutes");
 const contactRoutes = require("./routes/ContactRoutes/ContactRoutes");
 const adminMemberManagement = require("./routes/MainAdmin/MembersManagementRoutes");
+const Notificationroutes = require("./routes/MainAdmin/Notificationroutes");
 app.use("/mainadmin", societyroutes);
 app.use("/mainadmin", blockroutes);
 app.use("/mainadmin", flatsroutes);
@@ -54,6 +55,7 @@ app.use("/security", VisitorRoutes);
 app.use("/residence", residenceRoutes);
 app.use("/contact",contactRoutes);
 app.use("/mainadmin",adminMemberManagement)
+app.use("/mainadmin",Notificationroutes);
 
 // SERVER
 const PORT = process.env.PORT || 5000;
