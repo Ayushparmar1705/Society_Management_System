@@ -1,6 +1,7 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 
-export default function Contact() {
+export default function Contact({handleOnChange , handleOnSubmit}) {
     return (
         <div className="max-w-7xl mx-auto p-6 md:p-12">
             {/* Contact Info */}
@@ -17,7 +18,7 @@ export default function Contact() {
                             viewBox="0 0 24 24" 
                             stroke="currentColor"
                         >
-                            <path 
+                            <path
                                 strokeLinecap="round" 
                                 strokeLinejoin="round" 
                                 strokeWidth={2} 
@@ -79,7 +80,8 @@ export default function Contact() {
                         <div className="flex flex-col">
                             <label className="mb-2 text-gray-700 font-medium">Full Name</label>
                             <input 
-                                type="text" 
+                                type="text"
+                                onChange={handleOnChange}
                                 placeholder="John Doe" 
                                 className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" 
                             />
@@ -88,6 +90,7 @@ export default function Contact() {
                             <label className="mb-2 text-gray-700 font-medium">Email</label>
                             <input 
                                 type="email" 
+                                onChange={handleOnChange}
                                 placeholder="johndoe@gmail.com" 
                                 className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" 
                             />
@@ -99,6 +102,7 @@ export default function Contact() {
                             <label className="mb-2 text-gray-700 font-medium">Society Name</label>
                             <input 
                                 type="text" 
+                                onChange={handleOnChange}
                                 placeholder="Grand Society" 
                                 className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" 
                             />
@@ -107,6 +111,7 @@ export default function Contact() {
                             <label className="mb-2 text-gray-700 font-medium">Address</label>
                             <textarea 
                                 rows="2" 
+                                onChange={handleOnChange}
                                 placeholder="Complete society address including the postal code" 
                                 className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             ></textarea>
@@ -115,7 +120,7 @@ export default function Contact() {
 
                     <div className="flex flex-col">
                         <label className="mb-2 text-gray-700 font-medium">Purpose of Contact</label>
-                        <select className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <select onChange={handleOnChange} className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option disabled selected>Select Purpose</option>
                             <option value="register_society">Register New Society</option>
                             <option value="become_chairman">Become Chairman</option>
@@ -126,6 +131,7 @@ export default function Contact() {
                         <label className="mb-2 text-gray-700 font-medium">Detailed Message</label>
                         <textarea 
                             rows="4" 
+                            onChange={handleOnChange}
                             placeholder="Your message..." 
                             className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         ></textarea>
@@ -133,10 +139,13 @@ export default function Contact() {
 
                     <div>
                         <button 
+                            onClick={handleOnSubmit}
+
                             type="submit" 
                             className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
                         >
                             Send Message
+                           
                         </button>
                     </div>
                 </form>
