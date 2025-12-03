@@ -24,6 +24,7 @@ export default function ViewMembers({ result, loading, makeChairman }) {
           {/* Cards */}
           <div className='flex flex-wrap w-full mt-10 gap-10 justify-center'>
             {result.map((result, index) => (
+              console.log(result),
               <div key={index}>
                 <div className='hover:scale-[1.04] hover:border-2 hover:border-gray-200 transition-transform duration-200 border-2 border-gray-100 p-4 rounded w-[350px] h-500 '>
 
