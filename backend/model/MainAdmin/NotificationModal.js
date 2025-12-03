@@ -6,3 +6,5 @@ export default  Notificationmodel = {
         return query(sql);
     }
 }
+
+module.exports = {Notificationmodel}
