@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { toast } from "react-toastify";
 
-export default function Addflatspage({ getBlockByFlatName , handleOnChange, handleOnClick, societyName, blockName }) {
+export default function Addflatspage({ getBlockByFlatName, handleOnChange, handleOnClick, societyName, blockName }) {
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (!token) {
@@ -18,12 +18,12 @@ export default function Addflatspage({ getBlockByFlatName , handleOnChange, hand
 
             <div className="flex">
                 <div className="p-[10px] sd:p-[0px]  relative w-[100%]">
-                    <select  className="p-[10px] rounded-[5px] border-2 border-gray-300 focus:border-2 focus:border-blue-400 focus:outline-none peer w-[100%]" name="sid"
-                    onChange={(e)=>{
+                    <select className="p-[10px] rounded-[5px] border-2 border-gray-300 focus:border-2 focus:border-blue-400 focus:outline-none peer w-[100%]" name="sid"
+                        onChange={(e) => {
                             handleOnChange(e);
                             getBlockByFlatName(e);
                         }}>
-                        
+
                         <option value="" selected disabled>Select Society name</option>
                         {
                             societyName.map((data, index) => (
@@ -38,9 +38,9 @@ export default function Addflatspage({ getBlockByFlatName , handleOnChange, hand
 
             <div className="flex">
                 <div className="p-[10px] sd:p-[0px]  relative w-[100%]">
-                    <select className="p-[10px] rounded-[5px] border-2 border-gray-300 focus:border-2 focus:border-blue-400 focus:outline-none peer w-[100%]" name="bid" onChange={(e)=>{
+                    <select className="p-[10px] rounded-[5px] border-2 border-gray-300 focus:border-2 focus:border-blue-400 focus:outline-none peer w-[100%]" name="bid" onChange={(e) => {
                         handleOnChange(e);
-                        
+
                     }}>
                         <option value="" selected disabled>Select Block Name</option>
                         {
@@ -55,11 +55,11 @@ export default function Addflatspage({ getBlockByFlatName , handleOnChange, hand
 
 
 
- <div className="p-[10px] relative w-[100%]">
+            <div className="p-[10px] relative w-[100%]">
                 <input type="text" className=" p-[10px] rounded-[5px] border-2 border-gray-300 focus:border-2 focus:border-blue-400 focus:outline-none peer w-[100%] " name="flat_number" onChange={handleOnChange} placeholder=" "></input>
                 <label className="text-gray-700 bg-white absolute left-4 top-5 transition-all peer-placeholder-shown:top-5 peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:text-sm z-0 peer-placeholder-shown:text-base ">Flat Number</label>
             </div>
-  <div className="p-[10px] relative w-[100%]">
+            <div className="p-[10px] relative w-[100%]">
                 <select name="flat_type" onChange={handleOnChange} className=" p-[10px] rounded-[5px] border-2 border-gray-300 focus:border-2 focus:border-blue-400 focus:outline-none peer w-[100%] ">
                     <option disabled selected>Select flat type</option>
                     <option value="1BHK">1BHK</option>
@@ -74,7 +74,7 @@ export default function Addflatspage({ getBlockByFlatName , handleOnChange, hand
                 <input type="text" className=" p-[10px] rounded-[5px] border-2 border-gray-300 focus:border-2 focus:border-blue-400 focus:outline-none peer w-[100%] " name="floor_number" onChange={handleOnChange} placeholder=" "></input>
                 <label className="text-gray-700 bg-white absolute left-4 top-5 transition-all peer-placeholder-shown:top-5 peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:text-sm z-0 peer-placeholder-shown:text-base ">Floor Number</label>
             </div>
-          
+
 
             <div className="p-[10px] relative w-[100%]">
                 <input type="text" className=" p-[10px] rounded-[5px] border-2 border-gray-300 focus:border-2 focus:border-blue-400 focus:outline-none peer w-[100%] " name="flat_price" onChange={handleOnChange} placeholder=" "></input>
