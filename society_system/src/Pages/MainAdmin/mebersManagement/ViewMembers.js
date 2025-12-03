@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ViewMembers({ result, loading, makechairman }) {
+export default function ViewMembers({ result, loading, makeChairman }) {
   return (
     <div className='mt-[10px]'>
       {loading ? (
@@ -58,7 +58,7 @@ export default function ViewMembers({ result, loading, makechairman }) {
                     {/* Action Buttons */}
                     {data.role === "residence" ? (
                       <button
-                        onClick={() => makechairman(data.sid)}
+                        onClick={() => makeChairman(data.sid)}
                         className='bg-blue-500 hover:bg-blue-600 p-2 w-full rounded text-white mt-2 transition-all duration-200'
                       >
                         Make chairman
@@ -78,7 +78,7 @@ export default function ViewMembers({ result, loading, makechairman }) {
           </div>
 
           {/* Pagination */}
-          <div className='flex items-center justify-center gap-4 mt-6'>
+          {/* <div className='flex items-center justify-center gap-4 mt-6'>
             <button
               className='px-4 py-2 text-white bg-blue-500 hover:bg-blue-600 rounded disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200'
               onClick={() => setPage(page - 1)}
@@ -96,7 +96,7 @@ export default function ViewMembers({ result, loading, makechairman }) {
             >
               &raquo;
             </button>
-          </div>
+          </div> */}
         </div>
       )}
     </div>
