@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import Adminroutes from './routes/MainAdminRoutes/Adminroutes';
 import Usersroutes from './routes/Userroutes/Usersroutes';
 import SecurityRoutes from './routes/Userroutes/StaffRoutes';
+import ContactRoutes from './routes/Contactroutes/ContactRoutes';
 
 export default function App() {
   return (
@@ -11,7 +12,8 @@ export default function App() {
       <ToastContainer />
       <Adminroutes />
       <Usersroutes />
-      <SecurityRoutes/>
+      <SecurityRoutes />
+      <ContactRoutes />
     </BrowserRouter>
   );
 }
