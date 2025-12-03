@@ -2,16 +2,16 @@ const { query } = require("../../config/dbConfig");
 
 const MembersManagementModal = {
     viewMember: () => {
-        const sql = "SELECT u.username,u.email,u.phone,u.role,s.society_name,f.flat_code FROM users AS u INNER JOIN Addsociety AS s ON u.sid = s.sid INNER JOIN Addflats AS f ON u.fid = f.fid";
+        const sql = "SELECT u.uid,u.fid,u.sid,u.username,u.email,u.phone,u.role,s.society_name,f.flat_code FROM users AS u INNER JOIN Addsociety AS s ON u.sid = s.sid INNER JOIN Addflats AS f ON u.fid = f.fid";
         return query(sql);
     },
     makeChairman: (id) => {
         const sql = "UPDATE users SET role = 'chairman' ,  is_approve = 1 WHERE uid = ?";
         return query(sql, [id]);
     },
-    searchMember: (name)=>{
+    searchMember: (name) => {
         const sql = "SELECT * FROM users WHERE username LIKE ?"
-        return query(sql,[`${name}%`]);
+        return query(sql, [`${name}%`]);
     }
 }
 module.exports = { MembersManagementModal }
