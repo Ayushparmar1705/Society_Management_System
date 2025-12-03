@@ -19,7 +19,7 @@ export default function UserHeader() {
   const links = [
     { name: "Home", path: "/" },
     { name: "About Us", path: "/about" },
-    { name: "Contact Us", path: "/contact" },
+    { name: "Contact Us", path: "/Contact" },
     { name: myToken?'Dashboard':'Login', path: myToken?'/dashboard':'/login' },
   ];
 
