@@ -15,6 +15,7 @@ import UpdatestaffHook from '../../Hooks/RoleBasedAuthhook/Chairman/UpdatestaffH
 import ParkingAllocationHook from '../../Hooks/RoleBasedAuthhook/Chairman/ParkingAllocationHook'
 import ViewAllocateParkingHook from '../../Hooks/RoleBasedAuthhook/Chairman/ViewAllocateParkingHook'
 import ManageVisitor from '../../Hooks/RoleBasedAuthhook/Residence/ManageVisitorHooks'
+import Aboutus from '../../Component/Usercomponent/Aboutus'
 
 
 export default function Usersroutes() {
@@ -22,6 +23,7 @@ export default function Usersroutes() {
     <Routes>
 
       <Route path='/' element={<Home></Home>}></Route>
+      <Route path='/about' element={<Aboutus></Aboutus>}></Route>
       <Route path='/login' element={<LoginHook></LoginHook>}></Route>
       <Route path='/signup' element={<SignupHook></SignupHook>}></Route>
       <Route path='/otpverification' element={<OtpVerification></OtpVerification>}></Route>
@@ -33,7 +35,6 @@ export default function Usersroutes() {
       <Route path='/allocate-parking' element={<ParkingAllocationHook></ParkingAllocationHook>}></Route>
       <Route path='/view-parking' element={<ViewAllocateParkingHook></ViewAllocateParkingHook>}></Route>
       <Route path='/managevisitor' element={<ManageVisitor></ManageVisitor>}></Route>
-
 
     </Routes>
   )

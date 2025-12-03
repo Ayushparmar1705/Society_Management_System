@@ -46,9 +46,7 @@ export default function Userfooter() {
                             {[
                                 { name: 'Home', path: '/' },
                                 { name: 'About Us', path: '/about' },
-                                { name: 'Services', path: '/services' },
-                                { name: 'Features', path: '/features' },
-                                { name: 'Pricing', path: '/pricing' }
+                                { name: 'Contact Us', path:"/Contact"}
                             ].map((link, index) => (
                                 <li key={index}>
                                     <Link
@@ -69,10 +67,7 @@ export default function Userfooter() {
                         <ul className="space-y-3">
                             {[
                                 { name: 'Login', path: '/login' },
-                                { name: 'Register', path: '/register' },
-                                { name: 'Dashboard', path: '/dashboard' },
-                                { name: 'Profile', path: '/profile' },
-                                { name: 'Settings', path: '/settings' }
+                                { name: 'Register', path: '/signup' },
                             ].map((link, index) => (
                                 <li key={index}>
                                     <Link
