@@ -1,5 +1,6 @@
 import { Building } from 'lucide-react'
 import React, { useState } from 'react'
+import { BiNotification } from 'react-icons/bi'
 import { FaBuilding, FaChevronDown, FaChevronUp, FaUserCog, FaBars, FaTimes, FaHome, FaCube, FaChartLine, FaCogs, FaSignOutAlt } from 'react-icons/fa'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
@@ -188,7 +189,14 @@ export default function Sidebar() {
                 </div>
               ))}
             </nav>
-            <Link className="ml-8 pl-4 border-l-2 border-blue-400/30 mt-2 space-y-2" to='/mainadmin/notification'>Notification</Link>
+            <div>
+              <div className='flex justify-center'>
+                <BiNotification></BiNotification>
+              </div>
+              <div>
+                <Link className="ml-8 pl-4  mt-2 space-y-2" to='/mainadmin/notification'>Notification</Link>
+              </div>
+            </div>
           </div>
 
           {/* Footer Section */}
