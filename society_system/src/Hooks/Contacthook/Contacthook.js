@@ -34,8 +34,6 @@ export default function Contacthook() {
             }
         } catch (err) {
             console.log(err);
-        } finally {
-            setLoading(false);
         }
     }
     return <Contact handleOnChange={handleOnChange} handleOnSubmit={handleOnSubmit}></Contact>
