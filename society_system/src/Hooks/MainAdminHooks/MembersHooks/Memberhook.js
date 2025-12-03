@@ -11,10 +11,10 @@ export default function Memberhook() {
 
 
 
-    const getMembers = () => {
+    const getMembers = async() => {
         setLoading(true);
         try {
-            const myresult = MembersManagement.viewMembers();
+            const myresult = await MembersManagement.viewMembers();
             setResult(myresult.message);
         } catch (err) {
             console.log(err);
