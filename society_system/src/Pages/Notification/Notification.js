@@ -1,5 +1,5 @@
 
-export default function Notification({ notification }) {
+export default function Notification({ notification = [] }) {
     return (
         <div style={{ padding: "20px" }}>
             <h2 style={{ marginBottom: "15px" }}>Notifications</h2>
