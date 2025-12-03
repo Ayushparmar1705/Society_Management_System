@@ -2,7 +2,7 @@ const { query } = require("../../config/dbConfig");
 
 const MembersManagementModal = {
     viewMember: () => {
-        const sql = "SELECT u.username,u.email,u.phone,u.role,s.society_nam,f.flat_code FROM users AS u INNER JOIN Addsociety AS s ON u.sid = s.sid INNER JOIN Addflats AS f ON u.fid = f.fid";
+        const sql = "SELECT u.username,u.email,u.phone,u.role,s.society_name,f.flat_code FROM users AS u INNER JOIN Addsociety AS s ON u.sid = s.sid INNER JOIN Addflats AS f ON u.fid = f.fid";
         return query(sql);
     },
     makeChairman: (id) => {
