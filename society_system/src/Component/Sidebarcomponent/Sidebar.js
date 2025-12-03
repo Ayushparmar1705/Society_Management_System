@@ -111,8 +111,8 @@ export default function Sidebar() {
                     <Link
                       to={e.path}
                       className={`flex items-center p-3 rounded-xl transition-all duration-300 group ${isActiveLink(e.path)
-                          ? 'bg-white/20 shadow-lg transform scale-105'
-                          : 'hover:bg-white/10 hover:translate-x-2'
+                        ? 'bg-white/20 shadow-lg transform scale-105'
+                        : 'hover:bg-white/10 hover:translate-x-2'
                         }`}
                       onClick={handleLinkClick}
                       onMouseEnter={() => setHoveredItem(index)}
@@ -158,8 +158,8 @@ export default function Sidebar() {
                             <Link
                               key={idx}
                               className={`flex items-center p-2 rounded-lg transition-all duration-300 group hover:translate-x-1 ${isActiveLink(item.path)
-                                  ? 'bg-blue-500/30 text-white font-semibold shadow-md'
-                                  : 'text-white/80 hover:bg-white/10'
+                                ? 'bg-blue-500/30 text-white font-semibold shadow-md'
+                                : 'text-white/80 hover:bg-white/10'
                                 }`}
                               to={item.path}
                               onClick={(e) => {
@@ -181,9 +181,7 @@ export default function Sidebar() {
               ))}
             </nav>
             <div className='flex'>
-              <div className='justify-center'>
-                <Bell></Bell>
-              </div>
+
               <div>
                 <Link className="ml-8 pl-4  mt-2 space-y-2" to='/mainadmin/notification'>Notification</Link>
               </div>
