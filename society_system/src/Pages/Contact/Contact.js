@@ -75,7 +75,7 @@ export default function Contact({handleOnChange , handleOnSubmit}) {
             <div className="bg-white shadow-lg rounded-lg p-8">
                 <h2 className="text-2xl font-semibold mb-6 text-gray-800">Send Your Request</h2>
                 
-                <form className="space-y-6">
+            
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="flex flex-col">
                             <label className="mb-2 text-gray-700 font-medium">Full Name</label>
@@ -146,7 +146,7 @@ export default function Contact({handleOnChange , handleOnSubmit}) {
                            
                         </button>
                     </div>
-                </form>
+           
             </div>
         </div>
     );
