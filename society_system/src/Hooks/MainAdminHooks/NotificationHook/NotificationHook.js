@@ -12,7 +12,7 @@ export default function NotificationHook() {
   const getNotification = async () => {
     try {
       const result = await ManageNotification.manageNotification();
-      const data = result.data?.message || [];
+      const data = result.message || [];
       setNotification(data);
     } catch (err) {
       console.error("Failed to fetch notifications:", err);
