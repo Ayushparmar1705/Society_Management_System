@@ -5,7 +5,7 @@ export default function ViewMembers({ result, loading, makeChairman }) {
   return (
     <div className='p-2'>
       <div className='p-50'>
-        <div className='flex p-5 bg-white'>
+        <div className='flex p-5 bg-white flex-wrap'>
           {result.map((data) => (
             <div className='bg-gray-50 rounded-xl shadow p-10'>
               <p className='p-2'>Name: {data.username}</p>
