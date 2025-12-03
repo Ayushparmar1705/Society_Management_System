@@ -7,7 +7,7 @@ const ContactController = {
         try {
             const result = await ContactModal.createContact(data);
             if (result) {
-                return res.status(200).send({ code: 200, message: result });
+                return res.status(200).send({ code: 200, message: "Message send to super admin" });
             }
         } catch (err) {
             console.log(err);
