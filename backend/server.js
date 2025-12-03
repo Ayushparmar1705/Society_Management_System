@@ -39,7 +39,7 @@ const ParkingAllocationRoutes = require("./routes/RolebasedAuth/Chairman/Allocat
 const StaffRoutes = require("./routes/RolebasedAuth/Staff/StaffRoutes");
 const VisitorRoutes = require("./routes/RolebasedAuth/Staff/ManageVisitorRoutes");
 const residenceRoutes = require("./routes/residenceRoutes/residenceRoutes");
-
+const contactRoutes = require("./routes/ContactRoutes/ContactRoutes");
 app.use("/mainadmin", societyroutes);
 app.use("/mainadmin", blockroutes);
 app.use("/mainadmin", flatsroutes);
@@ -51,6 +51,7 @@ app.use("/auth", ParkingAllocationRoutes);
 app.use("/auth", StaffRoutes);
 app.use("/security", VisitorRoutes);
 app.use("/residence", residenceRoutes);
+app.use("/contact",contactRoutes)
 
 // SERVER
 const PORT = process.env.PORT || 5000;
