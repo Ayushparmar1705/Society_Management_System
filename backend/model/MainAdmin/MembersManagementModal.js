@@ -10,7 +10,7 @@ const MembersManagementModal = {
         return query(sql, [id]);
     },
     searchMember: (name)=>{
-        const sql = "SELECT * FROM users WHERE name LIKE ?"
+        const sql = "SELECT * FROM users WHERE username LIKE ?"
         return query(sql,[`${name}%`]);
     }
 }
