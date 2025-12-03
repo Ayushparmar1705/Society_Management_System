@@ -4,4 +4,4 @@ const router = express.Router();
 
 router.post("/query",ContactController.createContact);
 
-module.exports = {router}
+module.exports = router
