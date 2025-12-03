@@ -1,9 +1,25 @@
 
-export default function Notification({ notification = [] }) {
+export default function Notification({ notification = [], enableNotifications }) {
     return (
         <div style={{ padding: "20px" }}>
             <h2 style={{ marginBottom: "15px" }}>Notifications</h2>
+            <div>
+                <button
+                    onClick={enableNotifications}
+                    style={{
+                        padding: "8px 12px",
+                        marginBottom: "12px",
+                        background: "#007bff",
+                        color: "#fff",
+                        borderRadius: "6px",
+                        border: "none",
+                        cursor: "pointer",
+                    }}
+                >
+                    Enable Notifications & Sound
+                </button>
 
+            </div>
             <div style={{ height: "70vh", overflowY: "auto" }}>
                 {notification.length === 0 && (
                     <p>No notifications yet...</p>

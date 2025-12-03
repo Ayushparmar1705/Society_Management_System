@@ -73,23 +73,7 @@ export default function NotificationHook() {
   }, [soundEnabled]);
 
   return (
-    <div>
-      <button
-        onClick={enableNotifications}
-        style={{
-          padding: "8px 12px",
-          marginBottom: "12px",
-          background: "#007bff",
-          color: "#fff",
-          borderRadius: "6px",
-          border: "none",
-          cursor: "pointer",
-        }}
-      >
-        Enable Notifications & Sound
-      </button>
-
-      <Notification notification={notification} />
-    </div>
+   
+      <Notification enableNotifications={enableNotifications} notification={notification} />
   );
 }
