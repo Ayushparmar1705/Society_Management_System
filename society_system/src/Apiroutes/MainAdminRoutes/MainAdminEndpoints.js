@@ -20,6 +20,8 @@ const MainAdminApiEndPoints = {
     "getFlats": (page, limit) => `${BASE_URL}/mainadmin/getFlats/${page}/${limit}`,
     "getFlatById": (id) => `${BASE_URL}/mainadmin/getflatbyid/${id}`,
     "update_society": (id) => `${BASE_URL}/mainadmin/updatesociety/${id}`,
+    "viewMembers":`${BASE_URL}/mainadmin/viewmembers`,
+    "makeChairman" : (id)=>`${BASE_URL}/mainadmin/makechairman/${id}`,
 
 }
 export default MainAdminApiEndPoints;
