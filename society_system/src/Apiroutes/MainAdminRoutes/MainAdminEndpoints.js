@@ -22,6 +22,7 @@ const MainAdminApiEndPoints = {
     "update_society": (id) => `${BASE_URL}/mainadmin/updatesociety/${id}`,
     "viewMembers":`${BASE_URL}/mainadmin/viewmembers`,
     "makeChairman" : (id)=>`${BASE_URL}/mainadmin/makechairman/${id}`,
+    "getNotification" : `${BASE_URL}/mainadmin/notification`,
 
 }
 export default MainAdminApiEndPoints;

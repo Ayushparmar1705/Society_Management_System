@@ -42,6 +42,8 @@ const residenceRoutes = require("./routes/residenceRoutes/residenceRoutes");
 const contactRoutes = require("./routes/ContactRoutes/ContactRoutes");
 const adminMemberManagement = require("./routes/MainAdmin/MembersManagementRoutes");
 const Notificationroutes = require("./routes/MainAdmin/Notificationroutes");
+const http = require("http");
+const { Server } = require("socket.io");
 app.use("/mainadmin", societyroutes);
 app.use("/mainadmin", blockroutes);
 app.use("/mainadmin", flatsroutes);
@@ -58,6 +60,28 @@ app.use("/mainadmin",adminMemberManagement)
 app.use("/mainadmin",Notificationroutes);
 
 // SERVER
+
+const server = http.createServer(app);
+
+
+
+const io = new Server(server,{
+    cors:{
+        origin: [
+            "https://society-management-system-afb5.onrender.com",
+            "http://localhost:3000"
+        ],
+        methods: ["GET", "POST"]
+    }
+});
+
+global.io = io;
+
+io.on("connection",(socket)=>{
+    console.log("socket connected",socket.id);
+})
+
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
