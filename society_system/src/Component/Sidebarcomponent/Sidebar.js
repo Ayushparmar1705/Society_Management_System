@@ -10,6 +10,7 @@ export default function Sidebar() {
   const location = useLocation()
 
   const elements = [
+  
     { 
       label: "Society", 
       icon: <FaBuilding className="text-blue-300" />, 
@@ -187,6 +188,7 @@ export default function Sidebar() {
                 </div>
               ))}
             </nav>
+            <Link to='/mainadmin/notification'>Notification</Link>
           </div>
 
           {/* Footer Section */}
