@@ -6,7 +6,7 @@ const MembersManagementModal = {
         return query(sql);
     },
     makeChairman: (id) => {
-        const sql = "UPDATE users SET role = 'chairman' AND is_approve = 1 WHERE uid = ?";
+        const sql = "UPDATE users SET role = 'chairman' ,  is_approve = 1 WHERE uid = ?";
         return query(sql, [id]);
     }
 }
