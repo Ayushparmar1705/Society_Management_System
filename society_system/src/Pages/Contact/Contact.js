@@ -3,14 +3,16 @@ import { motion } from 'framer-motion';
 import { 
   User, 
   Building, 
-  Home, 
   Users, 
   Send, 
   Phone, 
   Mail, 
   MapPin,
   Shield,
-  CheckCircle
+  CheckCircle,
+  Upload,
+  FileText,
+  X
 } from 'lucide-react';
 
 export default function Contact() {
@@ -26,13 +28,34 @@ export default function Contact() {
 
   const [submitted, setSubmitted] = useState(false);
   const [selectedPurpose, setSelectedPurpose] = useState('');
+  const [files, setFiles] = useState([]);
+  const [isSocietyRegistration, setIsSocietyRegistration] = useState(false);
 
   const purposes = [
-    { id: 'register-society', icon: <Building size={20} />, label: 'Register New Society', description: 'Register a new society in the system' },
-    { id: 'add-flats', icon: <Home size={20} />, label: 'Add Flats/Units', description: 'Add new residential units to existing society' },
-    { id: 'add-blocks', icon: <Building size={20} />, label: 'Add Blocks/Wings', description: 'Add new blocks or wings to society' },
-    { id: 'become-chairman', icon: <Users size={20} />, label: 'Become Chairman', description: 'Convert resident to society chairman' },
-    { id: 'other', icon: <Shield size={20} />, label: 'Other Issues', description: 'Other administrative queries' }
+    { 
+      id: 'register-society', 
+      icon: <Building size={20} />, 
+      label: 'Register New Society', 
+      description: 'Register a new society in the system',
+      requiresFiles: true
+    },
+    { 
+      id: 'become-chairman', 
+      icon: <Users size={20} />, 
+      label: 'Become Chairman', 
+      description: 'Convert resident to society chairman',
+      requiresFiles: false
+    }
+  ];
+
+  const allowedFileTypes = [
+    'application/pdf',
+    'image/jpeg',
+    'image/png',
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'application/vnd.ms-excel',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
   ];
 
   const handleChange = (e) => {
@@ -44,17 +67,61 @@ export default function Contact() {
   };
 
   const handlePurposeSelect = (purpose) => {
-    setSelectedPurpose(purpose);
+    setSelectedPurpose(purpose.label);
+    setIsSocietyRegistration(purpose.requiresFiles);
     setFormData(prev => ({
       ...prev,
-      purpose
+      purpose: purpose.label
     }));
+    // Clear files when changing purpose
+    if (!purpose.requiresFiles) {
+      setFiles([]);
+    }
+  };
+
+  const handleFileUpload = (e) => {
+    const selectedFiles = Array.from(e.target.files);
+    
+    // Filter files by type
+    const validFiles = selectedFiles.filter(file => 
+      allowedFileTypes.includes(file.type)
+    );
+    
+    // Check for duplicates
+    const newFiles = validFiles.filter(newFile => 
+      !files.some(existingFile => 
+        existingFile.name === newFile.name && 
+        existingFile.size === newFile.size
+      )
+    );
+    
+    if (validFiles.length !== selectedFiles.length) {
+      alert('Some files were rejected. Please upload only PDF, images, Word, or Excel files.');
+    }
+    
+    setFiles(prev => [...prev, ...newFiles]);
+    e.target.value = ''; // Reset file input
+  };
+
+  const removeFile = (index) => {
+    setFiles(prev => prev.filter((_, i) => i !== index));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
     // Here you would typically send the data to your backend
-    console.log('Form submitted:', formData);
+    // Including file uploads
+    const submissionData = {
+      ...formData,
+      files: files.map(file => ({
+        name: file.name,
+        type: file.type,
+        size: file.size
+      }))
+    };
+    
+    console.log('Form submitted:', submissionData);
     setSubmitted(true);
     
     // Reset form after 3 seconds
@@ -70,7 +137,17 @@ export default function Contact() {
         message: ''
       });
       setSelectedPurpose('');
+      setFiles([]);
+      setIsSocietyRegistration(false);
     }, 3000);
+  };
+
+  const formatFileSize = (bytes) => {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   };
 
   const containerVariants = {
@@ -108,8 +185,7 @@ export default function Contact() {
             Contact Super Admin
           </h1>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Connect with our administration team to register new societies, add properties, 
-            or upgrade your role within the society management system.
+            Connect with our administration team to register new societies or become a chairman
           </p>
         </motion.div>
 
@@ -165,32 +241,41 @@ export default function Contact() {
               className="bg-white rounded-2xl shadow-lg p-8"
             >
               <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                Quick Actions
+                Select Purpose
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-4">
                 {purposes.map((purpose) => (
                   <motion.button
                     key={purpose.id}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    onClick={() => handlePurposeSelect(purpose.label)}
-                    className={`p-4 rounded-xl border-2 transition-all duration-300 ${
+                    onClick={() => handlePurposeSelect(purpose)}
+                    className={`w-full p-6 rounded-xl border-2 transition-all duration-300 text-left ${
                       selectedPurpose === purpose.label
                         ? 'border-blue-500 bg-blue-50'
                         : 'border-gray-200 hover:border-blue-300'
                     }`}
                   >
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className={`p-2 rounded-lg ${
+                    <div className="flex items-center gap-4 mb-3">
+                      <div className={`p-3 rounded-lg ${
                         selectedPurpose === purpose.label 
                           ? 'bg-blue-100 text-blue-600' 
                           : 'bg-gray-100 text-gray-600'
                       }`}>
                         {purpose.icon}
                       </div>
-                      <span className="font-semibold text-gray-900">{purpose.label}</span>
+                      <div>
+                        <span className="font-semibold text-gray-900 text-lg">{purpose.label}</span>
+                        <p className="text-sm text-gray-600 mt-1">{purpose.description}</p>
+                      </div>
                     </div>
-                    <p className="text-sm text-gray-600 text-left">{purpose.description}</p>
+                    {purpose.requiresFiles && selectedPurpose === purpose.label && (
+                      <div className="mt-3 p-3 bg-blue-50 rounded-lg">
+                        <p className="text-sm text-blue-700 font-medium">
+                          ✓ File upload enabled for society documents
+                        </p>
+                      </div>
+                    )}
                   </motion.button>
                 ))}
               </div>
@@ -213,6 +298,11 @@ export default function Contact() {
                   <p className="text-gray-600">
                     Your request has been sent to the Super Admin. We'll contact you within 24 hours.
                   </p>
+                  {isSocietyRegistration && files.length > 0 && (
+                    <p className="text-sm text-gray-500 mt-3">
+                      {files.length} document(s) uploaded successfully
+                    </p>
+                  )}
                 </motion.div>
               ) : (
                 <>
@@ -317,6 +407,110 @@ export default function Contact() {
                       </div>
                     </div>
 
+                    {/* File Upload Section - Only for Society Registration */}
+                    {isSocietyRegistration && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        transition={{ duration: 0.3 }}
+                        className="space-y-4"
+                      >
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-3">
+                            Upload Society Documents *
+                            <span className="text-xs text-gray-500 ml-2">
+                              (PDF, Images, Word, Excel up to 10MB each)
+                            </span>
+                          </label>
+                          
+                          <div className="border-2 border-dashed border-blue-300 rounded-xl p-6 bg-blue-50">
+                            <div className="text-center">
+                              <Upload className="w-12 h-12 text-blue-500 mx-auto mb-3" />
+                              <p className="text-sm text-gray-600 mb-4">
+                                Upload society registration documents, bylaws, floor plans, etc.
+                              </p>
+                              
+                              <label className="cursor-pointer">
+                                <input
+                                  type="file"
+                                  multiple
+                                  onChange={handleFileUpload}
+                                  className="hidden"
+                                  accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx"
+                                />
+                                <div className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                                  <Upload size={18} />
+                                  Choose Files
+                                </div>
+                              </label>
+                              <p className="text-xs text-gray-500 mt-2">
+                                Maximum 5 files, 10MB each
+                              </p>
+                            </div>
+                            
+                            {/* File List */}
+                            {files.length > 0 && (
+                              <div className="mt-6">
+                                <h4 className="font-medium text-gray-900 mb-3">Selected Files:</h4>
+                                <div className="space-y-2 max-h-40 overflow-y-auto">
+                                  {files.map((file, index) => (
+                                    <div
+                                      key={index}
+                                      className="flex items-center justify-between bg-white p-3 rounded-lg border"
+                                    >
+                                      <div className="flex items-center gap-3">
+                                        <FileText className="text-blue-500" size={18} />
+                                        <div>
+                                          <p className="text-sm font-medium text-gray-900 truncate max-w-xs">
+                                            {file.name}
+                                          </p>
+                                          <p className="text-xs text-gray-500">
+                                            {formatFileSize(file.size)}
+                                          </p>
+                                        </div>
+                                      </div>
+                                      <button
+                                        type="button"
+                                        onClick={() => removeFile(index)}
+                                        className="text-red-500 hover:text-red-700"
+                                      >
+                                        <X size={18} />
+                                      </button>
+                                    </div>
+                                  ))}
+                                </div>
+                                <p className="text-xs text-gray-500 mt-2">
+                                  {files.length} file(s) selected
+                                </p>
+                              </div>
+                            )}
+                          </div>
+                          
+                          <div className="mt-4">
+                            <p className="text-sm font-medium text-gray-700 mb-2">Required Documents:</p>
+                            <ul className="text-sm text-gray-600 space-y-1">
+                              <li className="flex items-center gap-2">
+                                <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                                Society Registration Certificate
+                              </li>
+                              <li className="flex items-center gap-2">
+                                <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                                Building Layout/Floor Plans
+                              </li>
+                              <li className="flex items-center gap-2">
+                                <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                                Society Bylaws/Constitution
+                              </li>
+                              <li className="flex items-center gap-2">
+                                <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                                NOC from Authorities (if applicable)
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Purpose of Contact
@@ -327,7 +521,8 @@ export default function Contact() {
                         value={formData.purpose}
                         onChange={handleChange}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition bg-gray-50"
-                        placeholder="Select from quick actions or type your purpose"
+                        placeholder="Select from above options"
+                        readOnly
                       />
                     </div>
 
@@ -342,7 +537,11 @@ export default function Contact() {
                         onChange={handleChange}
                         rows="4"
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                        placeholder="Describe your request in detail. Include number of flats, blocks, or specific requirements..."
+                        placeholder={
+                          isSocietyRegistration 
+                            ? "Describe your society details, number of buildings, total flats, amenities, etc..."
+                            : "Explain why you want to become chairman, your experience, and resident support..."
+                        }
                       />
                     </div>
 
@@ -350,7 +549,12 @@ export default function Contact() {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       type="submit"
-                      className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold py-4 px-6 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
+                      disabled={isSocietyRegistration && files.length === 0}
+                      className={`w-full text-white font-semibold py-4 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl ${
+                        isSocietyRegistration && files.length === 0
+                          ? 'bg-gray-400 cursor-not-allowed'
+                          : 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800'
+                      }`}
                     >
                       <Send size={20} />
                       Send Request to Super Admin
@@ -367,18 +571,37 @@ export default function Contact() {
             >
               <h3 className="text-xl font-bold mb-3">What happens next?</h3>
               <ul className="space-y-2">
-                <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <span>Super Admin reviews your request within 24 hours</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <span>You'll receive confirmation email with reference number</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <span>Administrative setup instructions will be provided</span>
-                </li>
+                {isSocietyRegistration ? (
+                  <>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-white rounded-full"></div>
+                      <span>Super Admin verifies your society documents</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-white rounded-full"></div>
+                      <span>Society registration approval within 3-5 business days</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-white rounded-full"></div>
+                      <span>Setup credentials will be provided via email</span>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-white rounded-full"></div>
+                      <span>Super Admin reviews your request within 24 hours</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-white rounded-full"></div>
+                      <span>Verification with existing society members</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-white rounded-full"></div>
+                      <span>Chairman role activation after approval</span>
+                    </li>
+                  </>
+                )}
                 <li className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-white rounded-full"></div>
                   <span>Dedicated support during the setup process</span>
