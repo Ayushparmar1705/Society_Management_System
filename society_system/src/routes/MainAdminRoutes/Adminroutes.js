@@ -33,6 +33,7 @@ export default function Adminroutes() {
         <Route path="/mainadmin/update-page" element={<Layout><Updatesocietyhook></Updatesocietyhook></Layout>}></Route>
         <Route path="/mainadmin/update-flats" element={<Layout><Updateflathook></Updateflathook></Layout>}></Route>
         <Route path="/mainadmin/member-management" element={<Layout><Memberhook></Memberhook></Layout>}></Route>
+        <Route path="/mainadmin/notification" element={<Layout><Notificationhook></Notificationhook></Layout>}></Route>
       </Routes>
 
     </div>

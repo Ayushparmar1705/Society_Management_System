@@ -188,7 +188,7 @@ export default function Sidebar() {
                 </div>
               ))}
             </nav>
-            <Link to='/mainadmin/notification'>Notification</Link>
+            <Link className="ml-8 pl-4 border-l-2 border-blue-400/30 mt-2 space-y-2" to='/mainadmin/notification'>Notification</Link>
           </div>
 
           {/* Footer Section */}
