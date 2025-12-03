@@ -2,7 +2,7 @@ const { ContactModal } = require("../../model/Contact/ContactModal")
 
 const ContactController = {
     createContact: async (req, res) => {
-        const data = await req.body;
+        const data =  req.body;
         console.log(data);
         try {
             const result = await ContactModal.createContact(data);
