@@ -11,7 +11,7 @@ export default function NotificationHook() {
     try {
       const result = await ManageNotification.manageNotification();
       // axios response: result.data
-      const data = result.data?.message || [];
+      const data = result.message || [];
       setNotification(data);
     } catch (err) {
       console.error("Failed to fetch notifications:", err);
