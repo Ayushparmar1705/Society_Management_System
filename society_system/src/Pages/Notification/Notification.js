@@ -1,5 +1,3 @@
-import React from "react";
-import "./Notification.css"; // optional
 
 export default function Notification({ notification }) {
     return (
