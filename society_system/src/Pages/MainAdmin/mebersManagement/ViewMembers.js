@@ -57,7 +57,7 @@ export default function ViewMembers({ result, loading, makeChairman }) {
                     </div>
 
                     {/* Action Buttons */}
-                    {data.role === "residence" ? (
+                    {result.role === "residence" ? (
                       <button
                         onClick={() => makeChairman(result.sid)}
                         className='bg-blue-500 hover:bg-blue-600 p-2 w-full rounded text-white mt-2 transition-all duration-200'
