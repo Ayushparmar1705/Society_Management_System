@@ -12,6 +12,7 @@ import Manageflathook from "../../Hooks/MainAdminHooks/FlatsHook/Manageflathook"
 import MainAdminLogin from "../../Pages/MainAdmin/MainAdminLogin";
 import Updatesocietyhook from "../../Hooks/MainAdminHooks/SocietyHook/Updatesocietyhook";
 import Updateflathook from "../../Hooks/MainAdminHooks/FlatsHook/Updateflathook";
+import Memberhook from "../../Hooks/MainAdminHooks/MembersHooks/Memberhook";
 
 
 
@@ -31,6 +32,7 @@ export default function Adminroutes() {
         <Route path="/mainadmin/manage-flats" element={<Layout><Manageflathook></Manageflathook></Layout>}></Route>
         <Route path="/mainadmin/update-page" element={<Layout><Updatesocietyhook></Updatesocietyhook></Layout>}></Route>
         <Route path="/mainadmin/update-flats" element={<Layout><Updateflathook></Updateflathook></Layout>}></Route>
+        <Route path="/mainadmin/member-management" element={<Memberhook></Memberhook>}></Route>
       </Routes>
 
     </div>
