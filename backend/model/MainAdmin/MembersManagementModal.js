@@ -5,7 +5,7 @@ const MembersManagementModal = {
         const sql = "SELECT * FROM users";
         return query(sql);
     },
-    makeChairman:()=>{
+    makeChairman:(id)=>{
         const sql = "UPDATE users SET role = 'chairman' AND is_active = 1 WHERE uid = ?";
         return query(sql,[id]);
     }

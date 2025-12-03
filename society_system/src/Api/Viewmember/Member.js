@@ -8,7 +8,9 @@ const MembersManagement = {
         return data;
     },
     makeChairman: async(id)=>{
-        const result = await fetch(MainAdminApiEndPoints.makeChairman(id));
+        const result = await fetch(MainAdminApiEndPoints.makeChairman(id),{
+            method:"PUT",
+        });
         const data = await result.json();
         return data;
     }

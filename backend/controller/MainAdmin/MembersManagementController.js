@@ -20,6 +20,7 @@ const MemberManagementController = {
                 return res.status(200).send({ code: 500, message: "member converted into chairman" });
             }
         } catch (err) {
+            console.log(err);
             return res.status(500).send({ code: 500, message: err });
         }
     }

@@ -4,6 +4,7 @@ import React from 'react'
 export default function ViewMembers({ result, loading, makeChairman }) {
   return (
     <div className='mt-[10px]'>
+      
       {loading ? (
         <div className='w-full flex justify-center items-center h-[300px]'>
           <img className='h-[100px] w-[100px] m-auto' src='/Assets/loading.gif' alt='Loading' />
@@ -29,7 +30,7 @@ export default function ViewMembers({ result, loading, makeChairman }) {
                   {/* Header */}
                   <div className={`text-white p-[10px] font-bold rounded`}>
                     <div className='flex justify-between items-center'>
-                      <p>{result.name}</p>
+                      <p>{result.username}</p>
                       <User className="h-4 w-4 text-green-500 mr-3"></User>
                     </div>
 
