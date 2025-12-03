@@ -1,4 +1,4 @@
-const {query} = require("../../config/dbConfig");
+const { query } = require("../../config/dbConfig");
 
 export default  Notificationmodel = {
     getNotification: () => {
