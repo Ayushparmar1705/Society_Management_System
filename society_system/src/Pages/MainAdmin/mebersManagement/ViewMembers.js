@@ -11,7 +11,7 @@ export default function ViewMembers({ result, loading, makeChairman }) {
               <p className='p-2'>Name: {data.username}</p>
               <p className='p-2'>Email: {data.email}</p>
               <p className='p-2'>Phone: {data.phone}</p>
-              <p className='p-2'>Role: {data.residence}</p>
+              <p className='p-2'>Role: {data.role}</p>
               <button onCanPlay={() => {
                 makeChairman(data.uid)
               }}>Make chairman</button>

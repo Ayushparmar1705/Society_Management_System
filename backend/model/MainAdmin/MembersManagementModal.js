@@ -8,6 +8,10 @@ const MembersManagementModal = {
     makeChairman: (id) => {
         const sql = "UPDATE users SET role = 'chairman' ,  is_approve = 1 WHERE uid = ?";
         return query(sql, [id]);
+    },
+    searchMember: (name)=>{
+        const sql = "SELECT * FROM users WHERE name LIKE ?"
+        return query(sql,[`${name}%`]);
     }
 }
 module.exports = { MembersManagementModal }

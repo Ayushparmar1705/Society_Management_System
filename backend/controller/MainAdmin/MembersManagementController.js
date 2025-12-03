@@ -2,7 +2,7 @@ const { MembersManagementModal } = require("../../model/MainAdmin/MembersManagem
 
 
 const MemberManagementController = {
-    viewMembers: async(req, res) => {
+    viewMembers: async (req, res) => {
         try {
             const result = await MembersManagementModal.viewMember();
             if (result) {
@@ -23,6 +23,19 @@ const MemberManagementController = {
             console.log(err);
             return res.status(500).send({ code: 500, message: err });
         }
+    },
+    searchMember: async (req, res) => {
+        const name = req.params.name;
+        try {
+            const result = await MembersManagementModal.searchMember(name);
+            console.log(result);
+            if (result) {
+                return res.status(200).send({ code: 200, message: result });
+            }
+        } catch (err) {
+            console.log(err);
+            return res.status(500).send({ code: 500, message: err });
+        }
     }
 }
-module.exports = {MemberManagementController}
+module.exports = { MemberManagementController }
