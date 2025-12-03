@@ -29,16 +29,16 @@ export default function ViewMembers({ result, loading, makeChairman }) {
                 <div className='hover:scale-[1.04] hover:border-2 hover:border-gray-200 transition-transform duration-200 border-2 border-gray-100 p-4 rounded w-[350px] h-500 '>
 
                   {/* Header */}
-                  <div className={`text-white p-[10px] font-bold rounded`}>
+                  
+                  {/* Info */}
+                  <div className='flex w-full flex-col p-5 gap-2'>
+<div className={`text-white p-[10px] font-bold rounded`}>
                     <div className='flex justify-between items-center'>
                       <p>{result.username}</p>
                       <User className="h-4 w-4 text-green-500 mr-3"></User>
                     </div>
 
                   </div>
-
-                  {/* Info */}
-                  <div className='flex w-full flex-col p-5 gap-2'>
 
                     <div className='flex items-center'>
                       <Mail className="h-4 w-4 text-blue-500 mr-3" />
