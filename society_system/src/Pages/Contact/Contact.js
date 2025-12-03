@@ -79,7 +79,8 @@ export default function Contact({handleOnChange , handleOnSubmit}) {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="flex flex-col">
                             <label className="mb-2 text-gray-700 font-medium">Full Name</label>
-                            <input 
+                            <input
+                                name='name'
                                 type="text"
                                 onChange={handleOnChange}
                                 placeholder="John Doe" 
@@ -88,7 +89,8 @@ export default function Contact({handleOnChange , handleOnSubmit}) {
                         </div>
                         <div className="flex flex-col">
                             <label className="mb-2 text-gray-700 font-medium">Email</label>
-                            <input 
+                            <input
+                                name='email'
                                 type="email" 
                                 onChange={handleOnChange}
                                 placeholder="johndoe@gmail.com" 
@@ -100,7 +102,8 @@ export default function Contact({handleOnChange , handleOnSubmit}) {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="flex flex-col">
                             <label className="mb-2 text-gray-700 font-medium">Society Name</label>
-                            <input 
+                            <input
+                                name='societyName'
                                 type="text" 
                                 onChange={handleOnChange}
                                 placeholder="Grand Society" 
@@ -109,7 +112,8 @@ export default function Contact({handleOnChange , handleOnSubmit}) {
                         </div>
                         <div className="flex flex-col">
                             <label className="mb-2 text-gray-700 font-medium">Address</label>
-                            <textarea 
+                            <textarea
+                                name='address'
                                 rows="2" 
                                 onChange={handleOnChange}
                                 placeholder="Complete society address including the postal code" 
@@ -120,7 +124,7 @@ export default function Contact({handleOnChange , handleOnSubmit}) {
 
                     <div className="flex flex-col">
                         <label className="mb-2 text-gray-700 font-medium">Purpose of Contact</label>
-                        <select onChange={handleOnChange} className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <select onChange={handleOnChange} name='purpose' className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option disabled selected>Select Purpose</option>
                             <option value="register_society">Register New Society</option>
                             <option value="become_chairman">Become Chairman</option>
@@ -129,7 +133,8 @@ export default function Contact({handleOnChange , handleOnSubmit}) {
 
                     <div className="flex flex-col">
                         <label className="mb-2 text-gray-700 font-medium">Detailed Message</label>
-                        <textarea 
+                        <textarea
+                            name='message'
                             rows="4" 
                             onChange={handleOnChange}
                             placeholder="Your message..." 
