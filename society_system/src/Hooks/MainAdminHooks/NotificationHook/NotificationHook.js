@@ -6,52 +6,58 @@ import { toast } from "react-toastify";
 
 export default function NotificationHook() {
   const [notification, setNotification] = useState([]);
+  const [soundEnabled, setSoundEnabled] = useState(false);
 
+  // Fetch existing notifications from backend
   const getNotification = async () => {
     try {
       const result = await ManageNotification.manageNotification();
-      // axios response: result.data
-      const data = result.message || [];
+      const data = result.data?.message || []; // use result.data
       setNotification(data);
     } catch (err) {
       console.error("Failed to fetch notifications:", err);
     }
   };
 
+  // Enable notifications + sound on first user click
+  const enableNotifications = () => {
+    if (window.Notification) {
+      Notification.requestPermission().then((perm) => {
+        if (perm === "granted") {
+          toast.success("Desktop notifications enabled!");
+        }
+      });
+    }
+    setSoundEnabled(true);
+    toast.info("Sound enabled for notifications!");
+  };
+
   useEffect(() => {
     getNotification();
 
-    // ask for desktop notification permission (once)
-    if (window.Notification && window.Notification.permission !== "granted") {
-      window.Notification.requestPermission().catch((e) => {
-        // ignore if blocked
-        console.warn("Notification permission request error:", e);
-      });
-    }
-
-    // socket listener
+    // Socket listener
     const onNewNotification = (data) => {
-      // add to UI
       setNotification((prev) => [data, ...prev]);
 
-      // play sound (safe: catch promise rejection)
-      try {
-        const audio = new Audio("/Assets/notification.mp3");
-        audio.play().catch((err) => {
-          // autoplay may be blocked; ignore
-          // console.log("Audio play blocked:", err);
-        });
-      } catch (e) {
-        console.warn("Audio error:", e);
+      // Play sound if enabled
+      if (soundEnabled) {
+        try {
+          const audio = new Audio("/Assets/notification.mp3");
+          audio.play().catch(() => {
+            console.log("Audio blocked by browser. User must interact first.");
+          });
+        } catch (e) {
+          console.warn("Audio error:", e);
+        }
       }
 
-      // show toast
+      // Show toast
       toast.success("New notification received!");
 
-      // browser desktop notification
-      if (window.Notification && window.Notification.permission === "granted") {
+      // Browser desktop notification
+      if (window.Notification && Notification.permission === "granted") {
         try {
-          new window.Notification("New contact message", {
+          new Notification("New contact message", {
             body: `${data.name} sent a message`,
             icon: "/Assets/notification_logo.jpg",
           });
@@ -63,11 +69,27 @@ export default function NotificationHook() {
 
     socket.on("new_notification", onNewNotification);
 
-    // cleanup
-    return () => {
-      socket.off("new_notification", onNewNotification);
-    };
-  }, []);
+    return () => socket.off("new_notification", onNewNotification);
+  }, [soundEnabled]);
 
-  return <Notification notification={notification} />;
+  return (
+    <div>
+      <button
+        onClick={enableNotifications}
+        style={{
+          padding: "8px 12px",
+          marginBottom: "12px",
+          background: "#007bff",
+          color: "#fff",
+          borderRadius: "6px",
+          border: "none",
+          cursor: "pointer",
+        }}
+      >
+        Enable Notifications & Sound
+      </button>
+
+      <Notification notification={notification} />
+    </div>
+  );
 }
