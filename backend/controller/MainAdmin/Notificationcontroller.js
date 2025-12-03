@@ -1,8 +1,9 @@
-const NotificationModal = require("../../model/MainAdmin/NotificationModal")
+const { Notificationmodel } = require("../../model/MainAdmin/NotificationModal");
+
 const NotificationController = {
     getNotification: async (req, res) => {
         try {
-            const result = await NotificationModal.getNotification();
+            const result = await Notificationmodel.getNotification();
             if (result) {
                 return res.status(200).send({ code: 200, message: result });
             }
