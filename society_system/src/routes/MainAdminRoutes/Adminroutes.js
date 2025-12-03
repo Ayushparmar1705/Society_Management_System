@@ -13,6 +13,7 @@ import MainAdminLogin from "../../Pages/MainAdmin/MainAdminLogin";
 import Updatesocietyhook from "../../Hooks/MainAdminHooks/SocietyHook/Updatesocietyhook";
 import Updateflathook from "../../Hooks/MainAdminHooks/FlatsHook/Updateflathook";
 import Memberhook from "../../Hooks/MainAdminHooks/MembersHooks/Memberhook";
+import NotificationHook from "../../Hooks/MainAdminHooks/NotificationHook/NotificationHook";
 
 
 
@@ -33,7 +34,7 @@ export default function Adminroutes() {
         <Route path="/mainadmin/update-page" element={<Layout><Updatesocietyhook></Updatesocietyhook></Layout>}></Route>
         <Route path="/mainadmin/update-flats" element={<Layout><Updateflathook></Updateflathook></Layout>}></Route>
         <Route path="/mainadmin/member-management" element={<Layout><Memberhook></Memberhook></Layout>}></Route>
-        <Route path="/mainadmin/notification" element={<Layout><Notificationhook></Notificationhook></Layout>}></Route>
+        <Route path="/mainadmin/notification" element={<Layout><NotificationHook></NotificationHook></Layout>}></Route>
       </Routes>
 
     </div>
