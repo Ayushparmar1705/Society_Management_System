@@ -1,6 +1,6 @@
-import { Bell, Car, LayoutDashboard, MenuIcon, Shield, User, X } from 'lucide-react'
+import { Bell, MenuIcon, X } from 'lucide-react'
 import { useState, useEffect } from 'react'
-import { Menu, MenuItem, Sidebar, SubMenu } from 'react-pro-sidebar'
+import { Menu, MenuItem, Sidebar } from 'react-pro-sidebar'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
 

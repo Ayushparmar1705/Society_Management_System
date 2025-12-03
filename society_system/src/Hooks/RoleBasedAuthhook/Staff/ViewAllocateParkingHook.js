@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+
+import { useEffect, useState } from 'react';
 import ParkingAllocationApi from '../../../Api/RolebasedAuth/Chairman/ParkingAllocation';
 import ViewParking from '../../../Pages/Staff/ViewParking';
 

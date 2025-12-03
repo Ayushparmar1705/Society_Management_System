@@ -1,7 +1,7 @@
 import React from 'react'
 import OtpVerificationpage from '../../Pages/Users/OtpVerificationpage'
 import { useState } from 'react'
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { ManageLogin } from '../../Api/User/ManageLogin';
 import { toast } from "react-toastify"
 
@@ -13,7 +13,7 @@ export default function OtpVerification() {
     const [otp, setOtp] = useState("");
     const handleVerifyotp = async () => {
         const result = await ManageLogin.verifyOTP(email, otp)
-        console.log("otp verify result = ",result);
+
         console.log(result.society_id);
         if (result.code === 200) {
 

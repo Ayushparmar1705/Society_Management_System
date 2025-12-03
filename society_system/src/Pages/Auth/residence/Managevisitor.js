@@ -28,7 +28,7 @@ export default function Managevisitor({ visitor, loading, approve }) {
               <p className="font-semibold text-black">
                 Flat Code: <span className="font-normal">{visitor.flat_code}</span>
               </p>
-              {visitor.is_approve == 1 ? (
+              {visitor.is_approve === 1 ? (
                 <p className='p-2 text-green-500'>Approval accept</p>
               ):(
                 <button onClick={() => {

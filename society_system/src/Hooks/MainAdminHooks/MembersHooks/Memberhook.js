@@ -7,15 +7,19 @@ export default function Memberhook() {
 
     const [result, setResult] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [dupResult, setDupresult] = useState([]);
 
 
 
 
-    const getMembers = async() => {
+    const getMembers = async () => {
         setLoading(true);
         try {
             const myresult = await MembersManagement.viewMembers();
+           
             setResult(myresult.message);
+            setDupresult(myresult.message);
+
         } catch (err) {
             console.log(err);
         } finally {
@@ -25,15 +29,15 @@ export default function Memberhook() {
     }
     const makeChairman = async (id) => {
         setLoading(true);
+        console.log(id);
         const toastContainer = toast.info("Waiting to convert chairman", {
             autoClose: 5000,
             isLoading: true,
         })
         try {
             const myresult = await MembersManagement.makeChairman(id);
-            setResult(myresult.message);
             toast.update(toastContainer, {
-                render: "Convert to chairman",
+                render: myresult.message,
                 type: "success",
                 isLoading: false,
                 autoClose: 5000,
@@ -49,8 +53,24 @@ export default function Memberhook() {
             setLoading(false);
         }
     }
+
+
+    const searchMember = async (name) => {
+        if (name !== "") {
+            const sresult = await MembersManagement.searchMember(name);
+            console.log(sresult);
+            if (sresult.code === 200) {
+                setResult(sresult.message);
+
+            }
+        }
+        else {
+            setResult(dupResult);
+        }
+    }
     useEffect(() => {
         getMembers();
+
     }, []);
-    return <ViewMembers result={result} loading={loading} makeChairman={makeChairman}></ViewMembers>
+    return <ViewMembers result={result} loading={loading} makeChairman={makeChairman} searchMember={searchMember}></ViewMembers>
 }

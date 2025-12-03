@@ -1,4 +1,4 @@
-import { Bell, Car, LayoutDashboard, MenuIcon, Shield, User, X } from 'lucide-react'
+import { Bell, Car, LayoutDashboard, MenuIcon, User, X } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { Menu, MenuItem, Sidebar, SubMenu } from 'react-pro-sidebar'
 import { Link, useLocation, useNavigate } from 'react-router-dom'

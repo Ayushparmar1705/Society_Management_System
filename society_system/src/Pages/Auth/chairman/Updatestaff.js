@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+
 import Loginchairmanheader from '../../../Component/Usercomponent/Loginchairmanheader';
 
 export default function Updatestaff({handleOnChange , handleOnClick , formData }) {

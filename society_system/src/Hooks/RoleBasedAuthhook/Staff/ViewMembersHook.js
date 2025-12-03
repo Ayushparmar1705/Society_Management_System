@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import Loginchairmanheader from '../../../Component/Usercomponent/Loginchairmanheader';
-import MemberHook from '../Chairman/MemberHook';
+
 import ViewMembers from '../../../Pages/Staff/Viewmember';
 import { Membermanagement } from '../../../Api/RolebasedAuth/Chairman/MemberManagement';
 import { jwtDecode } from 'jwt-decode';
+import { useEffect, useState } from 'react';
 
 export default function ViewMembersHook() {
     const [loading, setLoading] = useState(true)
     const [member,setMember] = useState([]);
-    const id = localStorage.getItem("token");
+    // const id = localStorage.getItem("token");
     const sid = localStorage.getItem("sid");
     const decodedSid = jwtDecode(sid).sid;
     const fetchMember = async () => {
