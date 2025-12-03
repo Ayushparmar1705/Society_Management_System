@@ -1,3 +1,4 @@
+import { Mail, Phone, User } from 'lucide-react'
 import React from 'react'
 
 export default function ViewMembers({ result, loading, makeChairman }) {
@@ -15,21 +16,21 @@ export default function ViewMembers({ result, loading, makeChairman }) {
           <input
             type='search'
             placeholder='Search society by name'
-            onChange={handleSearch}
+        
             className='outline-none rounded-[10px] border-2 border-gray-200 focus:border-blue-300 p-[10px] w-[400px] mx-auto block transition-all duration-300 ease-in-out'
           />
 
           {/* Cards */}
           <div className='flex flex-wrap w-full mt-10 gap-10 justify-center'>
-            {societyList.map((result, index) => (
+            {result.map((result, index) => (
               <div key={index}>
                 <div className='hover:scale-[1.04] hover:border-2 hover:border-gray-200 transition-transform duration-200 border-2 border-gray-100 p-4 rounded w-[350px] h-500 '>
 
                   {/* Header */}
-                  <div className={`text-white p-[10px] font-bold rounded ${data.is_active === 1 ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-black' : 'bg-gradient-to-r from-gray-500 to-gray-600'}`}>
+                  <div className={`text-white p-[10px] font-bold rounded`}>
                     <div className='flex justify-between items-center'>
                       <p>{result.name}</p>
-                      <Building2 className="h-8 w-8 text-white opacity-90" />
+                      <User className="h-4 w-4 text-green-500 mr-3"></User>
                     </div>
 
                   </div>
@@ -58,7 +59,7 @@ export default function ViewMembers({ result, loading, makeChairman }) {
                     {/* Action Buttons */}
                     {data.role === "residence" ? (
                       <button
-                        onClick={() => makeChairman(data.sid)}
+                        onClick={() => makeChairman(result.sid)}
                         className='bg-blue-500 hover:bg-blue-600 p-2 w-full rounded text-white mt-2 transition-all duration-200'
                       >
                         Make chairman
