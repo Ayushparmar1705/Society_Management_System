@@ -181,7 +181,7 @@ export default function Sidebar() {
               ))}
             </nav>
             <div className='flex'>
-              <div >
+              <div className='justify-center'>
                 <Bell></Bell>
               </div>
               <div>
