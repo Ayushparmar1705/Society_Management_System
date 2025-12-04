@@ -2,6 +2,8 @@ import React from 'react'
 import Dashboard from '../../../Pages/Staff/Dashboard'
 import { jwtDecode } from 'jwt-decode';
 import { useEffect } from 'react';
+import { useState } from 'react';
+import SecurityDashboard from '../../../Api/RolebasedAuth/StaffLogin/Dashboard';
 
 export default function StaffDashboard() {
 
@@ -15,13 +17,13 @@ export default function StaffDashboard() {
   const cid = jwtDecode(token).cid;
   console.log(society_id);
   const countResidence = async()=>{
-    const result = await DashboardManagement.countResidence(society_id);
+    const result = await SecurityDashboard.countResidence(society_id);
     if(result.code===200){
       setTotalResidence(result.message);
     }
   }
   const countParking = async()=>{
-    const result = await DashboardManagement.countResidence(cid);
+    const result = await SecurityDashboard.countResidence(cid);
     if(result.code===200){
       setTotalParking(result.message);
     }

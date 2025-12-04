@@ -16,4 +16,4 @@ const SecurityDashboard = {
         return result;
     }
 }
-export default DashboardManagement
+export default SecurityDashboard

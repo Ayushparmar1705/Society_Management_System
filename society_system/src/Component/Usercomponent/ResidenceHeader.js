@@ -121,16 +121,6 @@ export default function ResidenceHeader() {
                             >
                                 Manage visitor
                             </MenuItem>
-
-
-                            <MenuItem
-
-                                icon={<Bell size={20} />}
-                                component={<Link to="/notifications" onClick={closeSidebar} />}
-                                active={location.pathname === '/notifications'}
-                            >
-                                Notification
-                            </MenuItem>
                         </Menu>
                     </div>
 
