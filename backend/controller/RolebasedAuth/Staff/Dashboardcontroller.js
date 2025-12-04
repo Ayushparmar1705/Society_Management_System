@@ -11,14 +11,11 @@ const Dashboardcontroller = {
 
             console.log("residence = ", result);
             if (result) {
-                if(result[0]["totalMembers(*)"] === 0)
-                {
-                    return res.status(200).send({ code: 200, message: 0});
-                }
-                else
-                {
-                    return res.status(200).send({ code: 200, message: result[0]['count(*)'] });
-                }
+               
+              
+                
+                    return res.status(200).send({ code: 200, message: result[0]['totalMembers'] });
+                
                 
             }
         } catch (err) {
@@ -34,7 +31,7 @@ const Dashboardcontroller = {
         try {
             const result = await DashboardManagement.getTotalParking(id);
             if (result) {
-                return res.status(200).send({ code: 200, message: result[0]['totalMembers(*)'] });
+                return res.status(200).send({ code: 200, message: result[0]['totalMembers'] });
             }
         } catch (err) {
             return res.status(500).send({ code: 500, message: err });
@@ -49,7 +46,7 @@ const Dashboardcontroller = {
             const result = await DashboardManagement.getTotalVisitor(id);
             console.log(result[0]['COUNT(*)']);
             if (result) {
-                return res.status(200).send({ code: 200, message: result[0]['totalvisitor(*)'] });
+                return res.status(200).send({ code: 200, message: result[0]['totalvisitor'] });
             }
         } catch (err) {
             return res.status(500).send({ code: 500, message: err });
