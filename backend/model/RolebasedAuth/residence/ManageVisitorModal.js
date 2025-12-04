@@ -4,7 +4,7 @@ const { query } = require("../../../config/dbConfig");
 const ManageVisitormodal = {
     // Get visitors with flat details using JOIN
     getVisitorsByFlatId: (society_id,flat_id) => {
-        sql = 'SELECT * FROM Addvisitor WHERE society_id = ? AND flat_id = ?';
+        sql = 'SELECT * FROM Addvisitor AS av INNER JOIN Addflats AS af ON av.flat_id = af.flat_id WHERE af.society_id = ? AND af.flat_id = ?';
         return query(sql, [society_id,flat_id]);
     },
 
