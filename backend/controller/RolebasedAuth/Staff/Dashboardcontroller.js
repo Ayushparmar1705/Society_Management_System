@@ -13,6 +13,7 @@ const Dashboardcontroller = {
                 return res.status(200).send({ code: 200, message: result[0]['count(*)'] });
             }
         } catch (err) {
+            console.log(err);
             return res.status(500).send({ code: 500, message: err });
         }
 

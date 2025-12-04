@@ -42,6 +42,7 @@ const residenceRoutes = require("./routes/residenceRoutes/residenceRoutes");
 const contactRoutes = require("./routes/ContactRoutes/ContactRoutes");
 const adminMemberManagement = require("./routes/MainAdmin/MembersManagementRoutes");
 const Notificationroutes = require("./routes/MainAdmin/Notificationroutes");
+const staffDashboardRoutes = require("./routes/RolebasedAuth/Staff/Dashboard");
 const http = require("http");
 const { Server } = require("socket.io");
 app.use("/mainadmin", societyroutes);
@@ -54,10 +55,12 @@ app.use("/auth", dashboardRoutes);
 app.use("/auth", ParkingAllocationRoutes);
 app.use("/auth", StaffRoutes);
 app.use("/security", VisitorRoutes);
+app.use("/security",staffDashboardRoutes);
 app.use("/residence", residenceRoutes);
 app.use("/contact",contactRoutes);
 app.use("/mainadmin",adminMemberManagement)
 app.use("/mainadmin",Notificationroutes);
+
 
 // SERVER
 
