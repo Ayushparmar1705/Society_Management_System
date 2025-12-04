@@ -25,6 +25,9 @@ app.use((req, res, next) => {
     next();
 });
 
+const cookieParser = require("cookie-parser");
+app.use(cookieParser);
+
 app.use(express.json());
 
 // ROUTES
