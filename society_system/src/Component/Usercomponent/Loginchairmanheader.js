@@ -171,14 +171,7 @@ export default function Loginchairmanheader() {
                                 </MenuItem>
                             </SubMenu>
 
-                            <MenuItem
-
-                                icon={<Bell size={20} />}
-                                component={<Link to="/notifications" onClick={closeSidebar} />}
-                                active={location.pathname === '/notifications'}
-                            >
-                                Notification
-                            </MenuItem>
+                          
                         </Menu>
                     </div>
 

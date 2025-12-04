@@ -1,10 +1,11 @@
 import React from 'react'
+import SecurityHeader from '../../Component/Usercomponent/SecurityHeader'
 
 export default function Dashboard({ totalVisitor, totalResidence, totalParking }) {
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
       {/* Sidebar */}
-      <Loginchairmanheader />
+      <SecurityHeader />
 
       {/* Main Content */}
       <div className="flex-1 p-4 md:p-8 overflow-auto">

@@ -115,8 +115,8 @@ export default function SecurityHeader() {
                         <Menu menuItemStyles={menuItemStyles}>
                             <MenuItem
                                 icon={<LayoutDashboard size={20} />}
-                                component={<Link to="/dashboard" onClick={closeSidebar} />}
-                                active={location.pathname === '/dashboard'}
+                                component={<Link to="/staffdashboard" onClick={closeSidebar} />}
+                                active={location.pathname === '/staffdashboard'}
                             >
                                 Dashboard
                             </MenuItem>
