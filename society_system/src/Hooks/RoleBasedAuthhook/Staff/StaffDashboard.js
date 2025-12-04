@@ -29,7 +29,7 @@ export default function StaffDashboard() {
     }
   }
   const countVisitor = async()=>{
-    const result = await DashboardManagement.countResidence(society_id);
+    const result = await SecurityDashboard.countResidence(society_id);
     if(result.code===200){
       setTotalVisitor(result.message);
     }
