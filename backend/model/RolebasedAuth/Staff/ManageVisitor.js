@@ -9,6 +9,10 @@ const ManageVisitorModal = {
     Managevisitor: (society_id) => {
         const sql = "SELECT * FROM Addvisitor AS av INNER JOIN Addflats AS af ON av.flat_id = af.fid WHERE society_id=?";
         return query(sql, [society_id]);
+    },
+    viewParking: (cid) => {
+        const sql = "SELECT * FROM Allocateparking WHERE cid = ?";
+        return query(sql, [cid]);
     }
 };
 

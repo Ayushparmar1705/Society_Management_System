@@ -23,16 +23,25 @@ const ManageVisitorController = {
         //     }
         // })
     },
-    Managevisitor: async(req, res) => {
+    Managevisitor: async (req, res) => {
         const society_id = req.params.sid;
-   
+
         const result = await ManageVisitorModal.Managevisitor(society_id);
         console.log(result);
-        if(result){
-            return res.status(200).send({code:200,message:result});
+        if (result) {
+            return res.status(200).send({ code: 200, message: result });
         }
-        else{
+        else {
             return res.status(500).send({ code: 200, message: err });
+        }
+    },
+    viewParking: async (req, res) => {
+        const cid = req.params.cid;
+        const result = await ManageVisitorModal.viewParking(cid);
+        if (result) {
+            return res.status(200).send({ code: 200, message: result });
+        } else {
+            return res.status(500).send({ code: 500, message: err });
         }
     }
 }
