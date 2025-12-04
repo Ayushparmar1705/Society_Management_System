@@ -1,18 +1,42 @@
 import React from 'react'
-import SecurityHeader from '../../../Component/Usercomponent/SecurityHeader'
+import Dashboard from '../../../Pages/Staff/Dashboard'
+import { jwtDecode } from 'jwt-decode';
+import { useEffect } from 'react';
 
 export default function StaffDashboard() {
-  return (
 
-    <div className='flex'>
 
-      <div>
-        <SecurityHeader></SecurityHeader>
+  const [totalParking, setTotalParking] = useState(0);
+  const [totalResidence, setTotalResidence] = useState(0);
+  const [totalVisitor, setTotalVisitor] = useState(0);
 
-      </div>
-      <div>
-        <p>Dashboard</p>
-      </div>
-    </div>
-  )
+  const token = localStorage.getItem("token");
+  const society_id = jwtDecode(token).society_id;
+  const cid = jwtDecode(token).cid;
+  console.log(society_id);
+  const countResidence = async()=>{
+    const result = await DashboardManagement.countResidence(society_id);
+    if(result.code===200){
+      setTotalResidence(result.message);
+    }
+  }
+  const countParking = async()=>{
+    const result = await DashboardManagement.countResidence(cid);
+    if(result.code===200){
+      setTotalParking(result.message);
+    }
+  }
+  const countVisitor = async()=>{
+    const result = await DashboardManagement.countResidence(society_id);
+    if(result.code===200){
+      setTotalVisitor(result.message);
+    }
+  }
+
+  useEffect(()=>{
+    countResidence();
+    countParking();
+    countVisitor();
+  },[])
+  return <Dashboard totalParking={totalParking} totalResidence={totalResidence} totalVisitor={totalVisitor}></Dashboard>
 }

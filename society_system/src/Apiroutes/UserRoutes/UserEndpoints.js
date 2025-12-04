@@ -12,6 +12,8 @@ const ApiEndpoints = {
     "security_login": `${BASE_URL}/auth/security-login`,
     "add_visitor": `${BASE_URL}/security/add-visitor`,
     "view_visitor": (society_id) => `${BASE_URL}/security/get-visitor/${society_id}`,
-
+    "totalResidence":(society_id)=>`${BASE_URL}/security/totalresidence/${society_id}`,
+    "totalParking":(cid)=>`${BASE_URL}/security/totalparking/${cid}`,
+    "totalVisitor":(society_id)=>`${BASE_URL}/security/totalvisitor/${society_id}`,
 }
 export default ApiEndpoints;
