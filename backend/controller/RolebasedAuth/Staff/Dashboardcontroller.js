@@ -11,7 +11,7 @@ const Dashboardcontroller = {
 
             console.log("residence = ", result);
             if (result) {
-                if(result[0]["count(*)"] === 0)
+                if(result[0]["totalMembers(*)"] === 0)
                 {
                     return res.status(200).send({ code: 200, message: 0});
                 }
