@@ -7,9 +7,11 @@ import { useEffect, useState } from 'react';
 export default function ViewMembersHook() {
     const [loading, setLoading] = useState(true)
     const [member,setMember] = useState([]);
-    // const id = localStorage.getItem("token");
-    const sid = localStorage.getItem("sid");
-    const decodedSid = jwtDecode(sid).sid;
+    const id = localStorage.getItem("token");
+
+    const decodedSid = jwtDecode(id).id;
+    console.log(decodedSid);
+    console.log(decodedSid);
     const fetchMember = async () => {
         try {
             setLoading(true)
