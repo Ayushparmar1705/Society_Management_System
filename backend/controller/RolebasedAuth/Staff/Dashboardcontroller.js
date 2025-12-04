@@ -8,6 +8,7 @@ const Dashboardcontroller = {
         // call the countTotalMembers function from DashboardModel
         try {
             const result = await DashboardManagement.getTotalMembers(id);
+            
             console.log("residence = ", result);
             if (result) {
                 return res.status(200).send({ code: 200, message: result[0]['count(*)'] });
