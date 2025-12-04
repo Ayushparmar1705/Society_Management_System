@@ -63,12 +63,7 @@ const loginController = {
                 console.log(result);
                 // return res.status(200).send({ code: 200, message: "OTP verify succcesfully", role: result[0].role, _token: token, uid: result[0].uid, society_id: result[0].society_id, flat_id: result[0].fid });
 
-                res.cookie("token",token,{
-                    httpOnly:true,
-                    secure:process.env.NODE_ENV === "production",
-                    sameSite:"strict",
-                    maxAge:3600000
-                })
+
                 return res.status(200).send({
                     code: 200,
                     message: "OTP verify succesfully",
