@@ -9,14 +9,14 @@ const Dashboardcontroller = {
         try {
             const result = await DashboardManagement.getTotalMembers(id);
 
-            console.log("residence = ", result);
+      
             if (result) {
-               
-              
-                
-                    return res.status(200).send({ code: 200, message: result[0]['totalMembers'] });
-                
-                
+
+
+
+                return res.status(200).send({ code: 200, message: result[0]['totalMembers'] });
+
+
             }
         } catch (err) {
             console.log(err);
@@ -31,7 +31,7 @@ const Dashboardcontroller = {
         try {
             const result = await DashboardManagement.getTotalParking(id);
             if (result) {
-                return res.status(200).send({ code: 200, message: result[0]['totalMembers'] });
+                return res.status(200).send({ code: 200, message: result[0]['totalparking'] });
             }
         } catch (err) {
             return res.status(500).send({ code: 500, message: err });
@@ -44,7 +44,7 @@ const Dashboardcontroller = {
 
         try {
             const result = await DashboardManagement.getTotalVisitor(id);
-            console.log(result[0]['COUNT(*)']);
+            
             if (result) {
                 return res.status(200).send({ code: 200, message: result[0]['totalvisitor'] });
             }
