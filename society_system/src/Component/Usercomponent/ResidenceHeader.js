@@ -1,43 +1,11 @@
-import { Bell, MenuIcon, X } from 'lucide-react'
-import { useState, useEffect } from 'react'
-import { Menu, MenuItem, Sidebar } from 'react-pro-sidebar'
+import { MenuIcon } from 'lucide-react'
+import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify';
+import { toast } from 'react-toastify'
 
 export default function ResidenceHeader() {
-    const [collapsed, setCollapsed] = useState(false);
-    const [toggle, setToggle] = useState(false);
-    const [isMobile, setIsMobile] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
-    // Check if device is mobile
-    useEffect(() => {
-        const checkDevice = () => {
-            setIsMobile(window.innerWidth < 768);
-            if (window.innerWidth >= 768) {
-                setToggle(true); // Always show sidebar on desktop
-            } else {
-                setToggle(false); // Hide sidebar on mobile by default
-            }
-        };
-
-        checkDevice();
-        window.addEventListener('resize', checkDevice);
-
-        return () => {
-            window.removeEventListener('resize', checkDevice);
-        };
-    }, []);
-
-    const handleToggle = () => {
-        setToggle(!toggle);
-    };
-
-    const closeSidebar = () => {
-        if (isMobile) {
-            setToggle(false);
-        }
-    };
 
     const menuItemStyles = {
         button: {
@@ -52,109 +20,53 @@ export default function ResidenceHeader() {
         }
     };
 
-    const subMenuStyles = {
-        color: "white",
-        backgroundcolor: "bg-gray-700"
-    }
-
     return (
-        <div className="flex">
-            {/* Mobile Header */}
-            <div className={`fixed top-0 left-0 right-0 bg-[#1e293b] text-white p-4 z-50 flex items-center justify-between md:hidden shadow-lg`}>
-                <h1 className="text-xl font-bold">Dashboard</h1>
-                <button
-                    onClick={handleToggle}
-                    className="p-2 rounded-lg hover:bg-[#334155] transition-colors"
-                >
-                    {toggle ? <X size={24} /> : <MenuIcon size={24} />}
-                </button>
-            </div>
-
-            {/* Overlay for mobile */}
-            {toggle && isMobile && (
-                <div
-                    className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
-                    onClick={closeSidebar}
-                />
-            )}
-
+        <div className="flex h-screen">
             {/* Sidebar */}
-            <div className={`
-                fixed md:static h-screen z-50 transition-transform duration-300 ease-in-out
-                ${toggle ? 'translate-x-0' : '-translate-x-full'}
-                md:translate-x-0
-            `}>
-                <Sidebar
-                    collapsed={collapsed}
-                    width="280px"
-                    collapsedWidth="80px"
-                    className="h-full shadow-xl"
-                    backgroundColor="#1e293b"
-                    rootStyles={{
-                        color: "white",
-                        border: "none",
-                    }}
-                >
-                    {/* Header */}
-                    <div className="p-4 border-b border-gray-700 hidden md:block">
-                        <div className="flex items-center justify-between">
-                            {!collapsed && (
-                                <h2 className="text-xl font-bold text-white">Residence Panel</h2>
-                            )}
-                            <button
-                                onClick={() => setCollapsed(!collapsed)}
-                                className="p-2 rounded-lg hover:bg-[#334155] transition-colors hidden md:block"
-                            >
-                                <MenuIcon size={20} />
-                            </button>
-                        </div>
-                    </div>
+            <Sidebar
+                width="280px"
+                backgroundColor="#1e293b"
+                rootStyles={{
+                    color: "white",
+                    border: "none",
+                }}
+                className="shadow-xl"
+            >
+                <div className="p-4 border-b border-gray-700">
+                    <h2 className="text-xl font-bold text-white">Residence Panel</h2>
+                </div>
 
-                    {/* Menu Items */}
-                    <div className="p-4">
-                        <Menu menuItemStyles={menuItemStyles}>
+                <div className="p-4">
+                    <Menu menuItemStyles={menuItemStyles}>
 
-                            <MenuItem
-                                className={`${subMenuStyles.color, subMenuStyles.backgroundcolor}`}
-                                component={<Link to="/managevisitor" onClick={closeSidebar} />}
-                                active={location.pathname === '/managevisitor'}
-                            >
-                                Manage visitor
-                            </MenuItem>
-                        </Menu>
-                    </div>
-
-                    {/* Mobile close area */}
-                    <div className="p-4 border-t border-gray-700 md:hidden">
-                        <button
-                            onClick={closeSidebar}
-                            className="w-full py-2 px-4 bg-[#334155] hover:bg-[#475569] rounded-lg transition-colors text-center"
+                        <MenuItem
+                            component={<Link to="/managevisitor" />}
+                            active={location.pathname === '/managevisitor'}
                         >
-                            Close Menu
-                        </button>
-                    </div>
-                    <div className='w-full '>
-                        <button onClick={() => {
-                            localStorage.removeItem("cid");
-                            localStorage.removeItem("role");
-                            localStorage.removeItem("flat_id");
-                            localStorage.removeItem("token");
-                            localStorage.removeItem("sid");
-                            navigate("/login")
-                            toast.success("User logout succesfully")
-                        }} className='block bg-red-400 p-3 w-2/3 rounded m-[auto]'>Logout</button>
-                    </div>
-                </Sidebar>
-            </div>
+                            Manage Visitor
+                        </MenuItem>
 
-            {/* Main content area - with proper spacing for mobile header */}
-            <div className={`
-                flex-1 transition-all duration-300
-                ${toggle && !isMobile ? 'md:ml-0' : 'md:ml-0'}
-                mt-16 md:mt-0
-            `}>
+                    </Menu>
+                </div>
+
+                <div className="p-4 border-t border-gray-700">
+                    <button
+                        onClick={() => {
+                            localStorage.clear();
+                            toast.success("User logout successfully");
+                            navigate("/login");
+                        }}
+                        className="w-full py-2 px-4 bg-red-400 hover:bg-red-500 rounded-lg text-center text-white"
+                    >
+                        Logout
+                    </button>
+                </div>
+            </Sidebar>
+
+            {/* Main content area */}
+            <div className="flex-1 p-6">
                 {/* Your main content goes here */}
             </div>
         </div>
-    )
+    );
 }

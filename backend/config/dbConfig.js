@@ -4,7 +4,6 @@ const url = require("url");
 
 dotenv.config();
 
-// Use DATABASE_URL to avoid Railway overriding host
 if (!process.env.DATABASE_URL) {
   throw new Error("DATABASE_URL is not defined in .env");
 }
