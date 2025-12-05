@@ -4,7 +4,7 @@ export default function StaffLogin({handleOnChange,handleOnClick}) {
         <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
             <div className="w-full max-w-md bg-white shadow-lg rounded-2xl p-8">
                 <h2 className="text-2xl font-semibold text-center mb-6 text-gray-800">
-                    Security Login
+                    Staff Login
                 </h2>
 
                 <div className="mb-4">
