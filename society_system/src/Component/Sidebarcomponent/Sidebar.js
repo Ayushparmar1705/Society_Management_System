@@ -182,8 +182,15 @@ export default function Sidebar() {
             </nav>
             <div className='flex'>
 
-              <div>
+              <div className='p-5'>
                 <Link className="ml-8 pl-4  mt-2 space-y-2" to='/mainadmin/notification'>Notification</Link>
+              </div>
+            </div>
+
+              <div className='flex'>
+
+              <div className='p-5'>
+                <Link className="ml-8 pl-4  mt-2 space-y-2" to='/mainadmin/member-management'>Member Management</Link>
               </div>
             </div>
           </div>
