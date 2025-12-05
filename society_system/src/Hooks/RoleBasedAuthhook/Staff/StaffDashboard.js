@@ -23,13 +23,13 @@ export default function StaffDashboard() {
     }
   }
   const countParking = async()=>{
-    const result = await SecurityDashboard.countResidence(cid);
+    const result = await SecurityDashboard.countParking(cid);
     if(result.code===200){
       setTotalParking(result.message);
     }
   }
   const countVisitor = async()=>{
-    const result = await SecurityDashboard.countResidence(society_id);
+    const result = await SecurityDashboard.countVisitor(society_id);
     if(result.code===200){
       setTotalVisitor(result.message);
     }
